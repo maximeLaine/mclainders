@@ -1,0 +1,83 @@
+[
+  {
+    "name": "Gîte de Dalbepierre",
+    "contact": "Nicole et Georges GUILLARD - 04 74 71 27 25 ou 06 70 10 80 82",
+    "website": "https://www.gites-de-france-rhone.com/location-vacances-Gite-de-sejour-Val-D-oingt-69G3045.html",
+    "chambre": "6 chambres - Capacité totale de 15 personnes",
+    "capacity": "15 personnes",
+    "distance": "400 m",
+    "image": "/gallery/gites/gite-dalbepierre.jpg"
+  },
+  {
+    "name": "L'Orée du Paradis",
+    "contact": "Nicole et Georges GUILLARD - 04 74 71 27 25 ou 06 70 10 80 82",
+    "website": "https://www.gites-de-france-rhone.com/location-vacances-Chambre-d-hotes-Val-D-oingt-69G2213.html",
+    "chambre": "2 chambres de 2 personnes",
+    "capacity": "4 personnes",
+    "distance": "100 m",
+    "image": "/gallery/gites/l-oree-du-paradis.jpg"
+  },
+  {
+    "name": "Bienvenue à Dalbepierre",
+    "contact": "Nicole et Roger GUILLARD - 04 74 71 27 95 ou 06 71 39 01 88",
+    "website": "https://www.gites-de-france-rhone.com/location-vacances-Chambre-d-hotes-Val-D-oingt-69G2006.html",
+    "chambre": "3 chambres - Capacité totale de 9 personnes",
+    "capacity": "9 personnes",
+    "distance": "200 m",
+    "image": "/gallery/gites/bienvenue-a-dalbepierre.jpg"
+  },
+  {
+    "name": "Gîte de l'Oursonnière",
+    "contact": "06 67 44 59 87",
+    "website": "https://www.gites.fr/gites_gite-de-l-oursonniere_saint-laurent-d-oingt_h4842310.htm",
+    "chambre": "Chalet de 35 m² avec coin cuisine et espace Douche-WC séparé",
+    "capacity": "2 personnes",
+    "distance": "500 m",
+    "image": "/gallery/gites/gite-oursonniere.jpg"
+  },
+  {
+    "name": "Gîte Nid vu Nid connu",
+    "contact": "Non spécifié",
+    "website": "https://www.gites-de-france-rhone.com/location-vacances-Gite-Val-D-oingt-69G1807.html",
+    "chambre": "Maison indépendante de plain-pied avec vue panoramique",
+    "capacity": "6 personnes",
+    "distance": "1 km",
+    "image": "/gallery/gites/nid-vu-nid-connu.jpg"
+  },
+  {
+    "name": "Gite de la Petite Maison",
+    "contact": "Evelyne et Yves BLANC - 04 74 71 62 57",
+    "website": "http://gitesdescoasses.free.fr/",
+    "chambre": "Logement entier - 1 chambre avec un lit double et 1 mezzanine 3 lits simples - (1 canapé lit)",
+    "capacity": "5/7 personnes",
+    "distance": "4 km -  7 min de voiture",
+    "image": "/gallery/gites/gite-petite-maison.jpg"
+  },
+  {
+    "name": "Gîte des vendangeurs",
+    "contact": "Evelyne et Yves BLANC - 04 74 71 62 57",
+    "website": "http://gitesdescoasses.free.fr/",
+    "chambre": "Logement entier - 1 chambre avec un lit double, 1 chambre avec 2 lits superposés, 1 chambre avec mezzannine avec 4 lits simples et 1 chambre avec 2 lits simples",
+    "capacity": "14 personnes",
+    "distance": "4 km -  7 min de voiture",
+    "image": "/gallery/gites/gite_des_vendanges.jpg"
+  },
+  {
+    "name": "Maison Beaujolaise",
+    "contact": "Airbnb",
+    "website": "https://www.airbnb.com/rooms/34179111",
+    "chambre": "Chambre privée avec kitchenette et salle de bain",
+    "capacity": "4 personnes",
+    "distance": "500 m",
+    "image": "/gallery/gites/maison-beaujolaise.jpg"
+  },
+  {
+    "name": "Studio indépendant à Val d'Oingt",
+    "contact": "Airbnb",
+    "website": "https://www.airbnb.com/rooms/806213447650908843",
+    "chambre": "Studio avec coin cuisine et salle de bain",
+    "capacity": "2 personnes",
+    "distance": "1 km",
+    "image": "/gallery/gites/independent-studio-val-doingt.avif"
+  }
+]
