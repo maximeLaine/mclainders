@@ -17,7 +17,7 @@ const Header = () => {
       <nav className="hidden md:flex gap-6 text-sm">
         <Link to="/" className="hover:underline">Accueil</Link>
         <Link to="/notre-clan" className="hover:underline">Notre Clan</Link>
-        <Link to="/voyage" className="hover:underline">Voyage et hébergement</Link>
+        <Link to="/logement" className="hover:underline">Hébergement</Link>
         <Link to="/liste-de-mariage" className="hover:underline">Liste de mariage</Link>
         <Link to="/rsvp" className="bg-white text-black px-4 py-2 uppercase text-sm font-semibold hover:bg-gray-100">
           Confirmez votre venue
@@ -74,11 +74,11 @@ const Header = () => {
               Notre histoire
             </Link>
             <Link 
-              to="/voyage" 
+              to="/logement" 
               className="py-2 hover:underline"
               onClick={() => setIsMenuOpen(false)}
             >
-              Voyage et hébergement
+              Hébergement
             </Link>
             <Link 
               to="/liste-de-mariage" 
