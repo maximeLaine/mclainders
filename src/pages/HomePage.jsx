@@ -5,7 +5,7 @@ const HomePage = () => {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <div className="relative h-screen bg-cover bg-center flex items-center justify-center" style={{ backgroundImage: "url('/gallery/header.png')" }}>
+      <div className="relative h-[75vh] bg-cover bg-center flex items-center justify-center" style={{ backgroundImage: "url('/gallery/header.png')" }}>
         <div className="absolute inset-0 bg-black bg-opacity-20"></div>
         <div className="relative z-10 text-white text-center px-4 pt-52">
           <p className="text-lg md:text-xl mb-4">Venez fêter l'amour avec nous !</p>
@@ -66,7 +66,7 @@ const HomePage = () => {
           </div>
           
           <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-10">
-            <div className="bg-white p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 max-w-sm w-full">
+            <Link to="/beaujolais" className="block bg-white p-6 rounded-lg shadow-md transform hover:scale-105 hover:shadow-lg transition duration-300 max-w-sm w-full group">
               <div className="text-center">
                 <div className="bg-purple-100 inline-block p-3 rounded-full mb-4 group-hover:bg-purple-200 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -75,8 +75,14 @@ const HomePage = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Lieu à visiter</h3>
                 <p className="text-gray-600 mb-4">Nos coups de coeurs autours du lieux</p>
+                <span className="text-green-600 font-medium inline-flex items-center group-hover:underline">
+                  En savoir plus
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </span>
               </div>
-            </div>
+            </Link>
             
             <Link to="/logement" className="block bg-white p-6 rounded-lg shadow-md transform hover:scale-105 hover:shadow-lg transition duration-300 max-w-sm w-full group">
               <div className="text-center">

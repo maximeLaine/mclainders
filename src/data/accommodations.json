@@ -36,6 +36,15 @@
     "image": "/gallery/gites/gite-oursonniere.jpg"
   },
   {
+    "name": "La Rose Trémière",
+    "contact": "Monique et Michel GUILLARD - 04 74 71 21 77 ou 06 35 77 90 92 ou 06 22 65 53 02",
+    "website": "https://www.auvergnerhonealpes-tourisme.com/fiches/la-rose-tremiere/",
+    "chambre": "Une chambre avec un lit double",
+    "capacity": "2 personnes",
+    "distance": "1 km",
+    "image": "/gallery/gites/nid-vu-nid-connu.jpg"
+  },
+  {
     "name": "Gîte Nid vu Nid connu",
     "contact": "Non spécifié",
     "website": "https://www.gites-de-france-rhone.com/location-vacances-Gite-Val-D-oingt-69G1807.html",
@@ -79,5 +88,77 @@
     "capacity": "2 personnes",
     "distance": "1 km",
     "image": "/gallery/gites/independent-studio-val-doingt.avif"
+  },
+  {
+    "name": "Gîte A deux pas des Vignes",
+    "contact": "Laëtitia et Pascal - Vignerons",
+    "website": "https://www.gites-de-france.com/fr/auvergne-rhone-alpes/rhone/deux-pas-des-vignes-69g1974",
+    "chambre": "Gîte de charme rénové dans une vieille bâtisse en Pierres Dorées",
+    "capacity": "6 personnes",
+    "distance": "1 km",
+    "image": "/gallery/gites/deux_pas_des_vignes.jpg"
+  },
+  {
+    "name": "Gîte de Fond-vieille",
+    "contact": "Marie-jo et Lucien Guillard - Viticulteurs",
+    "website": "https://www.gites-de-france-rhone.com/gite-rural-guillard-marie-jo-et-lucien-a-oingt-dans-BEAUJOLAIS-VITICOLE-1402.html",
+    "chambre": "Gîte aménagé dans un corps de bâtiment en pierres dorées",
+    "capacity": "4 personnes",
+    "distance": "500 m",
+    "image": "/gallery/gites/fond_vieille.jpg"
+  },
+  {
+    "name": "GÎTE LUMIÈRE",
+    "contact": "Non spécifié",
+    "website": "https://www.gites-de-france-rhone.com/location-vacances-Gite-de-sejour-a-Saint-laurent-d-oingt-Rhone-69G3062.html",
+    "chambre": "Gîte d'étape de caractère dans un bâti ancien en pierres dorées",
+    "capacity": "8 personnes",
+    "distance": "1 km",
+    "image": "/gallery/gites/gite-lumiere.jpg"
+  },
+  {
+    "name": "Gîte Rural",
+    "contact": "Non spécifié",
+    "website": "https://valdoingt.org/votre-commune-au-quotidien/ciommerce-economie/chambres-dhotes-gites/joomlannuaire/blog/11:hebergement",
+    "chambre": "Ancienne ferme avec une cour fermée",
+    "capacity": "6 personnes",
+    "distance": "1 km",
+    "image": "/gallery/gites/gite_drawing.png"
+  },
+  {
+    "name": "Golden Rock",
+    "contact": "Mme PERRAT - 06.22.25.59.30",
+    "website": "https://valdoingt.org/votre-commune-au-quotidien/ciommerce-economie/chambres-dhotes-gites/joomlannuaire/blog/11:hebergement",
+    "chambre": "Maison individuelle - 5 pièces",
+    "capacity": "8 personnes",
+    "distance": "1 km",
+    "image": "/gallery/gites/gite_drawing.png"
+  },
+  {
+    "name": "La Levée",
+    "contact": "Laurence et Bruno",
+    "website": "http://www.lalevee.eu/",
+    "chambre": "Maison de vignerons",
+    "capacity": "4 personnes",
+    "distance": "1 km",
+    "image": "/gallery/gites/levee.jpg"
+  },
+  {
+    "name": "La Villa Buizantine",
+    "contact": "Non spécifié",
+    "website": "http://www.villa-beaujolais-oingt.com/",
+    "chambre": "Chambres d'hôtes ou gîte - Chambre accessible handicapés",
+    "capacity": "6 personnes",
+    "distance": "1 km",
+    "image": "/gallery/gites/villa_buizantine.jpg"
+  },
+  {
+    "name": "Les Herminières",
+    "contact": "Elisabeth et Guy CLAUDEY",
+    "website": "http://www.herminieres.com/",
+    "chambre": "Chambres d'hôtes et Gîte face à un paysage typique du Beaujolais",
+    "capacity": "8 personnes",
+    "distance": "2 km",
+    "image": "/gallery/gites/herminieres.jpg"
   }
 ]
