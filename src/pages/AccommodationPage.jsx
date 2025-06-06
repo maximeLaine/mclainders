@@ -30,7 +30,7 @@ const AccommodationPage = () => {
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4">
           <h1 className="text-5xl md:text-7xl font-light mb-6">Hébergement</h1>
-          <p className="text-xl max-w-2xl">Si vous n'avez pas votre propre Dobby (notre van libre 🧦), voici quelque infos pour vous.</p>
+          <p className="text-xl max-w-2xl">Si vous n'avez pas votre propre Dobby (notre van libre 🦶), voici quelques infos pour vous.</p>
         </div>
       </div>
 
