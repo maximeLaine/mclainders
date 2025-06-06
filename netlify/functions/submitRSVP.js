@@ -10,6 +10,9 @@ exports.handler = async (event, context) => {
   console.log('Fonction submitRSVP appelée');
   console.log('URL Supabase:', supabaseUrl);
   console.log('Clé Supabase définie:', !!supabaseKey);
+  // Vérifier si c'est une clé service_role (les premiers caractères sont suffisants pour identifier le type)
+  console.log('Type de clé:', supabaseKey && supabaseKey.startsWith('eyJ') ? 'Semble être une clé valide' : 'Format de clé non reconnu');
+  console.log('Longueur de la clé:', supabaseKey ? supabaseKey.length : 0);
   // Vérifier si la méthode est POST
   if (event.httpMethod !== 'POST') {
     return {
