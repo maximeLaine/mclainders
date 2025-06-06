@@ -17,7 +17,8 @@ const Header = () => {
       <nav className="hidden md:flex gap-6 text-sm">
         <Link to="/" className="hover:underline">Accueil</Link>
         <Link to="/notre-clan" className="hover:underline">Notre Clan</Link>
-        <Link to="/logement" className="hover:underline">Hébergement</Link>
+        <Link to="/logement" className="hover:underline">Hébergements</Link>
+        <Link to="/beaujolais" className="hover:underline">A voir</Link>
         <Link to="/liste-de-mariage" className="hover:underline">Liste de mariage</Link>
         <Link to="/rsvp" className="bg-white text-black px-4 py-2 uppercase text-sm font-semibold hover:bg-gray-100">
           Confirmez votre venue
@@ -79,6 +80,13 @@ const Header = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Hébergement
+            </Link>
+            <Link 
+              to="/beaujolais" 
+              className="py-2 hover:underline"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Beaujolais
             </Link>
             <Link 
               to="/liste-de-mariage" 

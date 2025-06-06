@@ -1,0 +1,83 @@
+[
+  {
+    "name": "Domaine des Terres Dorées",
+    "description": "Vignoble réputé proposant des dégustations de vins du Beaujolais dans un cadre pittoresque. Découvrez les méthodes de vinification traditionnelles et les cépages locaux.",
+    "website": "https://www.terresdorees.com",
+    "address": "69380 Charnay, France",
+    "distance": "15 km du lieu de la fête",
+    "image": "/gallery/beaujolais/terres-dorees.jpg",
+    "category": "Vin & Gastronomie"
+  },
+  {
+    "name": "Château de Bagnols",
+    "description": "Magnifique château médiéval du 13ème siècle transformé en hôtel de luxe. Même si vous n'y séjournez pas, vous pouvez visiter ses jardins et admirer son architecture remarquable.",
+    "website": "https://www.chateaudebagnols.fr",
+    "address": "69620 Bagnols, France",
+    "distance": "8 km du lieu de la fête",
+    "image": "/gallery/beaujolais/chateau-bagnols.jpg",
+    "category": "Patrimoine"
+  },
+  {
+    "name": "Oingt - Village Médiéval",
+    "description": "L'un des 'Plus Beaux Villages de France', avec ses ruelles pavées, ses maisons en pierre dorée et sa vue panoramique sur le Beaujolais. Parfait pour une balade romantique.",
+    "website": "https://www.beaujolaisvert.com/decouvrir/incontournables/oingt/",
+    "address": "69620 Oingt, France",
+    "distance": "1 km du lieu de la fête",
+    "image": "/gallery/beaujolais/oingt-village.jpg",
+    "category": "Patrimoine"
+  },
+  {
+    "name": "Sentier des Crêtes du Beaujolais",
+    "description": "Randonnée offrant des vues spectaculaires sur les vignobles et la vallée. Plusieurs parcours disponibles selon votre niveau, idéal pour une sortie en plein air.",
+    "website": "https://www.destination-beaujolais.com",
+    "address": "Mont Brouilly, 69220 Saint-Lager, France",
+    "distance": "20 km du lieu de la fête",
+    "image": "/gallery/beaujolais/sentier-cretes.jpg",
+    "category": "Nature & Randonnée"
+  },
+  {
+    "name": "Musée du Prieuré de Salles-Arbuissonnas",
+    "description": "Ancien prieuré bénédictin abritant un musée sur l'histoire locale et l'art roman. Son cloître du 12ème siècle est particulièrement remarquable.",
+    "website": "https://www.agglo-villefranche.fr/prieure-de-salles-arbuissonnas.html",
+    "address": "69460 Salles-Arbuissonnas-en-Beaujolais, France",
+    "distance": "12 km du lieu de la fête",
+    "image": "/gallery/beaujolais/prieure-salles.jpg",
+    "category": "Culture"
+  },
+  {
+    "name": "Hameau Dubœuf",
+    "description": "Premier parc à thème sur la vigne et le vin en Europe. Découvrez l'histoire du Beaujolais à travers des expositions interactives, un jardin botanique et des dégustations.",
+    "website": "https://www.hameauduvin.com",
+    "address": "796 Route de la Gare, 71570 Romanèche-Thorins, France",
+    "distance": "30 km du lieu de la fête",
+    "image": "/gallery/beaujolais/hameau-duboeuf.jpg",
+    "category": "Vin & Gastronomie"
+  },
+  {
+    "name": "Lac des Sapins",
+    "description": "Espace naturel avec plage aménagée, activités nautiques et parcours d'accrobranche. Parfait pour se rafraîchir et se détendre en famille ou entre amis.",
+    "website": "https://www.beaujolaisvert.com/decouvrir/incontournables/lac-des-sapins/",
+    "address": "69550 Cublize, France",
+    "distance": "35 km du lieu de la fête",
+    "image": "/gallery/beaujolais/lac-sapins.jpg",
+    "category": "Nature & Randonnée"
+  },
+  {
+    "name": "Marché de Villefranche-sur-Saône",
+    "description": "Grand marché traditionnel où vous pourrez découvrir les produits locaux du Beaujolais : fromages, charcuteries, fruits et légumes de saison, et bien sûr du vin !",
+    "website": "https://www.villefranche.net",
+    "address": "Place du Promenoir, 69400 Villefranche-sur-Saône, France",
+    "distance": "18 km du lieu de la fête",
+    "image": "/gallery/beaujolais/marche-villefranche.jpg",
+    "category": "Vin & Gastronomie"
+  },
+  {
+    "name": "Caves de Beaujeu",
+    "description": "Caves historiques proposant des dégustations de crus du Beaujolais dans un cadre authentique. Une expérience immersive dans l'univers viticole de la région.",
+    "website": "https://www.caves-de-beaujeu.com",
+    "address": "69430 Beaujeu, France",
+    "distance": "22 km du lieu de la fête",
+    "image": "/gallery/beaujolais/caves-beaujeu.jpg",
+    "category": "Vin & Gastronomie"
+  }
+]
