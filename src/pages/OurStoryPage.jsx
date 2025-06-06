@@ -24,7 +24,7 @@ const OurStoryPage = () => {
                 <h3 className="text-2xl mb-4">Missy & Barnabe</h3>
                 <p className="text-gray-700">
                   Je l'ai vue de l'autre côté du bar et je n'ai pas pu détourner le regard. 
-                  À un moment donné, nos yeux se sont croisés et j'ai été envouté par son sourire. 
+                  À un moment donné, nos yeux se sont croisés et j'ai été envoûté par son sourire. 
                   Ce soir-là, nous avons parlé pendant des heures sans même nous rendre compte du temps qui passait.
                 </p>
               </div>
@@ -60,7 +60,7 @@ const OurStoryPage = () => {
                 <h3 className="text-2xl mb-4">La demande</h3>
                 <p className="text-gray-700">
                   Après trois années merveilleuses ensemble, lors d'un voyage en Italie, j'ai demandé à Soria de m'épouser
-                  au coucher du soleil sur une terrasse surplombant la mer. Avec les larmes aux yeux, elle a dit "oui" et
+                  au coucher du soleil sur une terrasse surplombant la mer. Avec les larmes aux yeux, elle a dit « oui » et
                   nous avons commencé à planifier notre avenir ensemble.
                 </p>
               </div>
