@@ -33,13 +33,14 @@ exports.handler = async (event, context) => {
     }
 
     // Insert data into the dj_spots table in Supabase
+    // Ensure spotTime is treated as a text string, not a timestamp
     const { data: insertedData, error } = await supabase
       .from('dj_spots')
       .insert([
         {
           name: data.name,
           email: data.email,
-          spot_time: data.spotTime,
+          spot_time: String(data.spotTime), // Explicitly convert to string
           spot_index: data.spotIndex
         },
       ]);
