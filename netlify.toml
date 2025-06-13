@@ -3,6 +3,9 @@
   publish = "dist"
   functions = "netlify/functions"
 
+# Asset URLs will be set in Netlify environment variables
+# These are just examples and will be overridden by the Netlify UI settings
+
 [dev]
   command = "npm run dev"
   port = 8888

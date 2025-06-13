@@ -1,0 +1,58 @@
+name: Deploy with Images
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Create directories for images if they don't exist
+      - name: Create image directories
+        run: |
+          mkdir -p public/gallery
+          mkdir -p src/data
+
+      # Download images from external storage
+      - name: Download images
+        run: |
+          # Example using curl to download images from a storage service
+          # Replace these URLs with your actual image URLs
+          # You can also use aws-cli, gsutil, or other tools depending on where you store your images
+          
+          # Example for downloading to public/gallery
+          curl -o public/gallery/dobby_van.jpeg ${{ secrets.IMAGE_BASE_URL }}/dobby_van.jpeg
+          curl -o public/gallery/ombre.jpg ${{ secrets.IMAGE_BASE_URL }}/ombre.jpg
+          # Add more image downloads as needed
+          
+          # Example for downloading data files
+          curl -o src/data/beaujolais_attractions.json ${{ secrets.DATA_BASE_URL }}/beaujolais_attractions.json
+          # Add more data file downloads as needed
+
+      - name: Build
+        run: npm run build
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+
+      - name: Deploy to Netlify
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          args: deploy --prod --dir=dist

@@ -1,31 +1,170 @@
-import React, { useState } from 'react';
-import accommodations from '../data/accommodations.json';
+import React, { useState, useEffect } from 'react';
+import { fetchAccommodations } from '../utils/supabase';
 
+/**
+ * AccommodationPage Component
+ * Displays accommodations fetched from Supabase with category filtering
+ */
 const AccommodationPage = () => {
-  const [activeCategory, setActiveCategory] = useState('Tous');
+  // State management
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [accommodations, setAccommodations] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('all');
   
-  // Extract unique categories
-  const categories = ['Tous', ...new Set(accommodations.map(item => {
-    if (item.contact && item.contact.includes('Airbnb')) {
-      return 'Airbnb';
-    } else {
-      return 'Gîte';
+  /**
+   * Extracts unique categories from accommodation data
+   * @param {Array} data - The accommodation data array
+   * @returns {Array} - Array of unique categories
+   */
+  const extractCategories = (data) => {
+    try {
+      if (!data || data.length === 0) return [];
+      
+      // First try to use the 'type' field if it exists
+      const typeCategories = [...new Set(data.map(item => item.type))].filter(Boolean);
+      
+      if (typeCategories.length > 0) {
+        return typeCategories;
+      }
+      
+      // Fallback to categorizing by Airbnb vs Gîte based on contact field
+      return [...new Set(data.map(item => {
+        if (item.contact && item.contact.includes('Airbnb')) {
+          return 'Airbnb';
+        } else {
+          return 'Gîte';
+        }
+      }))].filter(Boolean);
+    } catch (err) {
+      console.error('Error extracting categories:', err);
+      return [];
     }
-  }))];
+  };
   
-  // Filter accommodations based on active category
-  const filteredAccommodations = activeCategory === 'Tous' 
+  /**
+   * Fetch accommodation data from Supabase
+   */
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        const supabaseData = await fetchAccommodations();
+        
+        if (supabaseData && supabaseData.length > 0) {
+          setAccommodations(supabaseData);
+          const uniqueCategories = extractCategories(supabaseData);
+          setCategories(uniqueCategories);
+        } else {
+          setError('No accommodation data available. Please check your Supabase connection and data.');
+          setAccommodations([]);
+          setCategories([]);
+        }
+      } catch (err) {
+        console.error('Error loading accommodations from Supabase:', err);
+        setError('Failed to load accommodations data: ' + (err.message || 'Unknown error'));
+        setAccommodations([]);
+        setCategories([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    loadData();
+  }, []);
+  
+  /**
+   * Filter accommodations by selected category
+   */
+  const filteredAccommodations = selectedCategory === 'all' 
     ? accommodations 
     : accommodations.filter(item => {
-        if (activeCategory === 'Airbnb') {
+        // If using type field
+        if (item.type) {
+          return item.type === selectedCategory;
+        }
+        // If using contact field for categorization
+        if (selectedCategory === 'Airbnb') {
           return item.contact && item.contact.includes('Airbnb');
         } else {
           return !item.contact || !item.contact.includes('Airbnb');
         }
       });
+  
+  /**
+   * Render accommodation card component
+   * @param {Object} accommodation - The accommodation data
+   * @param {Number} index - The index of the accommodation
+   */
+  const renderAccommodationCard = (accommodation, index) => (
+    <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
+      {/* Image */}
+      <div className="h-48 overflow-hidden">
+        <img 
+          src={accommodation.image || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'} 
+          alt={accommodation.name} 
+          className="w-full h-full object-cover"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60';
+          }}
+        />
+      </div>
+      
+      {/* Content */}
+      <div className="p-6">
+        <h3 className="text-xl font-semibold mb-2">{accommodation.name || 'Hébergement'}</h3>
+        <div className="mb-4">
+          <p className="text-gray-600"><span className="font-medium">Type:</span> {accommodation.type || 'Non spécifié'}</p>
+          <p className="text-gray-600"><span className="font-medium">Capacité:</span> {accommodation.capacity || 'Non spécifié'}</p>
+          <p className="text-gray-600"><span className="font-medium">Distance:</span> {accommodation.distance || 'Non spécifié'}</p>
+        </div>
+        <div className="flex flex-col space-y-2">
+          {accommodation.contact && (
+            <p className="text-gray-600"><span className="font-medium">Contact:</span> {accommodation.contact}</p>
+          )}
+          {accommodation.website && (
+            <a 
+              href={accommodation.website} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-purple-600 hover:underline"
+            >
+              Visiter le site web
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
+  /**
+   * Render category filter buttons
+   */
+  const renderCategoryFilters = () => (
+    <div className="mb-8 flex flex-wrap justify-center gap-4">
+      <button 
+        onClick={() => setSelectedCategory('all')} 
+        className={`px-4 py-2 rounded-md ${selectedCategory === 'all' ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-800'}`}
+      >
+        Tous
+      </button>
+      {categories.map((category, index) => (
+        <button 
+          key={index} 
+          onClick={() => setSelectedCategory(category)} 
+          className={`px-4 py-2 rounded-md ${selectedCategory === category ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-800'}`}
+        >
+          {category}
+        </button>
+      ))}
+    </div>
+  );
 
   return (
     <div className="flex flex-col min-h-screen">
+      {/* Hero Section */}
       <div className="relative h-[75vh] bg-cover bg-center" style={{ backgroundImage: "url('/gallery/dobby_van.jpeg')" }}>
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4">
@@ -33,110 +172,59 @@ const AccommodationPage = () => {
           <p className="text-xl max-w-2xl">Si vous n'avez pas votre propre Dobby (notre van libre 🦶), voici quelques infos pour vous.</p>
         </div>
       </div>
-
-      <div className="py-20 px-6 bg-gray-100">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl text-center mb-8">Conseils pour se loger</h2>
-          <p className="text-center text-lg mb-12 max-w-3xl mx-auto">
-            Voici une sélection d'hébergements à proximité du lieu de la fête pour vous permettre de profiter pleinement de l'événement.
-          </p>
-
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {categories.map(category => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-full transition-all duration-300 ${
-                  activeCategory === category 
-                  ? 'bg-purple-600 text-white shadow-md transform scale-105' 
-                  : 'bg-white text-gray-700 hover:bg-purple-100'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
+      
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-12">
+        {/* Loading State */}
+        {loading && (
+          <div className="flex justify-center items-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
+            <p className="ml-3 text-lg text-gray-600">Chargement des hébergements...</p>
           </div>
-
-          {/* Accommodations Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {filteredAccommodations.map((a, i) => (
-              <div 
-                key={i} 
-                className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-              >
-                <div className="relative h-64 overflow-hidden">
-                  {a.image && (
-                    <img 
-                      src={a.image} 
-                      alt={a.name} 
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" 
-                    />
-                  )}
-                  <div className="absolute top-0 right-0 bg-purple-600 text-white px-3 py-1 rounded-bl-lg">
-                    {a.contact && a.contact.includes('Airbnb') ? 'Airbnb' : 'Gîte'}
-                  </div>
-                </div>
-                
-                <div className="p-6">
-                  <h3 className="text-2xl font-medium mb-3">{a.name}</h3>
-
-                  <div className="space-y-3 text-sm">
-                    <div>
-                      <p className="font-semibold">Contact:</p>
-                      <p className="whitespace-pre-line">{a.contact}</p>
-                    </div>
-                    
-                    {a.website && a.website !== "Non" && (
-                      <div>
-                        <p className="font-semibold">Site web:</p>
-                        <a 
-                          href={a.website} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="text-purple-600 hover:text-purple-800 hover:underline transition-colors duration-300 break-words"
-                        >
-                          {a.website}
-                        </a>
-                      </div>
-                    )}
-                    
-                    <div>
-                      <p className="font-semibold">Capacité:</p>
-                      <p className="whitespace-pre-line">{a.capacity}</p>
-                    </div>
-                    
-                    <div>
-                      <p className="font-semibold">Logements:</p>
-                      <p className="whitespace-pre-line">{a.chambre}</p>
-                    </div>
-                    
-                    <div>
-                      <p className="font-semibold">Distance du lieu de la fête:</p>
-                      <p>{a.distance}</p>
-                    </div>
-                  </div>
-                  
-                  {a.contact && a.contact !== "Airbnb" && (
-                    <div className="mt-6">
-                      <a 
-                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.name + " Val d'Oingt")}`}
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center px-4 py-2 bg-purple-100 text-purple-700 rounded-full hover:bg-purple-200 transition-colors duration-300"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                        </svg>
-                        Voir sur Google Maps
-                      </a>
-                    </div>
-                  )}
-                </div>
+        )}
+        
+        {/* Error State */}
+        {error && !loading && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
+            <strong className="font-bold">Erreur!</strong>
+            <span className="block sm:inline"> {error}</span>
+          </div>
+        )}
+        
+        {/* No Data State */}
+        {!loading && !error && (!accommodations || accommodations.length === 0) && (
+          <div className="text-center py-10">
+            <p className="text-xl text-gray-600">Aucun hébergement disponible pour le moment.</p>
+          </div>
+        )}
+        
+        {/* Content when data is available */}
+        {!loading && !error && accommodations && accommodations.length > 0 && (
+          <>
+            {/* Category Filter */}
+            {renderCategoryFilters()}
+            
+            {/* No Results for Selected Category */}
+            {filteredAccommodations.length === 0 && (
+              <div className="text-center py-10">
+                <p className="text-xl text-gray-600">Aucun hébergement trouvé pour la catégorie sélectionnée.</p>
+                <button 
+                  onClick={() => setSelectedCategory('all')}
+                  className="mt-4 px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+                >
+                  Voir tous les hébergements
+                </button>
               </div>
-            ))}
-          </div>
-        </div>
+            )}
+            
+            {/* Accommodations Grid */}
+            {filteredAccommodations.length > 0 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredAccommodations.map(renderAccommodationCard)}
+              </div>
+            )}
+          </>
+        )}
       </div>
     </div>
   );
