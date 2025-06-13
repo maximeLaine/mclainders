@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/download-assets.js && vite build",
+    "build": "npm install && node scripts/download-assets.js && vite build",
     "preview": "vite preview",
     "download-assets": "node scripts/download-assets.js"
   },
@@ -15,6 +15,7 @@
     "react-router-dom": "^7.5.3"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.3.2",
