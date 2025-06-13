@@ -6,8 +6,8 @@ import HomePage from './pages/HomePage';
 import OurStoryPage from './pages/OurStoryPage';
 import AccommodationPage from './pages/AccommodationPage';
 import BeaujolaisPage from './pages/BeaujolaisPage';
-import RegistryPage from './pages/RegistryPage';
 import RSVPPage from './pages/RSVPPage';
+import WeNeedYouPage from './pages/WeNeedYouPage';
 
 const App = () => {
   return (
@@ -20,8 +20,8 @@ const App = () => {
             <Route path="/notre-clan" element={<OurStoryPage />} />
             <Route path="/logement" element={<AccommodationPage />} />
             <Route path="/beaujolais" element={<BeaujolaisPage />} />
-            <Route path="/liste-de-mariage" element={<RegistryPage />} />
             <Route path="/rsvp" element={<RSVPPage />} />
+            <Route path="/nous-avons-besoin-de-vous" element={<WeNeedYouPage />} />
           </Routes>
         </main>
         <Footer />

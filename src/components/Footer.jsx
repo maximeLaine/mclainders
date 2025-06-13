@@ -21,7 +21,7 @@ const Footer = () => {
               <Link to="/notre-clan" className="text-gray-400 hover:text-white transition">Notre clan</Link>
               <Link to="/logement" className="text-gray-400 hover:text-white transition">Hébergements</Link>
               <Link to="/beaujolais" className="text-gray-400 hover:text-white transition">A voir</Link>
-              <Link to="/liste-de-mariage" className="text-gray-400 hover:text-white transition">Liste</Link>
+              <Link to="/nous-avons-besoin-de-vous" className="text-gray-400 hover:text-white transition">Aidez-nous</Link>
               <Link to="/rsvp" className="text-gray-400 hover:text-white transition">RSVP</Link>
             </nav>
           </div>

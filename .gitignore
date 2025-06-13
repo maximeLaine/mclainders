@@ -38,3 +38,6 @@ Thumbs.db
 
 # Fichiers de test locaux
 test-*.js
+
+# Data files
+/src/data/

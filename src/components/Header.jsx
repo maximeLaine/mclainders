@@ -19,7 +19,7 @@ const Header = () => {
         <Link to="/notre-clan" className="hover:underline">Notre Clan</Link>
         <Link to="/logement" className="hover:underline">Hébergements</Link>
         <Link to="/beaujolais" className="hover:underline">A voir</Link>
-        <Link to="/liste-de-mariage" className="hover:underline">Liste de mariage</Link>
+        <Link to="/nous-avons-besoin-de-vous" className="hover:underline">Nous avons besoin de vous</Link>
         <Link to="/rsvp" className="bg-white text-black px-4 py-2 uppercase text-sm font-semibold hover:bg-gray-100">
           Confirmez votre venue
         </Link>
@@ -89,11 +89,11 @@ const Header = () => {
               Beaujolais
             </Link>
             <Link 
-              to="/liste-de-mariage" 
+              to="/nous-avons-besoin-de-vous" 
               className="py-2 hover:underline"
               onClick={() => setIsMenuOpen(false)}
             >
-              Liste de mariage
+              Nous avons besoin de vous
             </Link>
             <Link 
               to="/rsvp" 
