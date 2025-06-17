@@ -19,7 +19,7 @@ const Header = () => {
         <Link to="/notre-clan" className="hover:underline">Notre Clan</Link>
         <Link to="/logement" className="hover:underline">Hébergements</Link>
         <Link to="/beaujolais" className="hover:underline">A voir</Link>
-        <Link to="/nous-avons-besoin-de-vous" className="hover:underline">Nous avons besoin de vous</Link>
+        <Link to="/nous-avons-besoin-de-vous" className="hover:underline">Aidez-nous</Link>
         <Link to="/rsvp" className="bg-white text-black px-4 py-2 uppercase text-sm font-semibold hover:bg-gray-100">
           Confirmez votre venue
         </Link>
@@ -93,7 +93,7 @@ const Header = () => {
               className="py-2 hover:underline"
               onClick={() => setIsMenuOpen(false)}
             >
-              Nous avons besoin de vous
+              Aidez-nous
             </Link>
             <Link 
               to="/rsvp" 
