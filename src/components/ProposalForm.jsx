@@ -66,7 +66,7 @@ const ProposalForm = () => {
               id="proposalName"
               value={proposalName}
               onChange={(e) => setProposalName(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
               required
             />
           </div>
@@ -79,7 +79,7 @@ const ProposalForm = () => {
               id="proposalEmail"
               value={proposalEmail}
               onChange={(e) => setProposalEmail(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
               required
             />
           </div>
@@ -91,7 +91,7 @@ const ProposalForm = () => {
               id="proposalContent"
               value={proposalContent}
               onChange={(e) => setProposalContent(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
               rows="4"
               required
             ></textarea>
@@ -99,7 +99,7 @@ const ProposalForm = () => {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition disabled:bg-gray-400"
+            className="w-full bg-orange-500 text-white py-2 px-4 rounded-full hover:bg-orange-600 transition-colors duration-300 disabled:bg-gray-400 font-semibold"
           >
             {submitting ? 'Envoi en cours...' : 'Envoyer votre proposition'}
           </button>
