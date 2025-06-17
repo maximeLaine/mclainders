@@ -5,13 +5,13 @@ const HomePage = () => {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <div className="relative h-[75vh] bg-cover bg-center flex items-center justify-center" style={{ backgroundImage: "url('/gallery/header.png')" }}>
+      <div className="relative h-[75vh] bg-cover flex items-center justify-center" style={{ backgroundImage: "url('/gallery/header_mariage.jpg')", backgroundPosition: "center" }}>
         <div className="absolute inset-0 bg-black bg-opacity-20"></div>
-        <div className="relative z-10 text-white text-center px-4 pt-52">
-          <p className="text-lg md:text-xl mb-4">Venez fêter l'amour avec nous !</p>
+        <div className="relative z-10 text-white text-center px-4 pt-52 md:pr-20">
+          <p className="text-lg md:text-xl mb-4">💖 Venez fêter l'amour avec nous ! 💖</p>
           <h1 className="text-5xl md:text-7xl font-light mb-6">Mc Lainders</h1>
           <p className="text-lg md:text-2xl tracking-widest mb-12">07 . 11 . 26</p>
-          <Link to="/rsvp" className="inline-block bg-white text-black px-8 py-3 uppercase text-sm font-semibold hover:bg-gray-100 transition">
+          <Link to="/rsvp" className="inline-block bg-orange-500 text-white px-8 py-3 rounded-full uppercase text-sm font-semibold hover:bg-orange-600 transition-colors duration-300">
             CONFIRMEZ VOTRE VENUE
           </Link>
         </div>
@@ -21,7 +21,7 @@ const HomePage = () => {
       {/* Ceremony & Reception Section */}
       <section className="py-20 px-6 bg-white ">
         <div className="max-w-4xl mx-auto text-center" >
-          <h2 className="text-3xl mb-6">Nous vous donnons rendez-vous</h2>
+          <h2 className="text-3xl mb-6">📅 Nous vous donnons rendez-vous</h2>
         </div>
         <div className="flex justify-center">
             <div className="w-24 h-px bg-gray-400 my-8"></div>
@@ -58,7 +58,7 @@ const HomePage = () => {
       <section className="py-20 px-6 bg-gray-100">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
-            <h2 className="text-3xl mb-3">Que faire dans la région ?</h2>
+            <h2 className="text-3xl mb-3">🍷 Que faire dans la région ? 🌍</h2>
             <p className="text-lg text-gray-600">Trouvez votre nid douillet pour la nuit et des occupations pour la journée</p>
             <div className="flex justify-center">
               <div className="w-24 h-px bg-gray-400 my-6"></div>
@@ -106,11 +106,11 @@ const HomePage = () => {
       </section>
       
       {/* RSVP Call to Action */}
-      <section className="relative py-24 bg-cover bg-center" style={{ backgroundImage: "url('/gallery/baniere_sorlet.png')" }}>
+      <section className="relative py-24 bg-cover" style={{ backgroundImage: "url('/gallery/baniere_sorlet.png')", backgroundPosition: "80% center" }}>
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
         <div className="relative z-10 max-w-4xl mx-auto text-center text-white px-6">
-          <h2 className="text-4xl md:text-5xl font-light mb-6">Nous espérons vous compter parmi nous !</h2>
-          <Link to="/rsvp" className="inline-block bg-white text-black px-8 py-3 uppercase text-sm font-semibold hover:bg-gray-100 transition">
+          <h2 className="text-4xl md:text-5xl font-light mb-6">Nous espérons vous compter parmi nous! 🎉</h2>
+          <Link to="/rsvp" className="inline-block bg-orange-500 text-white px-8 py-3 rounded-full uppercase text-sm font-semibold hover:bg-orange-600 transition-colors duration-300">
             CONFIRMEZ VOTRE VENUE
           </Link>
         </div>

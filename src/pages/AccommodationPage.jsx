@@ -129,7 +129,7 @@ const AccommodationPage = () => {
               href={accommodation.website} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-purple-600 hover:underline"
+              className="text-orange-600 hover:underline"
             >
               Visiter le site web
             </a>
@@ -146,7 +146,7 @@ const AccommodationPage = () => {
     <div className="mb-8 flex flex-wrap justify-center gap-4">
       <button 
         onClick={() => setSelectedCategory('all')} 
-        className={`px-4 py-2 rounded-md ${selectedCategory === 'all' ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-800'}`}
+        className={`px-4 py-2 rounded-md ${selectedCategory === 'all' ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-800'}`}
       >
         Tous
       </button>
@@ -154,7 +154,7 @@ const AccommodationPage = () => {
         <button 
           key={index} 
           onClick={() => setSelectedCategory(category)} 
-          className={`px-4 py-2 rounded-md ${selectedCategory === category ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-800'}`}
+          className={`px-4 py-2 rounded-md ${selectedCategory === category ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-800'}`}
         >
           {category}
         </button>
@@ -168,7 +168,7 @@ const AccommodationPage = () => {
       <div className="relative h-[75vh] bg-cover bg-center" style={{ backgroundImage: "url('/gallery/dobby_van.jpeg')" }}>
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4">
-          <h1 className="text-5xl md:text-7xl font-light mb-6">Hébergement</h1>
+          <h1 className="text-5xl md:text-7xl font-light mb-6">Hébergements</h1>
           <p className="text-xl max-w-2xl">Si vous n'avez pas votre propre Dobby (notre van libre 🦶), voici quelques infos pour vous.</p>
         </div>
       </div>
@@ -178,7 +178,7 @@ const AccommodationPage = () => {
         {/* Loading State */}
         {loading && (
           <div className="flex justify-center items-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
             <p className="ml-3 text-lg text-gray-600">Chargement des hébergements...</p>
           </div>
         )}
@@ -210,7 +210,7 @@ const AccommodationPage = () => {
                 <p className="text-xl text-gray-600">Aucun hébergement trouvé pour la catégorie sélectionnée.</p>
                 <button 
                   onClick={() => setSelectedCategory('all')}
-                  className="mt-4 px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+                  className="mt-4 px-6 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors duration-300 font-semibold"
                 >
                   Voir tous les hébergements
                 </button>
