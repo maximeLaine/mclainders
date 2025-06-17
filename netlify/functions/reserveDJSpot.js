@@ -2,9 +2,8 @@ const { createClient } = require('@supabase/supabase-js');
 
 // Initialize Supabase client with environment variables
 const supabaseUrl = process.env.SUPABASE_URL;
-// Use service role key for serverless functions to bypass RLS
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+const supabaseKey = process.env.SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey, {
   auth: {
     persistSession: false,
   }
@@ -14,7 +13,7 @@ exports.handler = async (event, context) => {
   // Debug logs
   console.log('Function reserveDJSpot called');
   console.log('Supabase URL:', supabaseUrl);
-  console.log('Supabase Key defined:', !!supabaseServiceKey);
+  console.log('Supabase Key defined:', !!supabaseKey);
   
   // Check if method is POST
   if (event.httpMethod !== 'POST') {
