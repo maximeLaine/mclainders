@@ -11,16 +11,39 @@ import { getFallbackBrunchCookingSlots } from './getFallbackBrunchCookingSlots';
 
 /**
  * Initialize the Supabase client
- * In Vite, environment variables need to be prefixed with VITE_
- * We check for both formats to be safe
+ * Using only SUPABASE_URL and SUPABASE_KEY for simplicity
  */
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || import.meta.env.SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.SUPABASE_KEY;
+let supabaseUrl;
+let supabaseKey;
+let supabase;
 
-/**
- * Supabase client instance
- */
-export const supabase = createClient(supabaseUrl, supabaseKey);
+try {
+  // Log environment variable availability for debugging
+  console.log('Environment variables check:', {
+    SUPABASE_URL_exists: !!import.meta.env.SUPABASE_URL,
+    SUPABASE_KEY_exists: !!import.meta.env.SUPABASE_KEY
+  });
+  
+  supabaseUrl = import.meta.env.SUPABASE_URL;
+  supabaseKey = import.meta.env.SUPABASE_KEY;
+  
+  if (!supabaseUrl || !supabaseKey) {
+    console.error('Supabase environment variables are missing');
+    // Provide fallback values or handle the error appropriately
+  }
+  
+  /**
+   * Supabase client instance
+   */
+  supabase = createClient(supabaseUrl, supabaseKey);
+  console.log('Supabase client initialized successfully');
+} catch (error) {
+  console.error('Error initializing Supabase client:', error);
+  // Create a dummy client or handle the error appropriately
+  supabase = { from: () => ({ select: () => ({ data: null, error: 'Supabase client initialization failed' }) }) };
+}
+
+export { supabase };
 
 /**
  * Fetch accommodations from Supabase
