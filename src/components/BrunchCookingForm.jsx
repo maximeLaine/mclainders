@@ -45,6 +45,7 @@ const BrunchCookingForm = ({ slots: initialSlots, onSpotReserved }) => {
   const handleSlotSelect = (slotIndex, positionIndex) => {
     if (cookingSlots[slotIndex].positions[positionIndex].name) return; // Position already taken
     setSelectedSlot(cookingSlots[slotIndex]);
+
     setSelectedPosition(positionIndex);
   };
 
@@ -71,6 +72,7 @@ const BrunchCookingForm = ({ slots: initialSlots, onSpotReserved }) => {
         throw new Error("Créneau non trouvé");
       }
 
+
       // Prepare data for submission
       const dataToSubmit = {
         name,
@@ -79,8 +81,9 @@ const BrunchCookingForm = ({ slots: initialSlots, onSpotReserved }) => {
         spotIndex,
         positionIndex: selectedPosition
       };
-      
+
       console.log('Submitting data:', dataToSubmit);
+
 
       // Send the reservation to the serverless function
       const response = await fetch('/.netlify/functions/reserveBrunchCookingSlot', {
@@ -153,6 +156,7 @@ const BrunchCookingForm = ({ slots: initialSlots, onSpotReserved }) => {
                     border rounded-lg p-4 text-center cursor-pointer transition-all duration-300
                     ${position.name ? 'bg-gray-100 cursor-not-allowed' : 'hover:border-orange-500 hover:-translate-y-1'}
                     ${selectedSlot && selectedSlot.time === slot.time && selectedPosition === posIndex ? 'border-orange-500 ring-2 ring-orange-200 transform scale-105' : 'border-gray-200'}
+
                   `}
                 >
                   <p className="font-medium">🍳 Place {posIndex + 1}</p>
