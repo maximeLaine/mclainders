@@ -14,7 +14,7 @@ exports.handler = async (event, context) => {
   // Debug logs
   console.log('Function reserveDJSpot called');
   console.log('Supabase URL:', supabaseUrl);
-  console.log('Supabase Key defined:', !!supabaseKey);
+  console.log('Supabase Key defined:', !!supabaseServiceKey);
   
   // Check if method is POST
   if (event.httpMethod !== 'POST') {

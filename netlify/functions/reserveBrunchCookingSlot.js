@@ -29,7 +29,11 @@ exports.handler = async (event, context) => {
   try {
     // Parse the incoming request body
     const data = JSON.parse(event.body);
+    console.log('Received data:', data);
     const { name, email, spotTime, spotIndex, positionIndex } = data;
+    
+    // Log all received fields for debugging
+    console.log('Extracted fields:', { name, email, spotTime, spotIndex, positionIndex });
 
     // Validate required fields
     if (!name || !email || !spotTime || positionIndex === undefined) {
@@ -45,7 +49,7 @@ exports.handler = async (event, context) => {
 
     // Initialize Supabase client
     const supabaseUrl = process.env.SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY;
     
     if (!supabaseUrl || !supabaseKey) {
       return {
