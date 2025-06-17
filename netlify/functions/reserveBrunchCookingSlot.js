@@ -47,12 +47,21 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Initialize Supabase client
+    // Initialize Supabase client with detailed logging
+    console.log('Function reserveBrunchCookingSlot called');
+    
     const supabaseUrl = process.env.SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_KEY;
-
+    
+    console.log('Environment variables check:', {
+      SUPABASE_URL_exists: !!supabaseUrl,
+      SUPABASE_KEY_exists: !!supabaseKey,
+      SUPABASE_URL_prefix: supabaseUrl ? supabaseUrl.substring(0, 10) + '...' : 'undefined',
+      received_data: { name, email, spotTime, positionIndex }
+    });
     
     if (!supabaseUrl || !supabaseKey) {
+      console.error('Missing Supabase configuration');
       return {
         statusCode: 500,
         headers,
@@ -63,54 +72,80 @@ exports.handler = async (event, context) => {
       };
     }
 
-    const supabase = createClient(supabaseUrl, supabaseKey);
-
-    // Check if the slot is already taken
-    const { data: existingSlot, error: checkError } = await supabase
-      .from('brunch_cooking_slots')
-      .select('*')
-      .eq('time_slot', spotTime)
-      .eq('position', positionIndex + 1)
-      .not('name', 'is', null);
-
-    if (checkError) {
-      console.error('Error checking slot availability:', checkError);
+    let supabase;
+    try {
+      supabase = createClient(supabaseUrl, supabaseKey);
+      console.log('Supabase client created successfully');
+    } catch (clientError) {
+      console.error('Error creating Supabase client:', clientError);
       return {
         statusCode: 500,
         headers,
         body: JSON.stringify({ 
           success: false, 
-          message: 'Erreur lors de la vérification de la disponibilité.' 
+          message: 'Erreur de connexion à la base de données.' 
         })
       };
     }
 
-    if (existingSlot && existingSlot.length > 0) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ 
-          success: false, 
-          message: 'Ce créneau a déjà été réservé. Veuillez en choisir un autre.' 
-        })
-      };
-    }
+    try {
+      // Check if the slot is already taken
+      const { data: existingSlot, error: checkError } = await supabase
+        .from('brunch_cooking_slots')
+        .select('*')
+        .eq('time_slot', spotTime)
+        .eq('position', positionIndex + 1)
+        .not('name', 'is', null);
 
-    // Update the slot with the reservation details
-    const { error: updateError } = await supabase
-      .from('brunch_cooking_slots')
-      .update({ name, email })
-      .eq('time_slot', spotTime)
-      .eq('position', positionIndex + 1);
+      if (checkError) {
+        console.error('Error checking slot availability:', checkError);
+        return {
+          statusCode: 500,
+          headers,
+          body: JSON.stringify({ 
+            success: false, 
+            message: 'Erreur lors de la vérification de la disponibilité.' 
+          })
+        };
+      }
 
-    if (updateError) {
-      console.error('Error reserving cooking slot:', updateError);
+      if (existingSlot && existingSlot.length > 0) {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ 
+            success: false, 
+            message: 'Ce créneau a déjà été réservé. Veuillez en choisir un autre.' 
+          })
+        };
+      }
+
+      // Update the slot with the reservation details
+      const { error: updateError } = await supabase
+        .from('brunch_cooking_slots')
+        .update({ name, email })
+        .eq('time_slot', spotTime)
+        .eq('position', positionIndex + 1);
+
+      if (updateError) {
+        console.error('Error reserving cooking slot:', updateError);
+        return {
+          statusCode: 500,
+          headers,
+          body: JSON.stringify({ 
+            success: false, 
+            message: 'Erreur lors de la réservation du créneau.' 
+          })
+        };
+      }
+    } catch (queryError) {
+      console.error('Error during database operations:', queryError);
       return {
         statusCode: 500,
         headers,
         body: JSON.stringify({ 
           success: false, 
-          message: 'Erreur lors de la réservation du créneau.' 
+          message: 'Erreur lors de l\'opération sur la base de données.' 
         })
       };
     }
