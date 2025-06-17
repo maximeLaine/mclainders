@@ -32,12 +32,13 @@ exports.handler = async (event, context) => {
     
     const supabaseUrl = process.env.SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_KEY;
-    
+
     console.log('Environment variables check:', {
       SUPABASE_URL_exists: !!supabaseUrl,
       SUPABASE_KEY_exists: !!supabaseKey,
       SUPABASE_URL_prefix: supabaseUrl ? supabaseUrl.substring(0, 10) + '...' : 'undefined',
     });
+
     
     if (!supabaseUrl || !supabaseKey) {
       console.error('Missing Supabase configuration');
