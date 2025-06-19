@@ -94,8 +94,8 @@ exports.handler = async (event, context) => {
       const { data: existingSlot, error: checkError } = await supabase
         .from('brunch_cooking_slots')
         .select('*')
-        .eq('time_slot', spotTime)
-        .eq('position', positionIndex + 1)
+        .eq('spot_time', spotTime)
+        .eq('spot_index', (positionIndex + 1).toString())
         .not('name', 'is', null);
 
       if (checkError) {
@@ -125,8 +125,8 @@ exports.handler = async (event, context) => {
       const { error: updateError } = await supabase
         .from('brunch_cooking_slots')
         .update({ name, email })
-        .eq('time_slot', spotTime)
-        .eq('position', positionIndex + 1);
+        .eq('spot_time', spotTime)
+        .eq('spot_index', (positionIndex + 1).toString());
 
       if (updateError) {
         console.error('Error reserving cooking slot:', updateError);

@@ -83,7 +83,7 @@ const OurStoryPage = () => {
               <div className="md:w-1/2">
                 <h3 className="text-2xl mb-4 text-orange-700 font-semibold">💍 La demande 🌞</h3>
                 <p className="text-gray-700 leading-relaxed">
-                  Après trois années merveilleuses ensemble, lors d'un voyage en Italie, j'ai demandé à Soria de m'épouser
+                  Après trois années merveilleuses ensemble, lors d'un voyage en Italie, j'ai demandé à Missy de m'épouser
                   au coucher du soleil sur une terrasse surplombant la mer. Avec les larmes aux yeux, elle a dit « oui » et
                   nous avons commencé à planifier notre avenir ensemble.
                 </p>
@@ -116,7 +116,7 @@ const OurStoryPage = () => {
                   Nous sommes impatients de partager ce moment magique avec vous.
                 </p>
                 <div className="mt-6 inline-block bg-purple-100 px-4 py-2 rounded-full text-purple-700">
-                  <span className="font-semibold">Été 2025</span>
+                  <span className="font-semibold">Automne 2026</span>
                 </div>
               </div>
               <div className="md:w-1/2">

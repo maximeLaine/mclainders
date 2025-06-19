@@ -91,16 +91,20 @@ exports.handler = async (event, context) => {
       // Transform the data to match the expected format in the UI
       const slots = {};
       data.forEach(slot => {
-        if (!slots[slot.time_slot]) {
-          slots[slot.time_slot] = {
-            time: slot.time_slot,
+        if (!slots[slot.spot_time]) {
+          slots[slot.spot_time] = {
+            time: slot.spot_time,
             positions: []
           };
         }
         
-        slots[slot.time_slot].positions[slot.position - 1] = {
-          name: slot.name || ""
-        };
+        // Convert spot_index to number and subtract 1 for zero-based array
+        const positionIndex = parseInt(slot.spot_index, 10) - 1;
+        if (!isNaN(positionIndex) && positionIndex >= 0) {
+          slots[slot.spot_time].positions[positionIndex] = {
+            name: slot.name || ""
+          };
+        }
       });
       
       // Return success response with the slots data

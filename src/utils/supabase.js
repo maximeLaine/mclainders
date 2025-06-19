@@ -20,12 +20,12 @@ let supabase;
 try {
   // Log environment variable availability for debugging
   console.log('Environment variables check:', {
-    SUPABASE_URL_exists: !!import.meta.env.SUPABASE_URL,
-    SUPABASE_KEY_exists: !!import.meta.env.SUPABASE_KEY
+    SUPABASE_URL_exists: !!import.meta.env.VITE_SUPABASE_URL,
+    SUPABASE_KEY_exists: !!import.meta.env.VITE_SUPABASE_KEY
   });
   
-  supabaseUrl = import.meta.env.SUPABASE_URL;
-  supabaseKey = import.meta.env.SUPABASE_KEY;
+  supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+  supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
   
   if (!supabaseUrl || !supabaseKey) {
     console.error('Supabase environment variables are missing');
@@ -210,8 +210,8 @@ export async function reserveBrunchCookingSlot(timeSlot, position, name, email) 
     const { data: existingSlot, error: checkError } = await supabase
       .from('brunch_cooking_slots')
       .select('*')
-      .eq('time_slot', timeSlot)
-      .eq('position', position)
+      .eq('spot_time', timeSlot)
+      .eq('spot_index', position.toString())
       .not('name', 'is', null);
 
     if (checkError) {
@@ -227,8 +227,8 @@ export async function reserveBrunchCookingSlot(timeSlot, position, name, email) 
     const { error: updateError } = await supabase
       .from('brunch_cooking_slots')
       .update({ name, email })
-      .eq('time_slot', timeSlot)
-      .eq('position', position);
+      .eq('spot_time', timeSlot)
+      .eq('spot_index', position.toString());
 
     if (updateError) {
       console.error('Error reserving cooking slot:', updateError);
