@@ -1,4 +1,21 @@
 import React, { useState } from 'react';
+import { useFormSubmit } from '../hooks/useFormSubmit';
+
+// Async function to submit RSVP data to Netlify function
+async function submitRSVP(formData) {
+  const response = await fetch('/.netlify/functions/submitRSVP', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  });
+  const result = await response.json();
+  return {
+    success: response.ok,
+    message: result.message || (response.ok ? 'Merci ! Votre réponse a été enregistrée.' : 'Une erreur est survenue'),
+  };
+}
 
 /**
  * RSVPPage Component
@@ -12,61 +29,27 @@ const RSVPPage = () => {
     attendance: '',
     comments: ''
   });
-  
-  const [submitting, setSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
-  
+
+  const { submitting, submitStatus, handleSubmit } = useFormSubmit(submitRSVP);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
-  const handleSubmit = async (e) => {
+
+  const onSubmit = (e) => {
     e.preventDefault();
-    setSubmitting(true);
-    setSubmitStatus(null);
-    
-    try {
-      // Préparer les données pour correspondre au schéma de la table
-      const dataToSubmit = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        attendance: formData.attendance,
-        comments: formData.comments
-      };
-      
-      const response = await fetch('/.netlify/functions/submitRSVP', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dataToSubmit),
+    handleSubmit(formData, () => {
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        attendance: '',
+        comments: ''
       });
-      
-      const result = await response.json();
-      
-      if (response.ok) {
-        setSubmitStatus({ success: true, message: 'Merci ! Votre réponse a été enregistrée.' });
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          attendance: '',
-          additionalGuests: '',
-          dietaryRestrictions: '',
-          comments: ''
-        });
-      } else {
-        setSubmitStatus({ success: false, message: `Erreur: ${result.message || 'Une erreur est survenue'}` });
-      }
-    } catch (error) {
-      console.error('Erreur:', error);
-      setSubmitStatus({ success: false, message: 'Une erreur est survenue lors de l\'envoi du formulaire.' });
-    } finally {
-      setSubmitting(false);
-    }
+    });
   };
+
   return (
     <div className="flex flex-col min-h-screen">
     {/* Hero Section */}
@@ -87,7 +70,7 @@ const RSVPPage = () => {
           <div className="w-24 h-px bg-gray-400 my-8"></div>
         </div>
         
-        <form className="space-y-8" onSubmit={handleSubmit}>
+        <form className="space-y-8" onSubmit={onSubmit}>
           {/* Name Fields */}
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

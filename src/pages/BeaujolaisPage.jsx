@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import attractions from '../data/beaujolais_attractions.json';
+import React, { useState, useMemo } from 'react';
+import { useSupabaseData } from '../hooks/useSupabaseData';
 
 const BeaujolaisPage = () => {
   const [activeCategory, setActiveCategory] = useState('Tous');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const { data: attractions, loading, error } = useSupabaseData('attractions');
   
   // Extract unique categories
-  const categories = ['Tous', ...new Set(attractions.map(item => item.category))];
+  const categories = useMemo(() => {
+    if (!attractions || attractions.length === 0) return ['Tous'];
+    return ['Tous', ...new Set(attractions.map(item => item.category))];
+  }, [attractions]);
   
   // Filter attractions based on active category
-  const filteredAttractions = activeCategory === 'Tous' 
-    ? attractions 
-    : attractions.filter(item => item.category === activeCategory);
+  const filteredAttractions = useMemo(() => {
+    if (!attractions) return [];
+    return activeCategory === 'Tous'
+      ? attractions
+      : attractions.filter(item => item.category === activeCategory);
+  }, [attractions, activeCategory]);
 
   return (
     <div className="flex flex-col min-h-screen">

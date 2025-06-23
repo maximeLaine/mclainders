@@ -1,96 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { fetchAccommodations } from '../utils/supabase';
+import React, { useState, useMemo } from 'react';
+import { useSupabaseData } from '../hooks/useSupabaseData';
 
 /**
  * AccommodationPage Component
  * Displays accommodations fetched from Supabase with category filtering
  */
 const AccommodationPage = () => {
-  // State management
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [accommodations, setAccommodations] = useState([]);
-  const [categories, setCategories] = useState([]);
+  // Use the generic Supabase data fetching hook
+  const { data: accommodations, loading, error } = useSupabaseData('accommodations');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  
+
   /**
    * Extracts unique categories from accommodation data
    * @param {Array} data - The accommodation data array
-   * @returns {Array} - Array of unique categories
+   * @returns {Array} - Array of unique categories with 'all' as first item
    */
-  const extractCategories = (data) => {
-    try {
-      if (!data || data.length === 0) return [];
-      
-      // First try to use the 'type' field if it exists
-      const typeCategories = [...new Set(data.map(item => item.type))].filter(Boolean);
-      
-      if (typeCategories.length > 0) {
-        return typeCategories;
-      }
-      
-      // Fallback to categorizing by Airbnb vs Gîte based on contact field
-      return [...new Set(data.map(item => {
-        if (item.contact && item.contact.includes('Airbnb')) {
-          return 'Airbnb';
-        } else {
-          return 'Gîte';
-        }
-      }))].filter(Boolean);
-    } catch (err) {
-      console.error('Error extracting categories:', err);
-      return [];
-    }
-  };
-  
-  /**
-   * Fetch accommodation data from Supabase
-   */
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        setLoading(true);
-        const supabaseData = await fetchAccommodations();
-        
-        if (supabaseData && supabaseData.length > 0) {
-          setAccommodations(supabaseData);
-          const uniqueCategories = extractCategories(supabaseData);
-          setCategories(uniqueCategories);
-        } else {
-          setError('No accommodation data available. Please check your Supabase connection and data.');
-          setAccommodations([]);
-          setCategories([]);
-        }
-      } catch (err) {
-        console.error('Error loading accommodations from Supabase:', err);
-        setError('Failed to load accommodations data: ' + (err.message || 'Unknown error'));
-        setAccommodations([]);
-        setCategories([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    loadData();
-  }, []);
-  
+  const categories = useMemo(() => {
+    if (!accommodations || accommodations.length === 0) return ['all'];
+    const types = [...new Set(accommodations
+      .map(item => item.type)
+      .filter(type => type && typeof type === 'string')
+    )];
+    if (types.length === 0) return ['all', 'Gîte', 'Airbnb'];
+    return ['all', ...types];
+  }, [accommodations]);
+
   /**
    * Filter accommodations by selected category
    */
-  const filteredAccommodations = selectedCategory === 'all' 
-    ? accommodations 
-    : accommodations.filter(item => {
-        // If using type field
-        if (item.type) {
-          return item.type === selectedCategory;
-        }
-        // If using contact field for categorization
-        if (selectedCategory === 'Airbnb') {
-          return item.contact && item.contact.includes('Airbnb');
-        } else {
-          return !item.contact || !item.contact.includes('Airbnb');
-        }
-      });
+  const filteredAccommodations = useMemo(() => {
+    if (!accommodations) return [];
+    return selectedCategory === 'all'
+      ? accommodations
+      : accommodations.filter(item => item.type === selectedCategory);
+  }, [accommodations, selectedCategory]);
   
   /**
    * Render accommodation card component
@@ -169,7 +112,7 @@ const AccommodationPage = () => {
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4">
           <h1 className="text-5xl md:text-7xl font-light mb-6">Hébergements</h1>
-          <p className="text-xl max-w-2xl">Si vous n'avez pas votre propre Dobby (notre van d'elfe libre 👫), voici quelques infos pour vous.</p>
+          <p className="text-xl max-w-2xl">Si vous n'avez pas votre propre Dobby (notre van libre 🦶), voici quelques infos pour vous.</p>
         </div>
       </div>
       
