@@ -94,8 +94,8 @@ exports.handler = async (event, context) => {
       const { data: existingSlot, error: checkError } = await supabase
         .from('brunch_cooking_slots')
         .select('*')
-        .eq('spot_time', spotTime)
-        .eq('spot_index', (positionIndex + 1).toString())
+        .eq('time_slot', spotTime)
+        .eq('spot_index', (positionIndex + 1).toString())git 
         .not('name', 'is', null);
 
       if (checkError) {
@@ -125,7 +125,7 @@ exports.handler = async (event, context) => {
       const { error: updateError } = await supabase
         .from('brunch_cooking_slots')
         .update({ name, email })
-        .eq('spot_time', spotTime)
+        .eq('time_slot', spotTime)
         .eq('spot_index', (positionIndex + 1).toString());
 
       if (updateError) {

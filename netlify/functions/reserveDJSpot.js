@@ -44,7 +44,7 @@ exports.handler = async (event, context) => {
         {
           name: data.name,
           email: data.email,
-          spot_time: String(data.spotTime), // Explicitly convert to string
+          time_slot: String(data.spotTime), // Explicitly convert to string
           spot_index: data.spotIndex
         },
       ]);
