@@ -28,8 +28,8 @@ const DJSpotForm = ({ spots, onSpotReserved }) => {
       const dataToSubmit = {
         name: djName,
         email: djEmail,
-        spotTime: djSpots[selectedSpot].time,
-        spotIndex: selectedSpot
+        spotTime: djSpots[selectedSpot].time_slot || djSpots[selectedSpot].time,
+        spotIndex: djSpots[selectedSpot].spot_index ?? selectedSpot
       };
       
       // Send data to serverless function
