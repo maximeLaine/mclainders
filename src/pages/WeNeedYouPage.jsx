@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { fetchDJSpots, fetchBrunchCookingSlots } from '../utils/supabase';
+import React, { useState } from 'react';
+import { useSupabaseData } from '../hooks/useSupabaseData';
 import DJSpotForm from '../components/DJSpotForm';
 import ProposalForm from '../components/ProposalForm';
 import BrunchCookingForm from '../components/BrunchCookingForm';
@@ -21,68 +21,36 @@ const WeNeedYouPage = () => {
     { time: "00:00 - 00:30", name: "" },
     { time: "00:30 - 01:00", name: "" },
   ]);
-  
-  // Brunch cooking section state
   const [cookingSlots, setCookingSlots] = useState([]);
-  
-  // Loading and error states for better UX
-  const [loading, setLoading] = useState(false);
-  const [cookingSlotsLoading, setCookingSlotsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [cookingSlotsError, setCookingSlotsError] = useState(null);
-  const [cookingError, setCookingError] = useState(null);
-  const [cookingLoading, setCookingLoading] = useState(false);
-  
+
+  // Use the generic Supabase data fetching hook
+  const { data: djSpotsData, loading: loadingDJ, error: errorDJ } = useSupabaseData('dj_spots', { orderBy: 'time_slot' });
+
+  // Group flat brunch_cooking_slots data into the format expected by BrunchCookingForm
+  function groupCookingSlots(data) {
+    if (!Array.isArray(data)) return [];
+    const grouped = {};
+    data.forEach(row => {
+      if (!grouped[row.time_slot]) {
+        grouped[row.time_slot] = { time: row.time_slot, positions: [] };
+      }
+      grouped[row.time_slot].positions[row.spot_index] = { name: row.name || "" };
+    });
+    return Object.values(grouped);
+  }
+
+  const { data: cookingSlotsData, loading: loadingCooking, error: errorCooking } = useSupabaseData('brunch_cooking_slots', { orderBy: 'time_slot', transform: groupCookingSlots });
+
   // Handle DJ spot reservation
   const handleSpotReserved = (updatedSpots) => {
     setDjSpots(updatedSpots);
   };
-  
+
   // Handle cooking slot reservation
   const handleCookingSlotReserved = (updatedSlots) => {
     setCookingSlots(updatedSlots);
   };
-  
-  useEffect(() => {
-    const loadDJSpots = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const spots = await fetchDJSpots();
-        if (spots) {
-          setDjSpots(spots);
-        }
-      } catch (err) {
-        console.error('Error loading DJ spots:', err);
-        setError('Erreur lors du chargement des créneaux DJ');
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    loadDJSpots();
-  }, []);
-  
-  useEffect(() => {
-    const loadCookingSlots = async () => {
-      setCookingSlotsLoading(true);
-      setCookingSlotsError(null);
-      try {
-        const slots = await fetchBrunchCookingSlots();
-        if (slots) {
-          setCookingSlots(slots);
-        }
-      } catch (err) {
-        console.error('Error loading cooking slots:', err);
-        setCookingSlotsError('Erreur lors du chargement des créneaux de cuisine');
-      } finally {
-        setCookingSlotsLoading(false);
-      }
-    };
-
-    loadCookingSlots();
-  }, []);
-  
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
@@ -111,14 +79,14 @@ const WeNeedYouPage = () => {
           <h3 className="text-2xl text-center font-semibold mb-8 text-orange-600">Sélectionnez votre créneau</h3>
           
           {/* Error state */}
-          {error && (
+          {errorDJ && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-8 max-w-3xl mx-auto text-center">
-              <p>{error}</p>
+              <p>{errorDJ}</p>
             </div>
           )}
           
           {/* Loading state */}
-          {loading ? (
+          {loadingDJ ? (
             <div className="text-center py-12">
               <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-orange-500 border-r-transparent">
                 <span className="sr-only">Chargement...</span>
@@ -127,7 +95,7 @@ const WeNeedYouPage = () => {
             </div>
           ) : (
             /* DJ Spots Form Component */
-            <DJSpotForm spots={djSpots} onSpotReserved={handleSpotReserved} />
+            <DJSpotForm spots={djSpotsData || djSpots} onSpotReserved={handleSpotReserved} />
           )}
         </div>
       </section>
@@ -149,14 +117,14 @@ const WeNeedYouPage = () => {
           <h3 className="text-2xl text-center font-semibold mb-8 text-orange-600">Sélectionnez votre créneau de cuisine</h3>
           
           {/* Error state */}
-          {cookingSlotsError && (
+          {errorCooking && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-8 max-w-3xl mx-auto text-center">
-              <p>{cookingSlotsError}</p>
+              <p>{errorCooking}</p>
             </div>
           )}
           
           {/* Loading state */}
-          {cookingSlotsLoading ? (
+          {loadingCooking ? (
             <div className="text-center py-12">
               <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-orange-500 border-r-transparent">
                 <span className="sr-only">Chargement...</span>
@@ -165,14 +133,12 @@ const WeNeedYouPage = () => {
             </div>
           ) : (
             <BrunchCookingForm 
-              slots={cookingSlots} 
+              slots={(cookingSlotsData || cookingSlots || [])} 
               onSpotReserved={handleCookingSlotReserved} 
             />
           )}
         </div>
       </section>
-      
-      {/* Brunch Help Section removed - only using cooking slots now */}
         
       {/* Proposal Section */}
       <section className="py-20 px-6 bg-white">

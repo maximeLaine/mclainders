@@ -75,7 +75,7 @@ const DJSpotForm = ({ spots, onSpotReserved }) => {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        {djSpots.map((spot, index) => (
+        {[...djSpots].sort((a, b) => (a.spot_index ?? 0) - (b.spot_index ?? 0)).map((spot, index) => (
           <div 
             key={index}
             onClick={() => handleSpotSelect(index)}
@@ -85,7 +85,7 @@ const DJSpotForm = ({ spots, onSpotReserved }) => {
               ${selectedSpot === index ? 'border-orange-500 ring-2 ring-orange-200 transform scale-105' : 'border-gray-200'}
             `}
           >
-            <p className="font-medium">🎵 {spot.time}</p>
+            <div className="font-medium">🎵 {spot.time_slot || spot.time}</div>
             {spot.name ? (
               <p className="text-sm mt-2">🎧 Réservé par {spot.name}</p>
             ) : (
