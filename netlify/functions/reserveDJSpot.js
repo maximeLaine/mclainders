@@ -36,18 +36,38 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Insert data into the dj_spots table in Supabase
-    // Ensure spotTime is treated as a text string, not a timestamp
-    const { data: insertedData, error } = await supabase
+    // Check if the spot is already reserved
+    const { data: existingSpot, error: checkError } = await supabase
       .from('dj_spots')
-      .insert([
-        {
-          name: data.name,
-          email: data.email,
-          time_slot: String(data.spotTime), // Explicitly convert to string
-          spot_index: data.spotIndex
-        },
-      ]);
+      .select('name')
+      .eq('time_slot', String(data.spotTime))
+      .eq('spot_index', data.spotIndex)
+      .maybeSingle();
+
+    if (checkError) {
+      console.error('Error checking DJ spot availability:', checkError);
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ message: 'Erreur lors de la vérification de la disponibilité.' }),
+      };
+    }
+
+    if (existingSpot && existingSpot.name) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ message: 'Ce créneau DJ est déjà réservé. Veuillez en choisir un autre.' }),
+      };
+    }
+
+    // Update the existing DJ spot with the reservation details
+    const { data: updatedData, error } = await supabase
+      .from('dj_spots')
+      .update({
+        name: data.name,
+        email: data.email
+      })
+      .eq('time_slot', String(data.spotTime))
+      .eq('spot_index', data.spotIndex);
 
     if (error) {
       console.error('Supabase error:', error);
@@ -59,7 +79,7 @@ exports.handler = async (event, context) => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'DJ spot reserved successfully', data: insertedData }),
+      body: JSON.stringify({ message: 'DJ spot reserved successfully', data: updatedData }),
     };
   } catch (error) {
     console.error('Error:', error);
