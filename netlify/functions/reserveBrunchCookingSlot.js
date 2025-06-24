@@ -95,7 +95,7 @@ exports.handler = async (event, context) => {
         .from('brunch_cooking_slots')
         .select('*')
         .eq('time_slot', spotTime)
-        .eq('spot_index', (positionIndex + 1).toString())git 
+        .eq('spot_index', (positionIndex + 1).toString())
         .not('name', 'is', null);
 
       if (checkError) {
