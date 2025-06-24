@@ -66,12 +66,11 @@ const BrunchCookingForm = ({ slots: initialSlots, onSpotReserved }) => {
 
     try {
       // Get the index of the selected slot in the array
-      const spotIndex = cookingSlots.findIndex(slot => slot.time === selectedSlot.time);
+      const spotIndex = selectedSlot.positions[selectedPosition].spot_index;
       
-      if (spotIndex === -1) {
+      if (spotIndex === undefined) {
         throw new Error("Créneau non trouvé");
       }
-
 
       // Prepare data for submission
       const dataToSubmit = {

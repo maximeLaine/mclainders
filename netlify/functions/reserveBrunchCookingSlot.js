@@ -95,7 +95,7 @@ exports.handler = async (event, context) => {
         .from('brunch_cooking_slots')
         .select('*')
         .eq('time_slot', spotTime)
-        .eq('spot_index', (positionIndex + 1).toString())
+        .eq('spot_index', spotIndex)
         .not('name', 'is', null);
 
       if (checkError) {
@@ -126,7 +126,7 @@ exports.handler = async (event, context) => {
         .from('brunch_cooking_slots')
         .update({ name, email })
         .eq('time_slot', spotTime)
-        .eq('spot_index', (positionIndex + 1).toString());
+        .eq('spot_index', spotIndex);
 
       if (updateError) {
         console.error('Error reserving cooking slot:', updateError);

@@ -34,7 +34,7 @@ const WeNeedYouPage = () => {
       if (!grouped[row.time_slot]) {
         grouped[row.time_slot] = { time: row.time_slot, positions: [] };
       }
-      grouped[row.time_slot].positions[row.spot_index] = { name: row.name || "" };
+      grouped[row.time_slot].positions[row.spot_index] = { name: row.name || "", spot_index: row.spot_index };
     });
     return Object.values(grouped);
   }
