@@ -68,11 +68,11 @@ const Header = () => {
               Accueil
             </Link>
             <Link 
-              to="/notre-histoire" 
+              to="/notre-clan" 
               className="py-2 hover:underline"
               onClick={() => setIsMenuOpen(false)}
             >
-              Notre histoire
+              Notre clan
             </Link>
             <Link 
               to="/logement" 
