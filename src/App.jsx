@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -11,20 +11,7 @@ import WeNeedYouPage from './pages/WeNeedYouPage';
 import ErrorBoundary from './components/ErrorBoundary';
 
 const App = () => {
-  // Add debugging for environment variables
-  useEffect(() => {
-    console.log('App mounted, checking environment variables');
-    try {
-      // Check if environment variables are available
-      const envVars = {
-        SUPABASE_URL: import.meta.env.SUPABASE_URL ? 'defined' : 'undefined',
-        SUPABASE_KEY: import.meta.env.SUPABASE_KEY ? 'defined' : 'undefined'
-      };
-      console.log('Environment variables status:', envVars);
-    } catch (error) {
-      console.error('Error checking environment variables:', error);
-    }
-  }, []);
+  // no-op
 
   return (
     <ErrorBoundary>
