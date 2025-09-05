@@ -1,14 +1,14 @@
 # Dépendances
-/node_modules
-/.pnp
+node_modules/
+.pnp
 .pnp.js
 
 # Tests
-/coverage
+coverage/
 
 # Production
-/build
-/dist
+build/
+dist/
 
 # Environnement
 .env
@@ -33,7 +33,6 @@ yarn-error.log*
 Thumbs.db
 
 # Netlify
-/.netlify
 .netlify/
 
 # Fichiers de test locaux
