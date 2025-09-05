@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 
 /**
  * BrunchCookingForm Component
@@ -112,7 +111,7 @@ const BrunchCookingForm = ({ slots: initialSlots, onSpotReserved }) => {
                     ${selectedSlot && selectedSlot.time === slot.time && selectedPosition === posIndex ? 'border-orange-500 ring-2 ring-orange-200 transform scale-105' : 'border-gray-200'}
                   `}
                 >
-                  <p className="font-medium">🍳 Place {posIndex }</p>
+                  <p className="font-medium">🍳 Place {posIndex}</p>
                   {position.name ? (
                     <p className="text-sm mt-2">👨‍🍳 Réservé par {position.name}</p>
                   ) : (
@@ -170,11 +169,6 @@ const BrunchCookingForm = ({ slots: initialSlots, onSpotReserved }) => {
       )}
     </div>
   );
-};
-
-BrunchCookingForm.propTypes = {
-  slots: PropTypes.array,
-  onSpotReserved: PropTypes.func,
 };
 
 export default BrunchCookingForm;
