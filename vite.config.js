@@ -13,6 +13,10 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
+      './WebSocket': resolve(__dirname, 'src/polyfills/WebSocket.js'),
     },
+  },
+  define: {
+    global: 'globalThis',
   },
 });

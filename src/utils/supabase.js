@@ -27,7 +27,11 @@ try {
   /**
    * Supabase client instance
    */
-  supabase = createClient(supabaseUrl, supabaseKey);
+  supabase = createClient(supabaseUrl, supabaseKey, {
+    realtime: {
+      enabled: false
+    }
+  });
 } catch (error) {
   console.error('Error initializing Supabase client:', error);
   // Create a dummy client or handle the error appropriately
