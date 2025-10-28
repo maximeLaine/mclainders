@@ -32,6 +32,10 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
+# Claude
+/.claude
+.claude/
+
 # Netlify
 /.netlify
 .netlify/
