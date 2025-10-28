@@ -1,9 +1,6 @@
 const nodemailer = require('nodemailer');
 
 exports.handler = async (event, context) => {
-  // Debug logs
-  console.log('Function submitProposal called');
-  
   // Check if method is POST
   if (event.httpMethod !== 'POST') {
     return {
@@ -15,7 +12,6 @@ exports.handler = async (event, context) => {
   try {
     // Get data from request body
     const data = JSON.parse(event.body);
-    console.log('Data received:', data);
     
     // Validate required data
     if (!data.name || !data.email || !data.content) {

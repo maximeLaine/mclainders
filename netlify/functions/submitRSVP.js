@@ -6,13 +6,6 @@ const supabaseKey = process.env.VITE_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 exports.handler = async (event, context) => {
-  // Log pour déboguer
-  console.log('Fonction submitRSVP appelée');
-  console.log('URL Supabase:', supabaseUrl);
-  console.log('Clé Supabase définie:', !!supabaseKey);
-  // Vérifier si c'est une clé service_role (les premiers caractères sont suffisants pour identifier le type)
-  console.log('Type de clé:', supabaseKey && supabaseKey.startsWith('eyJ') ? 'Semble être une clé valide' : 'Format de clé non reconnu');
-  console.log('Longueur de la clé:', supabaseKey ? supabaseKey.length : 0);
   // Vérifier si la méthode est POST
   if (event.httpMethod !== 'POST') {
     return {
@@ -24,7 +17,6 @@ exports.handler = async (event, context) => {
   try {
     // Récupérer les données du corps de la requête
     const data = JSON.parse(event.body);
-    console.log('Données reçues:', data);
     
     // Validation des données requises
     if (!data.firstName || !data.lastName || !data.email || !data.attendance) {
