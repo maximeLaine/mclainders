@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useSupabaseData } from '../hooks/useSupabaseData';
+import OptimizedImage from '../components/OptimizedImage';
 
 /**
  * AccommodationPage Component
@@ -44,14 +45,10 @@ const AccommodationPage = () => {
     <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
       {/* Image */}
       <div className="h-48 overflow-hidden">
-        <img 
-          src={accommodation.image || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'} 
-          alt={accommodation.name} 
+        <OptimizedImage
+          src={accommodation.image || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'}
+          alt={accommodation.name}
           className="w-full h-full object-cover"
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60';
-          }}
         />
       </div>
       

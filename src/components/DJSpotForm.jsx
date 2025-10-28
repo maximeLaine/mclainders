@@ -65,7 +65,6 @@ const DJSpotForm = ({ spots, onSpotReserved }) => {
         setSubmitStatus({ success: false, message: `Erreur: ${result.message || 'Une erreur est survenue'}` });
       }
     } catch (error) {
-      console.error('Erreur:', error);
       setSubmitStatus({ success: false, message: 'Une erreur est survenue lors de l\'envoi du formulaire.' });
     } finally {
       setSubmitting(false);

@@ -10,11 +10,6 @@ const supabase = createClient(supabaseUrl, supabaseKey, {
 });
 
 exports.handler = async (event, context) => {
-  // Debug logs
-  console.log('Function reserveDJSpot called');
-  console.log('Supabase URL:', supabaseUrl);
-  console.log('Supabase Key defined:', !!supabaseKey);
-  
   // Check if method is POST
   if (event.httpMethod !== 'POST') {
     return {
@@ -26,7 +21,6 @@ exports.handler = async (event, context) => {
   try {
     // Get data from request body
     const data = JSON.parse(event.body);
-    console.log('Data received:', data);
     
     // Validate required data
     if (!data.name || !data.email || !data.spotTime || data.spotIndex === undefined) {
