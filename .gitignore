@@ -36,6 +36,7 @@ Thumbs.db
 /.claude
 .claude/
 
+
 # Netlify
 /.netlify
 .netlify/
