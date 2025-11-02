@@ -1,10 +1,8 @@
-import React from 'react';
-
 /**
- * OurStoryPage Component
+ * AgendaPage Component
  * Displays the wedding weekend schedule
  */
-const OurStoryPage = () => {
+const AgendaPage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
@@ -180,4 +178,4 @@ const OurStoryPage = () => {
   );
 };
 
-export default OurStoryPage;
+export default AgendaPage;

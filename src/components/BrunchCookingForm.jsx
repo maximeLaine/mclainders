@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import Modal from './common/Modal';
 
 /**
  * BrunchCookingForm Component
@@ -9,6 +10,7 @@ const BrunchCookingForm = ({ slots: initialSlots, onSpotReserved }) => {
   const [cookingSlots, setCookingSlots] = useState(Array.isArray(initialSlots) ? initialSlots : []);
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [selectedPosition, setSelectedPosition] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -26,6 +28,17 @@ const BrunchCookingForm = ({ slots: initialSlots, onSpotReserved }) => {
     if (cookingSlots[slotIndex]?.positions[positionIndex]?.name) return; // Position already taken
     setSelectedSlot(cookingSlots[slotIndex]);
     setSelectedPosition(positionIndex);
+    setIsModalOpen(true);
+    setSubmitStatus(null);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedSlot(null);
+    setSelectedPosition(null);
+    setName("");
+    setEmail("");
+    setSubmitStatus(null);
   };
 
   // Form submission handler
@@ -70,12 +83,13 @@ const BrunchCookingForm = ({ slots: initialSlots, onSpotReserved }) => {
         );
         setCookingSlots(updatedSlots);
         if (onSpotReserved) onSpotReserved(updatedSlots);
-        // Reset form
-        setSelectedSlot(null);
-        setSelectedPosition(null);
-        setName("");
-        setEmail("");
+
         setSubmitStatus({ success: true, message: result.message || "Votre créneau de cuisine a été réservé avec succès!" });
+
+        // Close modal after short delay to show success message
+        setTimeout(() => {
+          closeModal();
+        }, 2000);
       } else {
         setSubmitStatus({ success: false, message: result.message || "Erreur lors de la réservation du créneau." });
       }
@@ -124,49 +138,76 @@ const BrunchCookingForm = ({ slots: initialSlots, onSpotReserved }) => {
         ))}
       </div>
 
-      {selectedSlot !== null && selectedPosition !== null && !submitStatus?.success && (
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
-          <div className="mb-4">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-              👤 Votre nom
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-              required
-            />
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title={`👨‍🍳 Réserver le créneau ${selectedSlot ? selectedSlot.time : ''} - Place ${selectedPosition !== null ? selectedPosition : ''}`}
+      >
+        {submitStatus?.success ? (
+          <div className="text-center py-8">
+            <div className="text-6xl mb-4">🎉</div>
+            <p className="text-xl font-semibold text-green-600 mb-2">
+              {submitStatus.message}
+            </p>
+            <p className="text-gray-600">Cette fenêtre va se fermer automatiquement...</p>
           </div>
-          <div className="mb-6">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-              ✉️ Votre email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            disabled={submitting}
-            className="w-full bg-orange-500 text-white py-2 px-4 rounded-full hover:bg-orange-600 transition-colors duration-300 disabled:bg-gray-400 font-semibold"
-          >
-            {submitting ? '⏳ Réservation en cours...' : '🎉 Réserver ce créneau'}
-          </button>
-        </form>
-      )}
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                👤 Votre nom <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                placeholder="Votre nom complet"
+                required
+                autoFocus
+              />
+            </div>
+            <div className="mb-6">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                ✉️ Votre email <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                placeholder="votre@email.com"
+                required
+              />
+            </div>
 
-      {submitStatus && (
-        <div className={`max-w-md mx-auto p-4 rounded-md ${submitStatus.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-          {submitStatus.message}
-        </div>
-      )}
+            {submitStatus && !submitStatus.success && (
+              <div className="mb-4 p-4 rounded-md bg-red-100 text-red-800">
+                {submitStatus.message}
+              </div>
+            )}
+
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={closeModal}
+                className="flex-1 bg-gray-200 text-gray-700 py-2 px-4 rounded-full hover:bg-gray-300 transition-colors duration-300 font-semibold"
+              >
+                Annuler
+              </button>
+              <button
+                type="submit"
+                disabled={submitting}
+                className="flex-1 bg-orange-500 text-white py-2 px-4 rounded-full hover:bg-orange-600 transition-colors duration-300 disabled:bg-gray-400 font-semibold"
+              >
+                {submitting ? '⏳ Réservation...' : '🎉 Réserver'}
+              </button>
+            </div>
+          </form>
+        )}
+      </Modal>
     </div>
   );
 };

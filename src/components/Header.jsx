@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(prev => !prev);
+  }, []);
+
+  const closeMenu = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
 
   return (
     <header className="absolute top-0 left-0 w-full p-6 flex justify-between items-center text-white z-20">
@@ -16,7 +20,7 @@ const Header = () => {
       {/* Desktop Navigation */}
       <nav className="hidden md:flex gap-6 text-sm">
         <Link to="/" className="hover:underline">Accueil</Link>
-        <Link to="/notre-clan" className="hover:underline">Notre Clan</Link>
+        <Link to="/notre-clan" className="hover:underline">Déroulé</Link>
         <Link to="/logement" className="hover:underline">Hébergements</Link>
         <Link to="/beaujolais" className="hover:underline">A voir</Link>
         <Link to="/nous-avons-besoin-de-vous" className="hover:underline">Aidez-nous</Link>
@@ -60,45 +64,45 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-black bg-opacity-90 z-10">
           <div className="flex flex-col p-4">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="py-2 hover:underline"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
             >
               Accueil
             </Link>
-            <Link 
-              to="/notre-clan" 
+            <Link
+              to="/notre-clan"
               className="py-2 hover:underline"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
             >
-              Notre clan
+              Déroulé
             </Link>
-            <Link 
-              to="/logement" 
+            <Link
+              to="/logement"
               className="py-2 hover:underline"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
             >
               Hébergement
             </Link>
-            <Link 
-              to="/beaujolais" 
+            <Link
+              to="/beaujolais"
               className="py-2 hover:underline"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
             >
               Beaujolais
             </Link>
-            <Link 
-              to="/nous-avons-besoin-de-vous" 
+            <Link
+              to="/nous-avons-besoin-de-vous"
               className="py-2 hover:underline"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
             >
               Aidez-nous
             </Link>
-            <Link 
-              to="/rsvp" 
+            <Link
+              to="/rsvp"
               className="py-2 hover:underline"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
             >
               Confirmez votre venue
             </Link>
