@@ -108,9 +108,29 @@ const BrunchCookingForm = ({ slots: initialSlots, onSpotReserved }) => {
     return <div className="text-center py-8 text-red-600">{error}</div>;
   }
 
+  // Count available slots
+  const availableCount = cookingSlots.reduce((count, slot) => {
+    return count + (slot.positions?.filter(pos => !pos.name)?.length || 0);
+  }, 0);
+  const totalCount = cookingSlots.reduce((count, slot) => {
+    return count + (slot.positions?.length || 0);
+  }, 0);
+
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+    <div className="max-w-3xl mx-auto">
+      {/* Availability counter */}
+      <div className="text-center mb-6">
+        <span className={`inline-block px-4 py-2 rounded-full text-sm font-medium ${
+          availableCount > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+        }`}>
+          {availableCount > 0
+            ? `${availableCount} place${availableCount > 1 ? 's' : ''} disponible${availableCount > 1 ? 's' : ''} sur ${totalCount}`
+            : 'Complet !'
+          }
+        </span>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {(Array.isArray(cookingSlots) ? cookingSlots : []).map((slot, slotIndex) => (
           <div key={slotIndex} className="border rounded-lg p-6 bg-white shadow-sm">
             <h4 className="font-medium text-center mb-4">👨‍🍳 {slot.time}</h4>
@@ -121,15 +141,18 @@ const BrunchCookingForm = ({ slots: initialSlots, onSpotReserved }) => {
                   onClick={() => handleSlotSelect(slotIndex, posIndex)}
                   className={`
                     border rounded-lg p-4 text-center cursor-pointer transition-all duration-300
-                    ${position.name ? 'bg-gray-100 cursor-not-allowed' : 'hover:border-orange-500 hover:-translate-y-1'}
-                    ${selectedSlot && selectedSlot.time === slot.time && selectedPosition === posIndex ? 'border-orange-500 ring-2 ring-orange-200 transform scale-105' : 'border-gray-200'}
+                    ${position.name
+                      ? 'bg-gray-100 cursor-not-allowed border-gray-200'
+                      : 'hover:border-orange-500 hover:-translate-y-1 hover:shadow-md border-gray-200 bg-white'
+                    }
+                    ${selectedSlot && selectedSlot.time === slot.time && selectedPosition === posIndex ? 'border-orange-500 ring-2 ring-orange-200' : ''}
                   `}
                 >
-                  <p className="font-medium">🍳 Place {posIndex}</p>
+                  <p className="font-medium text-lg mb-2">🍳 Place {posIndex + 1}</p>
                   {position.name ? (
-                    <p className="text-sm mt-2">👨‍🍳 Réservé par {position.name}</p>
+                    <p className="text-sm text-gray-600">✅ Réservé par {position.name}</p>
                   ) : (
-                    <p className="text-sm mt-2 text-gray-500">✨ Disponible</p>
+                    <p className="text-sm text-green-600">✨ Disponible</p>
                   )}
                 </div>
               ))}
@@ -141,7 +164,7 @@ const BrunchCookingForm = ({ slots: initialSlots, onSpotReserved }) => {
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
-        title={`👨‍🍳 Réserver le créneau ${selectedSlot ? selectedSlot.time : ''} - Place ${selectedPosition !== null ? selectedPosition : ''}`}
+        title={`👨‍🍳 Réserver le créneau ${selectedSlot ? selectedSlot.time : ''} - Place ${selectedPosition !== null ? selectedPosition + 1 : ''}`}
       >
         {submitStatus?.success ? (
           <div className="text-center py-8">

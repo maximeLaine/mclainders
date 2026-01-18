@@ -20,9 +20,6 @@ const WeddingListPage = () => {
             Malgré cela, certains d'entre vous nous ont demandé ce qui nous ferait plaisir.
           </p>
           <p className="text-lg text-gray-700 leading-relaxed mt-6">
-            Nous avons donc réfléchi (pas très longtemps) et la conclusion est la suivante.
-          </p>
-          <p className="text-lg text-gray-700 leading-relaxed mt-6">
             Nous mesurons notre chance d'avoir tout ce dont nous avons besoin dans notre quotidien : une famille aimante, des amis présents, un appartement cosy-cocon… mais nous avons un rêve.
           </p>
         </div>
