@@ -11,6 +11,7 @@ const AccommodationPage = lazy(() => import('./pages/AccommodationPage'));
 const BeaujolaisPage = lazy(() => import('./pages/BeaujolaisPage'));
 const RSVPPage = lazy(() => import('./pages/RSVPPage'));
 const WeNeedYouPage = lazy(() => import('./pages/WeNeedYouPage'));
+const WeddingListPage = lazy(() => import('./pages/WeddingListPage'));
 
 // Loading component for Suspense fallback
 const LoadingSpinner = () => (
@@ -29,11 +30,12 @@ const App = () => {
             <Suspense fallback={<LoadingSpinner />}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/notre-clan" element={<AgendaPage />} />
-                <Route path="/logement" element={<AccommodationPage />} />
-                <Route path="/beaujolais" element={<BeaujolaisPage />} />
-                <Route path="/rsvp" element={<RSVPPage />} />
-                <Route path="/nous-avons-besoin-de-vous" element={<WeNeedYouPage />} />
+                <Route path="/deroule" element={<AgendaPage />} />
+                <Route path="/hebergements" element={<AccommodationPage />} />
+                <Route path="/visiter" element={<BeaujolaisPage />} />
+                <Route path="/confirmez-votre-venue" element={<RSVPPage />} />
+                <Route path="/participez" element={<WeNeedYouPage />} />
+                <Route path="/liste-de-mariage" element={<WeddingListPage />} />
               </Routes>
             </Suspense>
           </main>

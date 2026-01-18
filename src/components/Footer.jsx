@@ -18,10 +18,11 @@ const Footer = () => {
             <h4 className="text-base font-medium mb-2">Liens rapides</h4>
             <nav className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
               <Link to="/" className="text-gray-400 hover:text-white transition">Accueil</Link>
-              <Link to="/notre-clan" className="text-gray-400 hover:text-white transition">Notre clan</Link>
+              <Link to="/notre-clan" className="text-gray-400 hover:text-white transition">Déroulé</Link>
               <Link to="/logement" className="text-gray-400 hover:text-white transition">Hébergements</Link>
-              <Link to="/beaujolais" className="text-gray-400 hover:text-white transition">A voir</Link>
-              <Link to="/nous-avons-besoin-de-vous" className="text-gray-400 hover:text-white transition">Aidez-nous</Link>
+              <Link to="/beaujolais" className="text-gray-400 hover:text-white transition">Visiter</Link>
+              <Link to="/nous-avons-besoin-de-vous" className="text-gray-400 hover:text-white transition">Participez</Link>
+              <Link to="/liste-de-mariage" className="text-gray-400 hover:text-white transition">Liste de mariage</Link>
               <Link to="/rsvp" className="text-gray-400 hover:text-white transition">RSVP</Link>
             </nav>
           </div>
@@ -39,7 +40,7 @@ const Footer = () => {
         
         {/* Copyright */}
         <div className="border-t border-gray-800 mt-4 pt-4 text-center text-gray-500 text-xs">
-          <p>&copy; {currentYear} Claire & Maxime</p>
+          <p>&copy; 2026 Mc Lainders</p>
         </div>
       </div>
     </footer>
