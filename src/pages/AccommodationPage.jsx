@@ -15,19 +15,34 @@ const AccommodationPage = () => {
    * @param {Number} index - The index of the accommodation
    */
   const renderAccommodationCard = (accommodation, index) => (
-    <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div key={index} className={`bg-white rounded-lg shadow-md overflow-hidden ${accommodation.is_reserved ? 'opacity-75' : ''}`}>
       {/* Image */}
-      <div className="h-48 overflow-hidden">
+      <div className="h-48 overflow-hidden relative">
         <OptimizedImage
           src={accommodation.image || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'}
           alt={accommodation.name}
-          className="w-full h-full object-cover"
+          className={`w-full h-full object-cover ${accommodation.is_reserved ? 'grayscale' : ''}`}
         />
+        {accommodation.is_reserved && (
+          <div className="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
+            Complet
+          </div>
+        )}
       </div>
-      
+
       {/* Content */}
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-2">{accommodation.name || 'Hébergement'}</h3>
+
+        {/* Reserved notice */}
+        {accommodation.is_reserved && (
+          <div className="mb-4 p-3 bg-orange-50 border border-orange-200 rounded-lg">
+            <p className="text-orange-700 text-sm font-medium">
+              Ce lieu est victime de son succès !
+            </p>
+          </div>
+        )}
+
         <div className="mb-4">
           <p className="text-gray-600"><span className="font-medium">Type:</span> {accommodation.type || 'Non spécifié'}</p>
           <p className="text-gray-600"><span className="font-medium">Capacité:</span> {accommodation.capacity || 'Non spécifié'}</p>
@@ -38,10 +53,10 @@ const AccommodationPage = () => {
             <p className="text-gray-600"><span className="font-medium">Contact:</span> {accommodation.contact}</p>
           )}
           {accommodation.website && (
-            <a 
-              href={accommodation.website} 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href={accommodation.website}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-orange-600 hover:underline"
             >
               Visiter le site web
