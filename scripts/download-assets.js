@@ -50,20 +50,14 @@ function downloadFile(url, destination) {
 
 // List of assets to download
 // The URLs should be stored in environment variables or a config file
+// Note: Only add assets here if they need to be downloaded from external sources
 const assets = [
-  {
-    url: process.env.ASSET_URL_DOBBY_VAN || 'https://example.com/placeholder.jpg',
-    destination: path.join(__dirname, '../public/gallery/dobby_van.jpeg')
-  },
-  {
-    url: process.env.ASSET_URL_OMBRE || 'https://example.com/placeholder.jpg',
-    destination: path.join(__dirname, '../public/gallery/ombre.jpg')
-  },
-  // Add more assets as needed
-  {
-    url: process.env.ASSET_URL_ATTRACTIONS_JSON || 'https://example.com/attractions.json',
-    destination: path.join(__dirname, '../src/data/beaujolais_attractions.json')
-  }
+  // Add assets here if needed, with environment variable URLs
+  // Example:
+  // {
+  //   url: process.env.ASSET_URL_EXAMPLE || 'https://example.com/file.jpg',
+  //   destination: path.join(__dirname, '../public/gallery/file.jpg')
+  // }
 ];
 
 // Download all assets
