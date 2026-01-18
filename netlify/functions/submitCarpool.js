@@ -43,9 +43,9 @@ exports.handler = async (event, context) => {
   try {
     // Parse and validate the incoming request body
     const data = JSON.parse(event.body);
-    const { name, email, phone, departureCity, departureTime, seatsAvailable, comments } = data;
+    const { name, email, whatsapp, showWhatsapp, departureCity, departureDay, departureTime, seatsAvailable, comments } = data;
 
-    if (!name || !email || !departureCity || !departureTime || !seatsAvailable) {
+    if (!name || !email || !departureCity || !departureDay || !departureTime || !seatsAvailable) {
       return {
         statusCode: STATUS_BAD_REQUEST,
         headers,
@@ -83,8 +83,10 @@ exports.handler = async (event, context) => {
       .insert({
         name,
         email,
-        phone: phone || null,
+        whatsapp: whatsapp || null,
+        show_whatsapp: showWhatsapp || false,
         departure_city: departureCity,
+        departure_day: departureDay,
         departure_time: departureTime,
         seats_available: parseInt(seatsAvailable, 10),
         comments: comments || null,

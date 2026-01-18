@@ -28,8 +28,10 @@ const TransportPage = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
+    whatsapp: '',
+    showWhatsapp: false,
     departureCity: '',
+    departureDay: '',
     departureTime: '',
     seatsAvailable: 1,
     comments: ''
@@ -38,8 +40,8 @@ const TransportPage = () => {
   const { submitting, submitStatus, handleSubmit } = useFormSubmit(submitCarpoolOffer);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   };
 
   const onSubmit = (e) => {
@@ -48,8 +50,10 @@ const TransportPage = () => {
       setFormData({
         name: '',
         email: '',
-        phone: '',
+        whatsapp: '',
+        showWhatsapp: false,
         departureCity: '',
+        departureDay: '',
         departureTime: '',
         seatsAvailable: 1,
         comments: ''
@@ -286,12 +290,6 @@ const TransportPage = () => {
               </div>
             </div>
 
-            <div className="mt-8 p-4 bg-orange-50 rounded-lg border border-orange-200">
-              <p className="text-gray-700 text-sm">
-                <strong>Conseil :</strong> Un espace sera prévu pour garer les vélos en sécurité sur place.
-                N'hésitez pas à nous prévenir si vous venez à vélo pour qu'on puisse prévoir le nécessaire !
-              </p>
-            </div>
 
             <div className="mt-6 text-center">
               <a
@@ -400,7 +398,9 @@ const TransportPage = () => {
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <h4 className="font-semibold text-gray-800 text-lg">Depuis {offer.departure_city}</h4>
-                      <p className="text-gray-500 text-sm">{offer.departure_time}</p>
+                      <p className="text-gray-500 text-sm">
+                        {offer.departure_day} à {offer.departure_time}
+                      </p>
                     </div>
                     <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
                       {offer.seats_available} place{offer.seats_available > 1 ? 's' : ''}
@@ -411,12 +411,24 @@ const TransportPage = () => {
                   )}
                   <div className="border-t pt-4 flex items-center justify-between">
                     <p className="font-medium text-gray-800">{offer.name}</p>
-                    <a
-                      href={`mailto:mclainders@gmail.com?subject=Covoiturage depuis ${encodeURIComponent(offer.departure_city)}&body=Bonjour,%0A%0AJe souhaite contacter ${encodeURIComponent(offer.name)} pour le covoiturage depuis ${encodeURIComponent(offer.departure_city)} prévu ${encodeURIComponent(offer.departure_time)}.%0A%0AMerci de me mettre en relation.%0A%0ACordialement,`}
-                      className="inline-flex items-center gap-2 bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-orange-200 transition-colors"
-                    >
-                      <span>✉️</span> Contacter
-                    </a>
+                    <div className="flex items-center gap-2">
+                      {offer.whatsapp && (
+                        <a
+                          href={`https://wa.me/${offer.whatsapp.replace(/[^0-9+]/g, '')}?text=${encodeURIComponent(`Bonjour ${offer.name}, je suis intéressé(e) par votre covoiturage depuis ${offer.departure_city} le ${offer.departure_day}.`)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-green-200 transition-colors"
+                        >
+                          <span>📱</span> WhatsApp
+                        </a>
+                      )}
+                      <a
+                        href={`mailto:mclainders@gmail.com?subject=Covoiturage depuis ${encodeURIComponent(offer.departure_city)}&body=Bonjour,%0A%0AJe souhaite contacter ${encodeURIComponent(offer.name)} pour le covoiturage depuis ${encodeURIComponent(offer.departure_city)} prévu ${encodeURIComponent(offer.departure_day)} à ${encodeURIComponent(offer.departure_time)}.%0A%0AMerci de me mettre en relation.%0A%0ACordialement,`}
+                        className="inline-flex items-center gap-2 bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-orange-200 transition-colors"
+                      >
+                        <span>✉️</span> Contacter
+                      </a>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -479,31 +491,66 @@ const TransportPage = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Téléphone
+                  WhatsApp (optionnel)
                 </label>
                 <input
                   type="tel"
-                  name="phone"
-                  value={formData.phone}
+                  name="whatsapp"
+                  value={formData.whatsapp}
                   onChange={handleChange}
+                  placeholder="+33 6 12 34 56 78"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                />
+              </div>
+
+              {formData.whatsapp && (
+                <div className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    name="showWhatsapp"
+                    id="showWhatsapp"
+                    checked={formData.showWhatsapp}
+                    onChange={handleChange}
+                    className="w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
+                  />
+                  <label htmlFor="showWhatsapp" className="text-sm text-gray-700">
+                    Afficher mon WhatsApp aux autres invités pour qu'ils puissent me contacter directement
+                  </label>
+                </div>
+              )}
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Ville de départ <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="departureCity"
+                  value={formData.departureCity}
+                  onChange={handleChange}
+                  placeholder="Ex: Paris, Lyon..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  required
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Ville de départ <span className="text-red-500">*</span>
+                    Jour de départ <span className="text-red-500">*</span>
                   </label>
-                  <input
-                    type="text"
-                    name="departureCity"
-                    value={formData.departureCity}
+                  <select
+                    name="departureDay"
+                    value={formData.departureDay}
                     onChange={handleChange}
-                    placeholder="Ex: Paris, Lyon..."
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                     required
-                  />
+                  >
+                    <option value="">Sélectionner...</option>
+                    <option value="Vendredi">Vendredi</option>
+                    <option value="Samedi">Samedi</option>
+                    <option value="Dimanche">Dimanche</option>
+                  </select>
                 </div>
 
                 <div>
@@ -511,11 +558,10 @@ const TransportPage = () => {
                     Heure de départ <span className="text-red-500">*</span>
                   </label>
                   <input
-                    type="text"
+                    type="time"
                     name="departureTime"
                     value={formData.departureTime}
                     onChange={handleChange}
-                    placeholder="Ex: Samedi 10h"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                     required
                   />
