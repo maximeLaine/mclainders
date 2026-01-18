@@ -26,7 +26,10 @@ const RSVPPage = () => {
     firstName: '',
     lastName: '',
     email: '',
-    attendance: '',
+    presenceSaturday: '',
+    presenceSunday: '',
+    withChildren: '',
+    childrenCount: 0,
     comments: ''
   });
 
@@ -44,7 +47,10 @@ const RSVPPage = () => {
         firstName: '',
         lastName: '',
         email: '',
-        attendance: '',
+        presenceSaturday: '',
+        presenceSunday: '',
+        withChildren: '',
+        childrenCount: 0,
         comments: ''
       });
     });
@@ -64,8 +70,9 @@ const RSVPPage = () => {
     {/* Form Section */}
     <div className="py-20 px-6 bg-white">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-3xl text-center text-gray-800 mb-8">Fête de l'amour de Claire et Maxime</h2>
-        
+        <h2 className="text-3xl text-center text-gray-800 mb-4">Fête de l'amour de Claire et Maxime</h2>
+        <p className="text-center text-gray-600 mb-8 italic">Une réponse par personne invitée</p>
+
         <div className="flex justify-center">
           <div className="w-24 h-px bg-gray-400 my-8"></div>
         </div>
@@ -112,36 +119,115 @@ const RSVPPage = () => {
             />
           </div>
 
-          {/* Attendance */}
+          {/* Presence Saturday */}
           <div>
-            <label className="block mb-1 text-sm">Serez-vous présent(e) ? <span className="text-xs text-gray-500">(*)</span></label>
+            <label className="block mb-1 text-sm">Présence le samedi (mariage + soirée) <span className="text-xs text-gray-500">(*)</span></label>
             <div className="flex items-center space-x-4 mt-2">
               <label className="flex items-center">
-                <input 
-                  type="radio" 
-                  name="attendance" 
-                  className="mr-2" 
-                  value="yes" 
-                  checked={formData.attendance === 'yes'} 
-                  onChange={handleChange} 
-                  required 
+                <input
+                  type="radio"
+                  name="presenceSaturday"
+                  className="mr-2"
+                  value="yes"
+                  checked={formData.presenceSaturday === 'yes'}
+                  onChange={handleChange}
+                  required
                 />
                 Oui
               </label>
               <label className="flex items-center">
-                <input 
-                  type="radio" 
-                  name="attendance" 
-                  className="mr-2" 
-                  value="no" 
-                  checked={formData.attendance === 'no'} 
-                  onChange={handleChange} 
-                  required 
+                <input
+                  type="radio"
+                  name="presenceSaturday"
+                  className="mr-2"
+                  value="no"
+                  checked={formData.presenceSaturday === 'no'}
+                  onChange={handleChange}
+                  required
                 />
                 Non
               </label>
             </div>
           </div>
+
+          {/* Presence Sunday */}
+          <div>
+            <label className="block mb-1 text-sm">Présence le dimanche (déjeuner) <span className="text-xs text-gray-500">(*)</span></label>
+            <div className="flex items-center space-x-4 mt-2">
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="presenceSunday"
+                  className="mr-2"
+                  value="yes"
+                  checked={formData.presenceSunday === 'yes'}
+                  onChange={handleChange}
+                  required
+                />
+                Oui
+              </label>
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="presenceSunday"
+                  className="mr-2"
+                  value="no"
+                  checked={formData.presenceSunday === 'no'}
+                  onChange={handleChange}
+                  required
+                />
+                Non
+              </label>
+            </div>
+          </div>
+
+          {/* With Children */}
+          <div>
+            <label className="block mb-1 text-sm">Venez-vous avec des enfants ? <span className="text-xs text-gray-500">(*)</span></label>
+            <div className="flex items-center space-x-4 mt-2">
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="withChildren"
+                  className="mr-2"
+                  value="yes"
+                  checked={formData.withChildren === 'yes'}
+                  onChange={handleChange}
+                  required
+                />
+                Oui
+              </label>
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="withChildren"
+                  className="mr-2"
+                  value="no"
+                  checked={formData.withChildren === 'no'}
+                  onChange={handleChange}
+                  required
+                />
+                Non
+              </label>
+            </div>
+          </div>
+
+          {/* Children Count - Only show if withChildren is yes */}
+          {formData.withChildren === 'yes' && (
+            <div>
+              <label className="block mb-1 text-sm">Nombre d'enfants <span className="text-xs text-gray-500">(*)</span></label>
+              <input
+                type="number"
+                name="childrenCount"
+                value={formData.childrenCount}
+                onChange={handleChange}
+                min="1"
+                max="10"
+                className="w-32 border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                required
+              />
+            </div>
+          )}
 
 
           {/* Questions/Comments */}

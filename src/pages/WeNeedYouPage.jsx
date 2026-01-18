@@ -148,7 +148,7 @@ const WeNeedYouPage = () => {
 
           <div className="flex justify-center gap-8 text-center mb-12">
             <div className="bg-white rounded-lg shadow-md p-4">
-              <p className="text-orange-600 font-semibold">👥 6 personnes</p>
+              <p className="text-orange-600 font-semibold">👥 7 personnes</p>
             </div>
             <div className="bg-white rounded-lg shadow-md p-4">
               <p className="text-orange-600 font-semibold">🕐 10h-11h / 11h-12h / 12h-13h</p>
