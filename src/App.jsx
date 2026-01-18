@@ -8,7 +8,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 const HomePage = lazy(() => import('./pages/HomePage'));
 const AgendaPage = lazy(() => import('./pages/AgendaPage'));
 const AccommodationPage = lazy(() => import('./pages/AccommodationPage'));
-const BeaujolaisPage = lazy(() => import('./pages/BeaujolaisPage'));
+const TransportPage = lazy(() => import('./pages/TransportPage'));
 const RSVPPage = lazy(() => import('./pages/RSVPPage'));
 const WeNeedYouPage = lazy(() => import('./pages/WeNeedYouPage'));
 const WeddingListPage = lazy(() => import('./pages/WeddingListPage'));
@@ -33,7 +33,7 @@ const App = () => {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/deroule" element={<AgendaPage />} />
                 <Route path="/hebergements" element={<AccommodationPage />} />
-                <Route path="/visiter" element={<BeaujolaisPage />} />
+                <Route path="/transport" element={<TransportPage />} />
                 <Route path="/confirmez-votre-venue" element={<RSVPPage />} />
                 <Route path="/participez" element={<WeNeedYouPage />} />
                 <Route path="/liste-de-mariage" element={<WeddingListPage />} />
