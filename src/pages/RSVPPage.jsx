@@ -62,7 +62,7 @@ const RSVPPage = () => {
     <div className="relative h-[75vh] bg-cover bg-center" style={{ backgroundImage: "url('/gallery/baniere_rsvp.jpg')", backgroundPosition: "center 50%"  }}>
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
       <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4">
-        <h1 className="text-5xl md:text-7xl font-light mb-6">Confirmez Votre Venue</h1>
+        <h1 className="text-5xl md:text-7xl font-light mb-6">Confirmez votre venue</h1>
         <p className="text-xl max-w-2xl">Nous espérons que vous pourrez vous joindre à nous pour notre grand jour</p>
       </div>
     </div>
