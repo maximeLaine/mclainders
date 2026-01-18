@@ -20,11 +20,12 @@ const Header = () => {
       {/* Desktop Navigation */}
       <nav className="hidden md:flex gap-6 text-sm">
         <Link to="/" className="hover:underline">Accueil</Link>
-        <Link to="/notre-clan" className="hover:underline">Déroulé</Link>
-        <Link to="/logement" className="hover:underline">Hébergements</Link>
-        <Link to="/beaujolais" className="hover:underline">A voir</Link>
-        <Link to="/nous-avons-besoin-de-vous" className="hover:underline">Aidez-nous</Link>
-        <Link to="/rsvp" className="bg-white text-black px-4 py-2 uppercase text-sm font-semibold hover:bg-gray-100">
+        <Link to="/deroule" className="hover:underline">Déroulé</Link>
+        <Link to="/hebergements" className="hover:underline">Hébergements</Link>
+        <Link to="/visiter" className="hover:underline">Visiter</Link>
+        <Link to="/participez" className="hover:underline">Participez</Link>
+        <Link to="/liste-de-mariage" className="hover:underline">Liste de mariage</Link>
+        <Link to="/confirmez-votre-venue" className="bg-white text-black px-4 py-2 uppercase text-sm font-semibold hover:bg-gray-100">
           Confirmez votre venue
         </Link>
       </nav>
@@ -72,35 +73,42 @@ const Header = () => {
               Accueil
             </Link>
             <Link
-              to="/notre-clan"
+              to="/deroule"
               className="py-2 hover:underline"
               onClick={closeMenu}
             >
               Déroulé
             </Link>
             <Link
-              to="/logement"
+              to="/hebergements"
               className="py-2 hover:underline"
               onClick={closeMenu}
             >
-              Hébergement
+              Hébergements
             </Link>
             <Link
-              to="/beaujolais"
+              to="/visiter"
               className="py-2 hover:underline"
               onClick={closeMenu}
             >
-              Beaujolais
+              Visiter
             </Link>
             <Link
-              to="/nous-avons-besoin-de-vous"
+              to="/participez"
               className="py-2 hover:underline"
               onClick={closeMenu}
             >
-              Aidez-nous
+              Participez
             </Link>
             <Link
-              to="/rsvp"
+              to="/liste-de-mariage"
+              className="py-2 hover:underline"
+              onClick={closeMenu}
+            >
+              Liste de mariage
+            </Link>
+            <Link
+              to="/confirmez-votre-venue"
               className="py-2 hover:underline"
               onClick={closeMenu}
             >

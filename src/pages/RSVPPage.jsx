@@ -53,7 +53,7 @@ const RSVPPage = () => {
   return (
     <div className="flex flex-col min-h-screen">
     {/* Hero Section */}
-    <div className="relative h-[75vh] bg-cover bg-center" style={{ backgroundImage: "url('/gallery/image1.jpg')" }}>
+    <div className="relative h-[75vh] bg-cover bg-center" style={{ backgroundImage: "url('/gallery/baniere_rsvp.jpg')", backgroundPosition: "center 50%"  }}>
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
       <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4">
         <h1 className="text-5xl md:text-7xl font-light mb-6">Confirmez Votre Venue</h1>
@@ -64,7 +64,7 @@ const RSVPPage = () => {
     {/* Form Section */}
     <div className="py-20 px-6 bg-white">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-3xl text-center text-gray-800 mb-8">Mariage de Claire et Maxime 💝</h2>
+        <h2 className="text-3xl text-center text-gray-800 mb-8">Fête de l'amour de Claire et Maxime</h2>
         
         <div className="flex justify-center">
           <div className="w-24 h-px bg-gray-400 my-8"></div>

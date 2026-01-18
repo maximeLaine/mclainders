@@ -1,40 +1,13 @@
-import React, { useState, useMemo } from 'react';
 import { useSupabaseData } from '../hooks/useSupabaseData';
 import OptimizedImage from '../components/OptimizedImage';
 
 /**
  * AccommodationPage Component
- * Displays accommodations fetched from Supabase with category filtering
+ * Displays accommodations fetched from Supabase
  */
 const AccommodationPage = () => {
   // Use the generic Supabase data fetching hook
   const { data: accommodations, loading, error } = useSupabaseData('accommodations');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-
-  /**
-   * Extracts unique categories from accommodation data
-   * @param {Array} data - The accommodation data array
-   * @returns {Array} - Array of unique categories with 'all' as first item
-   */
-  const categories = useMemo(() => {
-    if (!accommodations || accommodations.length === 0) return ['all'];
-    const types = [...new Set(accommodations
-      .map(item => item.type)
-      .filter(type => type && typeof type === 'string')
-    )];
-    if (types.length === 0) return ['all', 'Gîte', 'Airbnb'];
-    return ['all', ...types];
-  }, [accommodations]);
-
-  /**
-   * Filter accommodations by selected category
-   */
-  const filteredAccommodations = useMemo(() => {
-    if (!accommodations) return [];
-    return selectedCategory === 'all'
-      ? accommodations
-      : accommodations.filter(item => item.type === selectedCategory);
-  }, [accommodations, selectedCategory]);
   
   /**
    * Render accommodation card component
@@ -79,37 +52,14 @@ const AccommodationPage = () => {
     </div>
   );
 
-  /**
-   * Render category filter buttons
-   */
-  const renderCategoryFilters = () => (
-    <div className="mb-8 flex flex-wrap justify-center gap-4">
-      <button 
-        onClick={() => setSelectedCategory('all')} 
-        className={`px-4 py-2 rounded-md ${selectedCategory === 'all' ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-800'}`}
-      >
-        Tous
-      </button>
-      {categories.map((category, index) => (
-        <button 
-          key={index} 
-          onClick={() => setSelectedCategory(category)} 
-          className={`px-4 py-2 rounded-md ${selectedCategory === category ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-800'}`}
-        >
-          {category}
-        </button>
-      ))}
-    </div>
-  );
-
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <div className="relative h-[75vh] bg-cover bg-center" style={{ backgroundImage: "url('/gallery/dobby_van.jpeg')" }}>
+      <div className="relative h-[75vh] bg-cover bg-center" style={{ backgroundImage: "url('/gallery/baniere_hebergements.jpg')", backgroundPosition: "center 65%" }}>
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4">
           <h1 className="text-5xl md:text-7xl font-light mb-6">Hébergements</h1>
-          <p className="text-xl max-w-2xl">Si vous n'avez pas votre propre Dobby (notre van libre 🦶), voici quelques infos pour vous.</p>
+          <p className="text-xl max-w-2xl">Si vous n'avez pas votre propre Dobby (notre van libre 🧦), voici quelques infos pour vous.</p>
         </div>
       </div>
       
@@ -138,32 +88,11 @@ const AccommodationPage = () => {
           </div>
         )}
         
-        {/* Content when data is available */}
+        {/* Accommodations Grid */}
         {!loading && !error && accommodations && accommodations.length > 0 && (
-          <>
-            {/* Category Filter */}
-            {renderCategoryFilters()}
-            
-            {/* No Results for Selected Category */}
-            {filteredAccommodations.length === 0 && (
-              <div className="text-center py-10">
-                <p className="text-xl text-gray-600">Aucun hébergement trouvé pour la catégorie sélectionnée.</p>
-                <button 
-                  onClick={() => setSelectedCategory('all')}
-                  className="mt-4 px-6 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors duration-300 font-semibold"
-                >
-                  Voir tous les hébergements
-                </button>
-              </div>
-            )}
-            
-            {/* Accommodations Grid */}
-            {filteredAccommodations.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredAccommodations.map(renderAccommodationCard)}
-              </div>
-            )}
-          </>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {accommodations.map(renderAccommodationCard)}
+          </div>
         )}
       </div>
     </div>
