@@ -274,10 +274,10 @@ const WeNeedYouPage = () => {
       {/* Proposal Section */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl text-center mb-8 text-gray-800">Vous voulez nous faire des surprises ?🎉</h2>
+          <h2 className="text-4xl text-center mb-8 text-gray-800">Vous voulez nous faire des surprises ?</h2>
           
           <p className="text-center text-lg mb-12 max-w-3xl mx-auto text-gray-700 leading-relaxed">
-            N'hésitez pas à les partager à nos maîtres et maîtresses de cérémonie via le formulaire ci-dessous.
+            Vous pouvez contacter Aude, maitresse de cérémonie, via le formulaire suivant. <br />Elle reviendra vers vous après avoir échangé avec Hubert et Romain, également maîtres de cérémonie, pour organiser au mieux votre surprise en fonction du déroulé du week-end. <br />Merci d’avance !
           </p>
           
           <div className="flex justify-center">
