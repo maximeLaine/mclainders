@@ -24,7 +24,7 @@ const Footer = () => {
               <Link to="/participez" className="text-gray-400 hover:text-white transition">Participez</Link>
               <Link to="/liste-de-mariage" className="text-gray-400 hover:text-white transition">Liste de mariage</Link>
               <Link to="/enfants" className="text-gray-400 hover:text-white transition">Enfants</Link>
-              <Link to="/confirmez-votre-venue" className="text-gray-400 hover:text-white transition">RSVP</Link>
+              <Link to="/confirmez-votre-venue" className="text-gray-400 hover:text-white transition">Confirmez votre venue</Link>
             </nav>
           </div>
           
