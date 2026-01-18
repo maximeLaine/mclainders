@@ -25,6 +25,7 @@ const Header = () => {
         <Link to="/visiter" className="hover:underline">Visiter</Link>
         <Link to="/participez" className="hover:underline">Participez</Link>
         <Link to="/liste-de-mariage" className="hover:underline">Liste de mariage</Link>
+        <Link to="/enfants" className="hover:underline">Enfants</Link>
         <Link to="/confirmez-votre-venue" className="bg-white text-black px-4 py-2 uppercase text-sm font-semibold hover:bg-gray-100">
           Confirmez votre venue
         </Link>
@@ -106,6 +107,13 @@ const Header = () => {
               onClick={closeMenu}
             >
               Liste de mariage
+            </Link>
+            <Link
+              to="/enfants"
+              className="py-2 hover:underline"
+              onClick={closeMenu}
+            >
+              Enfants
             </Link>
             <Link
               to="/confirmez-votre-venue"
