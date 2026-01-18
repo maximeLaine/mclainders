@@ -13,7 +13,6 @@ const WeddingListPage = () => {
           <p className="text-xl max-w-2xl">Votre présence est le plus beau des cadeaux</p>
         </div>
       </div>
-
       {/* Intro Section */}
       <div className="py-16 px-6 bg-white">
         <div className="max-w-3xl mx-auto text-center">
