@@ -29,7 +29,7 @@ const WeddingListPage = () => {
       <div className="py-16 px-6 bg-gray-100">
         <div className="max-w-4xl mx-auto">
           <p className="text-lg text-gray-700 text-center leading-relaxed mb-8">
-            Ce rêve semblait inaccessible, irréalisable, inapproprié… et puis… on s'est dit :
+            Ce rêve semblait inaccessible et puis on s'est dit :
           </p>
           <blockquote className="bg-white border-l-4 border-orange-500 p-8 rounded-r-lg shadow-md">
             <p className="text-2xl md:text-3xl font-light text-gray-800 italic">
@@ -61,18 +61,6 @@ const WeddingListPage = () => {
             <br />Elle regroupe une grande partie du matériel dont nous avons besoin pour aller au bout de notre rêve.
             <br />L'idée que vous allez nous accompagner dans ce voyage, en étant incarnés par le matériel offert, nous remplit de bonheur !
 
-          </p>
-        </div>
-      </div>
-
-      {/* Message de partage */}
-      <div className="py-16 px-6 bg-gray-100">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-orange-100 rounded-full mb-6">
-            <span className="text-4xl">📸</span>
-          </div>
-          <p className="text-lg text-gray-700 leading-relaxed">
-            Nous avons déjà hâte de partager les photos de nos joies, de nos galères et de nos découvertes vécues à l'autre bout du monde.
           </p>
         </div>
       </div>
