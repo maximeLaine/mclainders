@@ -65,22 +65,24 @@ const WeddingListPage = () => {
         </div>
       </div>
 
-      {/* Signature + Cagnotte */}
+      {/* Signature + Liste Milirose */}
       <div className="py-16 px-6 bg-white">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-2xl font-light text-gray-800 mb-2">Mille mercis,</p>
           <p className="text-3xl font-semibold text-orange-600 mb-12">Claire & Max</p>
 
           <div className="bg-white p-8 rounded-xl shadow-lg">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">Cagnotte voyage de noces</h3>
+            <h3 className="text-2xl font-semibold text-gray-800 mb-4">Découvrir notre liste</h3>
             <p className="text-gray-600 mb-6">
-              Votre contribution nous aidera à réaliser ce rêve et à vivre cette aventure ensemble, même à distance.
+              Notre liste de mariage est disponible sur Milirose. Vous y trouverez tout le matériel pour notre aventure en Nouvelle-Zélande !
             </p>
             <a
-              href="#"
+              href="https://www.milirose.com/liste-cadeaux-1225807.html"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-orange-500 text-white px-8 py-3 rounded-full uppercase text-sm font-semibold hover:bg-orange-600 transition-colors duration-300"
             >
-              Participer à la cagnotte
+              Voir la liste sur Milirose
             </a>
           </div>
         </div>

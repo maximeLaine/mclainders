@@ -43,9 +43,10 @@ exports.handler = async (event, context) => {
   try {
     // Parse and validate the incoming request body
     const data = JSON.parse(event.body);
-    const { name, email, whatsapp, showWhatsapp, departureCity, departureDay, departureTime, seatsAvailable, comments } = data;
+    const { name, whatsapp, departureCity, departureDay, departureTime, seatsAvailable, comments } = data;
 
-    if (!name || !email || !departureCity || !departureDay || !departureTime || !seatsAvailable) {
+    // Validate required fields
+    if (!name || !whatsapp || !departureCity || !departureDay || !departureTime || !seatsAvailable) {
       return {
         statusCode: STATUS_BAD_REQUEST,
         headers,
@@ -77,14 +78,22 @@ exports.handler = async (event, context) => {
       };
     }
 
+    // Validate WhatsApp format (33 followed by 9 digits)
+    const whatsappRegex = /^33[0-9]{9}$/;
+    if (!whatsappRegex.test(whatsapp)) {
+      return {
+        statusCode: STATUS_BAD_REQUEST,
+        headers,
+        body: JSON.stringify({ success: false, message: 'Format WhatsApp invalide. Utilisez le format 33 suivi de 9 chiffres (ex: 33612345678).' }),
+      };
+    }
+
     // Insert the carpool offer
     const { error: insertError } = await supabase
       .from('carpool_offers')
       .insert({
         name,
-        email,
-        whatsapp: whatsapp || null,
-        show_whatsapp: showWhatsapp || false,
+        whatsapp,
         departure_city: departureCity,
         departure_day: departureDay,
         departure_time: departureTime,

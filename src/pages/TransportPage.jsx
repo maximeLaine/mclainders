@@ -27,9 +27,7 @@ const TransportPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     whatsapp: '',
-    showWhatsapp: false,
     departureCity: '',
     departureDay: '',
     departureTime: '',
@@ -49,9 +47,7 @@ const TransportPage = () => {
     handleSubmit(formData, () => {
       setFormData({
         name: '',
-        email: '',
         whatsapp: '',
-        showWhatsapp: false,
         departureCity: '',
         departureDay: '',
         departureTime: '',
@@ -411,24 +407,14 @@ const TransportPage = () => {
                   )}
                   <div className="border-t pt-4 flex items-center justify-between">
                     <p className="font-medium text-gray-800">{offer.name}</p>
-                    <div className="flex items-center gap-2">
-                      {offer.whatsapp && (
-                        <a
-                          href={`https://wa.me/${offer.whatsapp.replace(/[^0-9+]/g, '')}?text=${encodeURIComponent(`Bonjour ${offer.name}, je suis intéressé(e) par votre covoiturage depuis ${offer.departure_city} le ${offer.departure_day}.`)}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-green-200 transition-colors"
-                        >
-                          <span>📱</span> WhatsApp
-                        </a>
-                      )}
-                      <a
-                        href={`mailto:mclainders@gmail.com?subject=Covoiturage depuis ${encodeURIComponent(offer.departure_city)}&body=Bonjour,%0A%0AJe souhaite contacter ${encodeURIComponent(offer.name)} pour le covoiturage depuis ${encodeURIComponent(offer.departure_city)} prévu ${encodeURIComponent(offer.departure_day)} à ${encodeURIComponent(offer.departure_time)}.%0A%0AMerci de me mettre en relation.%0A%0ACordialement,`}
-                        className="inline-flex items-center gap-2 bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-orange-200 transition-colors"
-                      >
-                        <span>✉️</span> Contacter
-                      </a>
-                    </div>
+                    <a
+                      href={`https://wa.me/${offer.whatsapp}?text=${encodeURIComponent(`Bonjour ${offer.name}, je suis intéressé(e) par votre covoiturage depuis ${offer.departure_city} le ${offer.departure_day}.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-green-600 transition-colors"
+                    >
+                      <span>📱</span> Contacter sur WhatsApp
+                    </a>
                   </div>
                 </div>
               ))}
@@ -477,47 +463,21 @@ const TransportPage = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Email <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  WhatsApp (optionnel)
+                  WhatsApp <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="tel"
                   name="whatsapp"
                   value={formData.whatsapp}
                   onChange={handleChange}
-                  placeholder="+33 6 12 34 56 78"
+                  placeholder="33612345678"
+                  pattern="33[0-9]{9}"
+                  title="Format: 33 suivi de 9 chiffres (ex: 33612345678)"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  required
                 />
+                <p className="text-xs text-gray-500 mt-1">Format: 33 suivi de votre numéro sans le 0 (ex: 33612345678)</p>
               </div>
-
-              {formData.whatsapp && (
-                <div className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    name="showWhatsapp"
-                    id="showWhatsapp"
-                    checked={formData.showWhatsapp}
-                    onChange={handleChange}
-                    className="w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
-                  />
-                  <label htmlFor="showWhatsapp" className="text-sm text-gray-700">
-                    Afficher mon WhatsApp aux autres invités pour qu'ils puissent me contacter directement
-                  </label>
-                </div>
-              )}
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
