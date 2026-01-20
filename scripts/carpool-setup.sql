@@ -2,8 +2,7 @@
 -- Carpool Offers Table Setup
 -- Run this in Supabase SQL Editor
 -- =====================================================
--- GDPR Compliant: Email is stored but NOT exposed.
--- WhatsApp is optional and shown only if user agrees.
+-- WhatsApp only contact method (format: 33XXXXXXXXX)
 -- =====================================================
 
 -- Drop existing table and view if they exist (for clean setup)
@@ -14,9 +13,7 @@ DROP TABLE IF EXISTS carpool_offers;
 CREATE TABLE carpool_offers (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
-  email TEXT NOT NULL,
-  whatsapp TEXT,
-  show_whatsapp BOOLEAN DEFAULT false,
+  whatsapp TEXT NOT NULL,
   departure_city TEXT NOT NULL,
   departure_day TEXT NOT NULL,
   departure_time TEXT NOT NULL,
@@ -29,20 +26,20 @@ CREATE TABLE carpool_offers (
 ALTER TABLE carpool_offers ENABLE ROW LEVEL SECURITY;
 
 -- =====================================================
--- GDPR-SAFE VIEW: Only expose non-sensitive data
+-- PUBLIC VIEW: Expose carpool offers with WhatsApp
 -- =====================================================
--- Email is never exposed
--- WhatsApp is only shown if show_whatsapp is true
-CREATE VIEW carpool_offers_public AS
+-- Using SECURITY INVOKER (default) to use querying user's permissions
+CREATE VIEW carpool_offers_public
+WITH (security_invoker = true) AS
 SELECT
   id,
   name,
+  whatsapp,
   departure_city,
   departure_day,
   departure_time,
   seats_available,
   comments,
-  CASE WHEN show_whatsapp = true THEN whatsapp ELSE NULL END as whatsapp,
   created_at
 FROM carpool_offers;
 
