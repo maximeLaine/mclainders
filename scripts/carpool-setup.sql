@@ -26,15 +26,16 @@ CREATE TABLE carpool_offers (
 ALTER TABLE carpool_offers ENABLE ROW LEVEL SECURITY;
 
 -- =====================================================
--- PUBLIC VIEW: Expose carpool offers with WhatsApp
+-- PUBLIC VIEW: Expose carpool offers WITHOUT WhatsApp
 -- =====================================================
+-- WhatsApp is NOT exposed to protect privacy
+-- Contact is done via Netlify function that fetches number server-side
 -- Using SECURITY INVOKER (default) to use querying user's permissions
 CREATE VIEW carpool_offers_public
 WITH (security_invoker = true) AS
 SELECT
   id,
   name,
-  whatsapp,
   departure_city,
   departure_day,
   departure_time,

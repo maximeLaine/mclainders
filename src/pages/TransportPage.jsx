@@ -408,7 +408,7 @@ const TransportPage = () => {
                   <div className="border-t pt-4 flex items-center justify-between">
                     <p className="font-medium text-gray-800">{offer.name}</p>
                     <a
-                      href={`https://wa.me/${offer.whatsapp}?text=${encodeURIComponent(`Bonjour ${offer.name}, je suis intéressé(e) par votre covoiturage depuis ${offer.departure_city} le ${offer.departure_day}.`)}`}
+                      href={`/.netlify/functions/contactCarpool?id=${offer.id}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-green-600 transition-colors"
