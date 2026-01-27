@@ -46,8 +46,10 @@ GOOGLE_SHEET_ID=1ABC...xyz
    - B1: Prénom
    - C1: Nom
    - D1: Email
-   - E1: Présence
-   - F1: Commentaires
+   - E1: Samedi
+   - F1: Dimanche
+   - G1: Enfants
+   - H1: Commentaires
 4. **Important**: Partage le sheet avec l'email du compte de service (GOOGLE_SERVICE_ACCOUNT_EMAIL) en tant qu'éditeur
 
 ### Étape 4: Récupérer l'ID du Sheet
@@ -80,8 +82,8 @@ https://docs.google.com/spreadsheets/d/[SHEET_ID]/edit
 Insère un RSVP de test dans Supabase :
 
 ```sql
-INSERT INTO rsvp (first_name, last_name, email, attendance, comments)
-VALUES ('Test', 'Utilisateur', 'ton-email@example.com', 'yes', 'Test webhook');
+INSERT INTO rsvp (first_name, last_name, email, presence_saturday, presence_sunday, with_children, children_count, comments)
+VALUES ('Test', 'Utilisateur', 'ton-email@example.com', true, true, false, 0, 'Test webhook');
 ```
 
 ### Vérifications

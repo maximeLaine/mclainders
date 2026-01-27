@@ -17,16 +17,16 @@ exports.handler = async (event, context) => {
   try {
     // Récupérer les données du corps de la requête
     const data = JSON.parse(event.body);
-    
+
     // Validation des données requises
-    if (!data.firstName || !data.lastName || !data.email || !data.attendance) {
+    if (!data.firstName || !data.lastName || !data.email || !data.presenceSaturday || !data.presenceSunday) {
       return {
         statusCode: 400,
         body: JSON.stringify({ message: 'Données incomplètes' }),
       };
     }
 
-    // Insérer les données dans la table RSVP de Supabase selon le schéma réel
+    // Insérer les données dans la table RSVP de Supabase
     const { data: insertedData, error } = await supabase
       .from('rsvp')
       .insert([
@@ -34,9 +34,11 @@ exports.handler = async (event, context) => {
           first_name: data.firstName,
           last_name: data.lastName,
           email: data.email,
-          attendance: data.attendance,
+          presence_saturday: data.presenceSaturday === 'yes',
+          presence_sunday: data.presenceSunday === 'yes',
+          with_children: data.withChildren === 'yes',
+          children_count: data.withChildren === 'yes' ? parseInt(data.childrenCount, 10) : 0,
           comments: data.comments || ''
-          // Note: Les colonnes additional_guests et dietary_restrictions n'existent pas dans la table
         },
       ]);
 

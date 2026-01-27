@@ -54,5 +54,5 @@
 -- Verification
 -- =====================================================
 -- After setup, test by inserting a test RSVP:
--- INSERT INTO rsvp (first_name, last_name, email, attendance)
--- VALUES ('Test', 'User', 'your-email@example.com', 'yes');
+-- INSERT INTO rsvp (first_name, last_name, email, presence_saturday, presence_sunday, with_children, children_count)
+-- VALUES ('Test', 'User', 'your-email@example.com', true, true, false, 0);

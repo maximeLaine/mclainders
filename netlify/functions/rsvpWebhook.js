@@ -18,7 +18,7 @@ const headers = {
  * Send confirmation email to the guest
  */
 async function sendConfirmationEmail(rsvpData) {
-  const { first_name, last_name, email, attendance } = rsvpData;
+  const { first_name, last_name, email, presence_saturday, presence_sunday, with_children, children_count, comments } = rsvpData;
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -28,55 +28,94 @@ async function sendConfirmationEmail(rsvpData) {
     },
   });
 
-  const isAttending = attendance === 'yes' || attendance === true;
+  const isAttendingSaturday = presence_saturday === true || presence_saturday === 'yes';
+  const isAttendingSunday = presence_sunday === true || presence_sunday === 'yes';
+  const isAttending = isAttendingSaturday || isAttendingSunday;
+  const hasChildren = with_children === true || with_children === 'yes';
 
   const subject = isAttending
     ? `${first_name}, nous avons hâte de vous voir !`
     : `Merci pour votre réponse, ${first_name}`;
 
   const htmlContent = isAttending ? `
-    <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-      <h1 style="color: #c2410c; text-align: center;">Merci ${first_name} !</h1>
+    <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #fefefe;">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="color: #c2410c; margin-bottom: 5px;">Merci ${first_name} !</h1>
+        <p style="color: #666; font-style: italic;">Votre réponse a bien été enregistrée</p>
+      </div>
 
-      <p style="font-size: 18px; line-height: 1.6;">
+      <p style="font-size: 18px; line-height: 1.6; text-align: center;">
         Nous sommes ravis que vous puissiez être présent(e) pour célébrer notre mariage !
       </p>
 
-      <div style="background-color: #fff7ed; padding: 20px; border-radius: 10px; margin: 20px 0;">
-        <h2 style="color: #ea580c; margin-top: 0;">Récapitulatif</h2>
-        <p><strong>Nom :</strong> ${first_name} ${last_name}</p>
-        <p><strong>Présence :</strong> Confirmée</p>
+      <div style="background-color: #fff7ed; padding: 20px; border-radius: 10px; margin: 30px 0; border-left: 4px solid #ea580c;">
+        <h2 style="color: #ea580c; margin-top: 0; font-size: 18px;">Récapitulatif de votre réponse</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 8px 0; color: #666;">Nom</td>
+            <td style="padding: 8px 0; font-weight: bold;">${first_name} ${last_name}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #666;">Samedi (mariage + soirée)</td>
+            <td style="padding: 8px 0; font-weight: bold;">${isAttendingSaturday ? '✅ Présent(e)' : '❌ Absent(e)'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #666;">Dimanche (déjeuner)</td>
+            <td style="padding: 8px 0; font-weight: bold;">${isAttendingSunday ? '✅ Présent(e)' : '❌ Absent(e)'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #666;">Enfants</td>
+            <td style="padding: 8px 0; font-weight: bold;">${hasChildren ? `Oui (${children_count || 0})` : 'Non'}</td>
+          </tr>
+          ${comments ? `
+          <tr>
+            <td style="padding: 8px 0; color: #666; vertical-align: top;">Commentaires</td>
+            <td style="padding: 8px 0; font-style: italic;">${comments}</td>
+          </tr>
+          ` : ''}
+        </table>
       </div>
 
       <div style="background-color: #f3f4f6; padding: 20px; border-radius: 10px; margin: 20px 0;">
-        <h3 style="margin-top: 0;">Informations pratiques</h3>
-        <p><strong>Date :</strong> [Date du mariage]</p>
-        <p><strong>Lieu :</strong> La Bastide des Hirondelles</p>
-        <p><strong>Adresse :</strong> 253 Rte du Gonnet, Val d'Oingt, 69620</p>
+        <h3 style="margin-top: 0; color: #333;">📍 Informations pratiques</h3>
+        <p style="margin: 10px 0;"><strong>Date :</strong> 30 & 31 août 2025</p>
+        <p style="margin: 10px 0;"><strong>Lieu :</strong> La Bastide des Hirondelles</p>
+        <p style="margin: 10px 0;"><strong>Adresse :</strong> 253 Rte du Gonnet, Val d'Oingt, 69620</p>
       </div>
 
-      <p style="font-size: 16px;">
+      <p style="font-size: 16px; text-align: center;">
         Retrouvez toutes les informations sur notre site :<br>
-        <a href="https://mclainders.netlify.app" style="color: #ea580c;">mclainders.netlify.app</a>
+        <a href="https://mclainders.netlify.app" style="color: #ea580c; font-weight: bold;">mclainders.netlify.app</a>
       </p>
 
-      <p style="font-size: 16px; margin-top: 30px;">
-        À très bientôt !<br>
-        <strong>Claire & Maxime</strong>
-      </p>
+      <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
+        <p style="font-size: 16px; color: #666;">
+          À très bientôt !<br>
+          <strong style="color: #c2410c; font-size: 18px;">Claire & Maxime</strong>
+        </p>
+      </div>
     </div>
   ` : `
     <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 20px;">
       <h1 style="color: #c2410c; text-align: center;">Merci ${first_name}</h1>
 
-      <p style="font-size: 18px; line-height: 1.6;">
-        Nous avons bien reçu votre réponse. Nous sommes désolés que vous ne puissiez pas être présent(e), mais nous pensons à vous !
+      <p style="font-size: 18px; line-height: 1.6; text-align: center;">
+        Nous avons bien reçu votre réponse. Nous sommes désolés que vous ne puissiez pas être présent(e), mais nous pensons fort à vous !
       </p>
 
-      <p style="font-size: 16px; margin-top: 30px;">
-        Avec toute notre affection,<br>
-        <strong>Claire & Maxime</strong>
-      </p>
+      <div style="background-color: #fff7ed; padding: 20px; border-radius: 10px; margin: 30px 0; border-left: 4px solid #ea580c;">
+        <h2 style="color: #ea580c; margin-top: 0; font-size: 18px;">Récapitulatif</h2>
+        <p><strong>Nom :</strong> ${first_name} ${last_name}</p>
+        <p><strong>Présence samedi :</strong> ${isAttendingSaturday ? 'Oui' : 'Non'}</p>
+        <p><strong>Présence dimanche :</strong> ${isAttendingSunday ? 'Oui' : 'Non'}</p>
+      </div>
+
+      <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
+        <p style="font-size: 16px; color: #666;">
+          Avec toute notre affection,<br>
+          <strong style="color: #c2410c; font-size: 18px;">Claire & Maxime</strong>
+        </p>
+      </div>
     </div>
   `;
 
@@ -94,7 +133,7 @@ async function sendConfirmationEmail(rsvpData) {
  * Add RSVP data to Google Sheet
  */
 async function addToGoogleSheet(rsvpData) {
-  const { first_name, last_name, email, attendance, comments, created_at } = rsvpData;
+  const { first_name, last_name, email, presence_saturday, presence_sunday, with_children, children_count, comments, created_at } = rsvpData;
 
   // Check if Google credentials are configured
   if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY || !process.env.GOOGLE_SHEET_ID) {
@@ -113,18 +152,24 @@ async function addToGoogleSheet(rsvpData) {
 
     const sheets = google.sheets({ version: 'v4', auth });
 
+    const isSaturday = presence_saturday === true || presence_saturday === 'yes';
+    const isSunday = presence_sunday === true || presence_sunday === 'yes';
+    const hasChildren = with_children === true || with_children === 'yes';
+
     const values = [[
       new Date(created_at || Date.now()).toLocaleString('fr-FR'),
       first_name,
       last_name,
       email,
-      attendance === 'yes' || attendance === true ? 'Oui' : 'Non',
+      isSaturday ? 'Oui' : 'Non',
+      isSunday ? 'Oui' : 'Non',
+      hasChildren ? `Oui (${children_count || 0})` : 'Non',
       comments || '',
     ]];
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: 'RSVP!A:F',
+      range: 'RSVP!A:H',
       valueInputOption: 'USER_ENTERED',
       requestBody: { values },
     });
