@@ -78,7 +78,7 @@ async function sendConfirmationEmail(rsvpData) {
 
       <div style="background-color: #f3f4f6; padding: 20px; border-radius: 10px; margin: 20px 0;">
         <h3 style="margin-top: 0; color: #333;">📍 Informations pratiques</h3>
-        <p style="margin: 10px 0;"><strong>Date :</strong> 30 & 31 août 2025</p>
+        <p style="margin: 10px 0;"><strong>Date :</strong> 7-8 novembre 2026</p>
         <p style="margin: 10px 0;"><strong>Lieu :</strong> La Bastide des Hirondelles</p>
         <p style="margin: 10px 0;"><strong>Adresse :</strong> 253 Rte du Gonnet, Val d'Oingt, 69620</p>
       </div>
