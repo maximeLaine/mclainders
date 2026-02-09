@@ -106,7 +106,7 @@ const AccommodationPage = () => {
         {/* Accommodations Grid */}
         {!loading && !error && accommodations && accommodations.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {accommodations.map(renderAccommodationCard)}
+            {[...accommodations].sort((a, b) => (a.is_reserved ? 1 : 0) - (b.is_reserved ? 1 : 0)).map(renderAccommodationCard)}
           </div>
         )}
       </div>
