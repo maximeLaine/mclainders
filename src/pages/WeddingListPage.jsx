@@ -22,28 +22,14 @@ const WeddingListPage = () => {
           <p className="text-lg text-gray-700 leading-relaxed mt-6">
             Nous mesurons notre chance d'avoir tout ce dont nous avons besoin dans notre quotidien : une famille aimante, des amis présents, un appartement cosy-cocon… mais nous avons un rêve.
           </p>
-        </div>
-      </div>
-
-      {/* Le Rêve - Citation mise en avant */}
-      <div className="py-16 px-6 bg-gray-100">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-lg text-gray-700 text-center leading-relaxed mb-8">
-            Ce rêve semblait inaccessible et puis on s'est dit :
-          </p>
-          <blockquote className="bg-white border-l-4 border-orange-500 p-8 rounded-r-lg shadow-md">
-            <p className="text-2xl md:text-3xl font-light text-gray-800 italic">
-              « MERDE ! La chance, il faut la provoquer, elle ne peut pas toujours arriver aux autres. 2026 sera notre année, on partira traverser la Nouvelle-Zélande en vélo. Point final. »
-            </p>
-          </blockquote>
           <p className="text-lg text-gray-700 text-center leading-relaxed mt-8">
-            Et voilà, Maxime a négocié un congé de 2 mois, Claire a négocié sa fin de contrat CDD et nous partirons sur les routes de Nouvelle-Zélande de <strong>fin novembre 2026 à début février 2027</strong>.
+            Maxime a négocié un congé de 2 mois, Claire a négocié sa fin de contrat CDD et nous partirons sur les routes de Nouvelle-Zélande de <strong>fin novembre 2026 à début février 2027</strong>.
           </p>
         </div>
       </div>
 
       {/* L'objectif - Avec icône */}
-      <div className="py-16 px-6 bg-white">
+      <div className="py-16 px-6 bg-gray-100">
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-orange-100 rounded-full mb-6">
             <span className="text-4xl">🚴</span>
@@ -59,8 +45,6 @@ const WeddingListPage = () => {
             Sauf que voilà, partir voyager en vélo sans matériel et sans vélos et bien… c'est pas facile, facile.
             <br /><br />C'est pourquoi nous avons décidé de vous proposer une <strong>liste de mariage un peu atypique</strong>.
             <br />Elle regroupe une grande partie du matériel dont nous avons besoin pour aller au bout de notre rêve.
-            <br />L'idée que vous allez nous accompagner dans ce voyage, en étant incarnés par le matériel offert, nous remplit de bonheur !
-
           </p>
         </div>
       </div>
