@@ -301,55 +301,6 @@ const TransportPage = () => {
         </div>
       </section>
 
-      {/* Train Info */}
-      <section className="py-16 px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-100 rounded-full mb-4">
-              <span className="text-3xl">🚄</span>
-            </div>
-            <h2 className="text-3xl font-light text-gray-800">Venir en train</h2>
-          </div>
-
-          <div className="bg-gray-50 rounded-xl p-8">
-            <p className="text-gray-700 leading-relaxed mb-6">
-              La gare la plus proche est <strong>Villefranche-sur-Saône</strong>, bien desservie depuis Lyon Part-Dieu (TER toutes les 15-30 min).
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-lg p-6">
-                <h4 className="font-semibold text-gray-800 mb-3">Réserver vos billets</h4>
-                <div className="space-y-2">
-                  <a
-                    href="https://www.sncf-connect.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-blue-600 hover:text-blue-800 transition-colors"
-                  >
-                    → SNCF Connect
-                  </a>
-                  <a
-                    href="https://www.trainline.fr"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-blue-600 hover:text-blue-800 transition-colors"
-                  >
-                    → Trainline
-                  </a>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-lg p-6">
-                <h4 className="font-semibold text-gray-800 mb-3">Depuis la gare</h4>
-                <p className="text-gray-600 text-sm">
-                  Consultez les offres de covoiturage ci-dessous ou contactez-nous pour organiser votre trajet depuis la gare.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Carpool Section */}
       <section className="py-16 px-6 bg-gray-100">
         <div className="max-w-4xl mx-auto">
@@ -360,6 +311,9 @@ const TransportPage = () => {
             <h2 className="text-3xl font-light text-gray-800">Covoiturage</h2>
             <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
               Proposez des places dans votre voiture ou trouvez un covoiturage pour vous rendre au mariage !
+            </p>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+              Rendez-vous dans le groupe covoiturage du WhatsApp "Fête de l'amour - Mc Lainders"
             </p>
           </div>
 

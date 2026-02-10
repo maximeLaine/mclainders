@@ -139,7 +139,7 @@ const VolunteerSlotForm = ({
               ${selectedSlot?.index === index ? 'border-orange-500 ring-2 ring-orange-200' : ''}
             `}
           >
-            <p className="font-medium text-lg mb-2">{emoji} {title} {index + 1}</p>
+            <p className="font-medium text-lg mb-2">{emoji} {title}</p>
             {slot.name ? (
               <p className="text-sm text-gray-600">✅ {reservedText} {slot.name}</p>
             ) : (
@@ -153,7 +153,7 @@ const VolunteerSlotForm = ({
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
-        title={`${emoji} ${modalTitle} - ${title} ${selectedSlot ? selectedSlot.index + 1 : ''}`}
+        title={`${emoji} ${modalTitle}`}
       >
         {submitStatus?.success ? (
           <div className="text-center py-8">

@@ -121,7 +121,7 @@ const AgendaPage = () => {
                       </div>
                       <h4 className="text-xl font-medium mb-2 text-gray-800">Goûter Festif</h4>
                       <p className="text-gray-600">
-                        Place aux festivités ! <br />Déambulez dans la cour extérieure de la Bastide et découvrez les animations et les douceurs automnales proposées par notre traiteur 100% local.
+                        Place aux festivités ! <br />Déambulez dans la cour extérieure de la Bastide, découvrez les animations et les douceurs automnales proposées par notre traiteur 100% local.
                       </p>
                     </div>
                   </div>

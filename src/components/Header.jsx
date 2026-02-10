@@ -22,7 +22,7 @@ const Header = () => {
         <Link to="/" className="hover:underline">Accueil</Link>
         <Link to="/deroule" className="hover:underline">Déroulé</Link>
         <Link to="/hebergements" className="hover:underline">Hébergements</Link>
-        <Link to="/transport" className="hover:underline">Transport</Link>
+        <Link to="/transport" className="hover:underline">Transports</Link>
         <Link to="/participez" className="hover:underline">Participez</Link>
         <Link to="/liste-de-mariage" className="hover:underline">Liste de mariage</Link>
         <Link to="/enfants" className="hover:underline">Enfants</Link>
@@ -92,7 +92,7 @@ const Header = () => {
               className="py-2 hover:underline"
               onClick={closeMenu}
             >
-              Transport
+              Transports
             </Link>
             <Link
               to="/participez"

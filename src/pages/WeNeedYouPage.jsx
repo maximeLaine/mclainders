@@ -16,7 +16,7 @@ const WeNeedYouPage = () => {
       if (!grouped[row.time_slot]) {
         grouped[row.time_slot] = { time: row.time_slot, positions: [] };
       }
-      grouped[row.time_slot].positions[row.spot_index] = { name: row.name || "", spot_index: row.spot_index };
+      grouped[row.time_slot].positions.push({ name: row.name || "", spot_index: row.spot_index });
     });
     return Object.values(grouped);
   }
@@ -34,8 +34,8 @@ const WeNeedYouPage = () => {
       <div className="relative h-[75vh] bg-cover" style={{ backgroundImage: "url('/gallery/baniere_participez.jpg')", backgroundPosition: "center 35%" }}>
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4">
-          <h1 className="text-5xl md:text-7xl font-light mb-6">Votre aide est précieuse.</h1>
-          <p className="text-xl max-w-2xl">Nous cherchons des volontaires pour rendre ce week-end vraiment spécial.</p>
+          <h1 className="text-5xl md:text-7xl font-light mb-6">Votre aide est précieuse</h1>
+          <p className="text-xl max-w-2xl">Nous cherchons des volontaires pour rendre ce week-end vraiment spécial</p>
         </div>
       </div>
 
@@ -82,7 +82,7 @@ const WeNeedYouPage = () => {
               onSpotReserved={refetchVoiturier}
               tableName="voiturier_slots"
               emoji="🚗"
-              title="Place"
+              title="Je suis volontaire"
               modalTitle="Réserver une place de voiturier"
               successMessage="Merci ! Vous êtes inscrit comme voiturier."
             />
@@ -127,7 +127,7 @@ const WeNeedYouPage = () => {
               onSpotReserved={refetchAccueil}
               tableName="accueil_slots"
               emoji="👋"
-              title="Place"
+              title="Je suis volontaire"
               modalTitle="Réserver une place d'accueil"
               successMessage="Merci ! Vous êtes inscrit à l'accueil."
             />
@@ -219,7 +219,7 @@ const WeNeedYouPage = () => {
               onSpotReserved={refetchCafe}
               tableName="cafe_slots"
               emoji="☕"
-              title="Place"
+              title="Je suis volontaire"
               modalTitle="Réserver une place de respo café"
               successMessage="Merci ! Vous êtes inscrit comme respo café."
             />
@@ -263,7 +263,7 @@ const WeNeedYouPage = () => {
               onSpotReserved={refetchRangement}
               tableName="rangement_slots"
               emoji="🧹"
-              title="Place"
+              title="Je suis volontaire"
               modalTitle="Réserver une place pour le rangement"
               successMessage="Merci ! Vous êtes inscrit pour le rangement."
             />
