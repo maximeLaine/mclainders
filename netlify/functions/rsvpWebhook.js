@@ -182,6 +182,55 @@ async function addToGoogleSheet(rsvpData) {
 }
 
 /**
+ * Send WhatsApp notification via Whapi
+ */
+async function sendWhatsAppNotification(rsvpData) {
+  const { first_name, last_name, presence_saturday, presence_sunday, with_children, children_count, comments } = rsvpData;
+
+  if (!process.env.WHAPI_TOKEN || !process.env.WHAPI_PHONE_NUMBER) {
+    console.log('Whapi not configured, skipping WhatsApp notification...');
+    return;
+  }
+
+  const isSaturday = presence_saturday === true || presence_saturday === 'yes';
+  const isSunday = presence_sunday === true || presence_sunday === 'yes';
+  const hasChildren = with_children === true || with_children === 'yes';
+  const isAttending = isSaturday || isSunday;
+
+  const message = `📋 *Nouveau RSVP !*
+
+👤 *${first_name} ${last_name}*
+${isAttending ? '✅ Présent(e)' : '❌ Absent(e)'}
+
+📅 Samedi : ${isSaturday ? 'Oui' : 'Non'}
+📅 Dimanche : ${isSunday ? 'Oui' : 'Non'}
+👶 Enfants : ${hasChildren ? `Oui (${children_count || 0})` : 'Non'}${comments ? `\n💬 ${comments}` : ''}`;
+
+  const phoneNumbers = process.env.WHAPI_PHONE_NUMBER.split(',').map(n => n.trim());
+
+  for (const phone of phoneNumbers) {
+    const response = await fetch('https://gate.whapi.cloud/messages/text', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.WHAPI_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        to: `${phone}@s.whatsapp.net`,
+        body: message,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Whapi error for ${phone}: ${response.status} - ${errorText}`);
+    } else {
+      console.log(`WhatsApp notification sent to ${phone}`);
+    }
+  }
+}
+
+/**
  * Main webhook handler
  * Called by Supabase Database Webhook on INSERT to rsvp table
  */
@@ -232,6 +281,14 @@ exports.handler = async (event) => {
     } catch (sheetError) {
       console.error('Google Sheet error:', sheetError);
       // Continue even if Sheet fails
+    }
+
+    // Send WhatsApp notification
+    try {
+      await sendWhatsAppNotification(record);
+    } catch (whatsappError) {
+      console.error('WhatsApp error:', whatsappError);
+      // Continue even if WhatsApp fails
     }
 
     return {
