@@ -148,7 +148,7 @@ const BrunchCookingForm = ({ slots: initialSlots, onSpotReserved }) => {
                     ${selectedSlot && selectedSlot.time === slot.time && selectedPosition === posIndex ? 'border-orange-500 ring-2 ring-orange-200' : ''}
                   `}
                 >
-                  <p className="font-medium text-lg mb-2">🍳 Place {posIndex + 1}</p>
+                  <p className="font-medium text-lg mb-2">🍳 Je suis volontaire</p>
                   {position.name ? (
                     <p className="text-sm text-gray-600">✅ Réservé par {position.name}</p>
                   ) : (
