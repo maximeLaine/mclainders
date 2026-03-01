@@ -45,3 +45,7 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Bi-weekly RSVP summary — 1st and 15th of each month at 9:00 UTC
+[functions."rsvpBiweeklySummary"]
+  schedule = "0 9 1,15 * *"
