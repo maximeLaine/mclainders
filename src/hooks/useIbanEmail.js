@@ -7,14 +7,14 @@ import { useState } from 'react';
 export function useIbanEmail() {
   const [sending, setSending] = useState(false);
 
-  const sendIban = async ({ name, email, giftName, amount }) => {
+  const sendIban = async ({ name, email, giftName, giftId, amount }) => {
     if (!email || !email.includes('@')) return;
     setSending(true);
     try {
       await fetch('/.netlify/functions/sendIbanEmail', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, giftName, amount }),
+        body: JSON.stringify({ name, email, giftName, giftId, amount }),
       });
     } catch (err) {
       console.error('Failed to send IBAN email:', err);

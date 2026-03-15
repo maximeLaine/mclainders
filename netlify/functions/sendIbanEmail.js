@@ -30,7 +30,7 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid JSON' }) };
   }
 
-  const { name, email, giftName, amount } = body;
+  const { name, email, giftName, giftId, amount } = body;
 
   if (!email || !email.includes('@')) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid email' }) };
@@ -46,6 +46,10 @@ exports.handler = async (event) => {
 
   const displayName = name && name !== 'Anonyme' ? name : 'cher(e) invité(e)';
   const amountLine  = amount ? `<p style="margin: 8px 0;"><strong>Montant :</strong> ${amount} €</p>` : '';
+
+  const cancelUrl = giftId
+    ? `https://mclainders.netlify.app/.netlify/functions/cancelContribution?email=${encodeURIComponent(email)}&giftId=${giftId}`
+    : null;
 
   const html = `
     <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #fefefe;">
@@ -71,6 +75,14 @@ exports.handler = async (event) => {
       <p style="font-size: 14px; color: #888; line-height: 1.6;">
         Si vous avez la moindre question, n'hésitez pas à nous répondre directement à cet email.
       </p>
+
+      ${cancelUrl ? `
+      <div style="text-align: center; margin-top: 30px;">
+        <a href="${cancelUrl}" style="display: inline-block; padding: 10px 24px; background-color: #f3f4f6; color: #6b7280; border-radius: 20px; font-size: 13px; text-decoration: none; border: 1px solid #e5e7eb;">
+          Annuler ma participation
+        </a>
+      </div>
+      ` : ''}
 
       <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
         <p style="font-size: 16px; color: #666;">
