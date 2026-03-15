@@ -219,7 +219,7 @@ const WeddingListPage = () => {
       return;
     }
 
-    sendIban({ name, email: participantEmail.trim(), giftName, amount: parsedAmount });
+    sendIban({ name, email: participantEmail.trim(), giftName, giftId: modal, amount: parsedAmount });
     refetch();
     setModal(null);
     showToast(`🎁 Merci ! Participation de ${parsedAmount} € enregistrée.`);
