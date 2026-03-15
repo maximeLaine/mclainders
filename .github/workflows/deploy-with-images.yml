@@ -12,7 +12,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          # Fetch all history for all branches and tags
           fetch-depth: 0
 
       - name: Setup Node.js
@@ -24,12 +23,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Skip the download step - we're using the images already in the Git repository
+      - name: Apply Supabase migrations
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - run: supabase db push --project-ref ${{ secrets.SUPABASE_PROJECT_ID }}
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+
       - name: List available images
         run: |
           echo "Images in public/gallery:"
           ls -la public/gallery | head -n 10
-          
           echo "Data files in src/data:"
           ls -la src/data || echo "src/data directory not found"
 
@@ -37,7 +42,7 @@ jobs:
         run: npm run build
         env:
           VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          VITE_SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
 
       - name: Deploy to Netlify
         uses: netlify/actions/cli@master
