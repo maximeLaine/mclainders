@@ -203,6 +203,7 @@ const WeddingListPage = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           giftId: modal,
+          giftName,
           name,
           email: participantEmail.trim(),
           amount: parsedAmount,

@@ -6,6 +6,38 @@ const headers = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
+async function sendWhatsAppNotification({ name, giftName, amount, message }) {
+  if (!process.env.WHAPI_TOKEN || !process.env.WHAPI_PHONE_NUMBER) {
+    console.log('Whapi not configured, skipping WhatsApp notification...');
+    return;
+  }
+
+  const text = `🎁 *Nouvelle participation liste de mariage !*\n\n👤 *${name}*\n🎁 ${giftName} — *${amount} €*${message ? `\n💬 ${message}` : ''}`;
+
+  const phoneNumbers = process.env.WHAPI_PHONE_NUMBER.split(',').map(n => n.trim());
+
+  for (const phone of phoneNumbers) {
+    const response = await fetch('https://gate.whapi.cloud/messages/text', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.WHAPI_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        to: `${phone}@s.whatsapp.net`,
+        body: text,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Whapi error for ${phone}: ${response.status} - ${errorText}`);
+    } else {
+      console.log(`WhatsApp notification sent to ${phone}`);
+    }
+  }
+}
+
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
@@ -21,7 +53,7 @@ exports.handler = async (event) => {
 
   try {
     const data = JSON.parse(event.body);
-    const { giftId, name, email, amount, message } = data;
+    const { giftId, giftName, name, email, amount, message } = data;
 
     if (!giftId || !email || !amount || amount < 1) {
       return {
@@ -57,8 +89,19 @@ exports.handler = async (event) => {
       return {
         statusCode: 500,
         headers,
-        body: JSON.stringify({ success: false, message: 'Erreur lors de l\'enregistrement' }),
+        body: JSON.stringify({ success: false, message: "Erreur lors de l'enregistrement" }),
       };
+    }
+
+    try {
+      await sendWhatsAppNotification({
+        name: name || 'Anonyme',
+        giftName: giftName || `Cadeau #${giftId}`,
+        amount: parseInt(amount, 10),
+        message,
+      });
+    } catch (whatsappError) {
+      console.error('WhatsApp error:', whatsappError);
     }
 
     return {
