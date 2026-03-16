@@ -79,9 +79,9 @@ const GIFT_ITEMS = [
     price: 260, image: '/liste/liseuse-vivlio.png', emoji: '📖',
   },
   {
-    id: 17, name: 'Deux enceintes JBL Clip', category: 'Loisirs',
+    id: 17, name: 'Une enceinte JBL Clip', category: 'Loisirs',
     description: 'Pour mettre de la bonne musique dans les plus beaux paysages du monde.',
-    price: 100, image: '/liste/jbl-clip.png', emoji: '🔊',
+    price: 70, image: '/liste/jbl-clip.png', emoji: '🔊',
   },
   // ── VOYAGE ──
   {
@@ -96,9 +96,9 @@ const GIFT_ITEMS = [
   },
   // ── AUTRES CADEAUX ──
   {
-    id: 18, name: 'Visite du village Hobbiton', category: 'Autres cadeaux',
+    id: 18, name: 'Visite de Hobbiton, le village des hobbits', category: 'Autres cadeaux',
     description: "Parce qu'on traverse quand même la Terre du Milieu !",
-    price: 80, image: '/liste/hobbiton.png', emoji: '🧙',
+    price: 150, image: '/liste/hobbiton.png', emoji: '🧙',
   },
 ];
 
