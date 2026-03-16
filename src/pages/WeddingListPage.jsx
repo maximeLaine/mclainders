@@ -55,12 +55,12 @@ const GIFT_ITEMS = [
   {
     id: 15, name: 'Veste de pluie — Max', category: 'Équipement',
     description: 'Pour affronter les caprices météo néo-zélandais sans se mouiller.',
-    price: 120, image: '/liste/veste-pluie-max.png', emoji: '🧥',
+    price: 90, image: '/liste/veste-pluie-max.png', emoji: '🧥',
   },
   {
     id: 16, name: 'Veste de pluie — Claire', category: 'Équipement',
     description: 'Pour affronter les caprices météo néo-zélandais sans se mouiller.',
-    price: 120, image: '/liste/veste-pluie-claire.png', emoji: '🧥',
+    price: 90, image: '/liste/veste-pluie-claire.png', emoji: '🧥',
   },
   {
     id: 5, name: 'Doudoune ultra light — Claire', category: 'Équipement',
