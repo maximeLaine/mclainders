@@ -158,6 +158,7 @@ const WeddingListPage = () => {
   const [isAnonymous, setIsAnonymous]         = useState(false);
   const [amount, setAmount]                   = useState('');
   const [message, setMessage]                 = useState('');
+  const [isSubmitting, setIsSubmitting]       = useState(false);
 
   const showToast = useCallback((msg) => {
     setToast(msg); setToastVisible(true);
@@ -197,6 +198,7 @@ const WeddingListPage = () => {
     const name = isAnonymous ? 'Anonyme' : participantName.trim();
     const giftName = GIFT_ITEMS.find(g => g.id === modal)?.name;
 
+    setIsSubmitting(true);
     try {
       const res = await fetch('/.netlify/functions/submitContribution', {
         method: 'POST',
@@ -210,18 +212,26 @@ const WeddingListPage = () => {
         }),
       });
       const result = await res.json();
+      if (res.status === 409) {
+        showToast('⚠ Tu as déjà participé à ce cadeau.');
+        setIsSubmitting(false);
+        return;
+      }
       if (!result.success) {
         showToast('⚠ Erreur lors de l\'enregistrement. Réessaie.');
+        setIsSubmitting(false);
         return;
       }
     } catch {
       showToast('⚠ Erreur réseau. Réessaie.');
+      setIsSubmitting(false);
       return;
     }
 
     sendIban({ name, email: participantEmail.trim(), giftName, giftId: modal, amount: parsedAmount });
     refetch();
     setModal(null);
+    setIsSubmitting(false);
     showToast(`🎁 Merci ! Participation de ${parsedAmount} € enregistrée.`);
   };
 
@@ -526,8 +536,8 @@ const WeddingListPage = () => {
                 className="w-full px-4 py-3 border border-gray-200 rounded-lg mb-5 focus:outline-none focus:border-orange-400"
               />
               <div className="flex gap-3">
-                <button onClick={confirmParticipation} className="flex-1 py-3 bg-gray-800 text-white rounded-lg text-sm font-semibold uppercase tracking-wider hover:bg-orange-500 transition-colors">
-                  Confirmer
+                <button onClick={confirmParticipation} disabled={isSubmitting} className="flex-1 py-3 bg-gray-800 text-white rounded-lg text-sm font-semibold uppercase tracking-wider hover:bg-orange-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                  {isSubmitting ? 'Envoi...' : 'Confirmer'}
                 </button>
                 <button onClick={() => setModal(null)} className="px-5 py-3 border border-gray-200 rounded-lg text-sm text-gray-600 hover:border-orange-400 hover:text-orange-500 transition-colors">
                   Annuler

@@ -76,6 +76,21 @@ exports.handler = async (event) => {
 
     const supabase = createClient(supabaseUrl, supabaseKey);
 
+    const { data: existing } = await supabase
+      .from('wedding_contributions')
+      .select('id')
+      .eq('email', email)
+      .eq('gift_id', giftId)
+      .maybeSingle();
+
+    if (existing) {
+      return {
+        statusCode: 409,
+        headers,
+        body: JSON.stringify({ success: false, message: 'Tu as déjà participé à ce cadeau.' }),
+      };
+    }
+
     const { error } = await supabase.from('wedding_contributions').insert([{
       gift_id: giftId,
       name: name || 'Anonyme',

@@ -63,6 +63,10 @@ exports.handler = async (event) => {
         ${giftName ? `Nous sommes touchés que vous participiez à <strong>${giftName}</strong>.` : ''}
       </p>
 
+      <div style="background-color: #fef3c7; padding: 16px; border-radius: 8px; margin: 25px 0; border-left: 4px solid #f59e0b; font-size: 14px;">
+        <p style="margin: 0; color: #92400e;">⚠️ <strong>Attention :</strong> Vérifiez vos <strong>spams</strong> si vous ne recevez pas ce mail — les emails transactionnels finissent parfois là-bas !</p>
+      </div>
+
       <div style="background-color: #fff7ed; padding: 24px; border-radius: 10px; margin: 30px 0; border-left: 4px solid #ea580c;">
         <h2 style="color: #ea580c; margin-top: 0; font-size: 18px;">🏦 Coordonnées bancaires</h2>
         <p style="margin: 8px 0;"><strong>Titulaire :</strong> ${titulaire}</p>
