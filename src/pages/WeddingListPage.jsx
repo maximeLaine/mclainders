@@ -72,6 +72,16 @@ const GIFT_ITEMS = [
     description: 'Pour avoir bien chaud en prenant le moins de place possible.',
     price: 70, image: '/liste/doudoune_max.jpg', emoji: '🧥',
   },
+  {
+    id: 20, name: 'Paires de chaussettes', category: 'Équipement',
+    description: 'Des chaussettes techniques pour les longues journées de pédalage.',
+    price: 50, image: '/liste/chaussettes.jpg', emoji: '🧦',
+  },
+  {
+    id: 19, name: 'Kit de 2 antivols pliable ABUS', category: 'Équipement',
+    description: 'Pour dormir sur nos deux oreilles quand on laisse les vélos dehors !',
+    price: 100, image: '/liste/antivol-abus.jpg', emoji: '🔒',
+  },
   // ── LOISIRS ──
   {
     id: 7, name: 'Deux Liseuses Vivlio + housses', category: 'Loisirs',
