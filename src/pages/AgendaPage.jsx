@@ -49,7 +49,7 @@ const AgendaPage = () => {
                       <p className="text-gray-600 mb-4">
                         Bienvenue à la Bastide des Hirondelles. <br />En attendant que tous les invités arrivent, nous vous proposons un accueil café accompagné des gourmandises de notre enfance.<br />Détendez-vous et profitez de la vue !
                       </p>
-                      <Link to="/participez" className="block bg-orange-50 p-4 rounded-lg border border-orange-200 hover:bg-orange-100 transition-colors">
+                      <Link to="/volontaire" className="block bg-orange-50 p-4 rounded-lg border border-orange-200 hover:bg-orange-100 transition-colors">
                         <p className="text-sm text-orange-800 font-medium">
                           👋 Devenez hôte ou hôtesse d'accueil ! Aidez-nous à préparer le café et les gourmandises →
                         </p>
@@ -230,7 +230,7 @@ const AgendaPage = () => {
                         <p className="text-gray-600 mb-4">
                           Après une soirée bien arrosée, un repas réconfortant fait toujours du bien. <br />Nous avons choisi une croziflette géante, parce que le gras, c’est la vie !
                         </p>
-                        <Link to="/participez" className="block bg-purple-50 p-4 rounded-lg border border-purple-200 hover:bg-purple-100 transition-colors">
+                        <Link to="/volontaire" className="block bg-purple-50 p-4 rounded-lg border border-purple-200 hover:bg-purple-100 transition-colors">
                           <p className="text-sm text-purple-800 font-medium">
                             🍽️ Vous pouvez participer à la préparation ! Réservez votre créneau →
                           </p>
