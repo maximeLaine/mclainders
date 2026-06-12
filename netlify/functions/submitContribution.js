@@ -7,6 +7,7 @@ const headers = {
 };
 
 async function sendWhatsAppNotification({ name, giftName, amount, message }) {
+  console.log('[WA] token present:', !!process.env.WHAPI_TOKEN, '| phone present:', !!process.env.WHAPI_PHONE_NUMBER);
   if (!process.env.WHAPI_TOKEN || !process.env.WHAPI_PHONE_NUMBER) {
     console.log('Whapi not configured, skipping WhatsApp notification...');
     return;

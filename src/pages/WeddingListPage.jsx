@@ -26,6 +26,11 @@ const GIFT_ITEMS = [
     price: 200, image: '/liste/saccoche-guidon.jpg', emoji: '🎒',
   },
   {
+    id: 23, name: 'Kit de réparation vélo', category: 'Bikepacking',
+    description: "Pour être autonomes en cas de crevaison ou de pépin mécanique en pleine nature !",
+    price: 100, image: '/liste/kit-reparation-velo.jpg', emoji: '🔧',
+  },
+  {
     id: 1, name: 'Deux paires de Food Pouch', category: 'Bikepacking',
     description: 'Des petits contenants parfaits pour y glisser nos "gourmandises" lors des longues journées de pédalage.',
     price: 120, image: '/liste/food pouch.jpg', emoji: '🍬',
@@ -34,7 +39,7 @@ const GIFT_ITEMS = [
   {
     id: 2, name: 'Tente Camp Minima 2 SL', category: 'Camping',
     description: 'Une tente ultra compact mais aussi ultra confort !',
-    price: 248, image: '/liste/tente.jpg', emoji: '⛺',
+    price: 250, image: '/liste/tente.jpg', emoji: '⛺',
   },
   {
     id: 3, name: 'Deux sacs de couchage ultras légers', category: 'Camping',
@@ -45,6 +50,11 @@ const GIFT_ITEMS = [
     id: 4, name: 'Un matelas gonflable', category: 'Camping',
     description: 'Il nous en manque un pour pouvoir dormir à deux... logique !',
     price: 50, image: '/liste/matelas.png', emoji: '🌙',
+  },
+  {
+    id: 21, name: 'Deux oreillers Sea to Summit Aeros Premium', category: 'Camping',
+    description: 'Pour dormir confortablement sous la tente après de longues journées de pédalage !',
+    price: 70, image: '/liste/oreiller-sea-to-summit.jpg', emoji: '😴',
   },
   // ── ÉQUIPEMENT ──
   {
@@ -61,6 +71,11 @@ const GIFT_ITEMS = [
     id: 16, name: 'Veste de pluie — Claire', category: 'Équipement',
     description: 'Pour affronter les caprices météo néo-zélandais sans se mouiller.',
     price: 90, image: '/liste/veste-pluie-claire.png', emoji: '🧥',
+  },
+  {
+    id: 22, name: 'Vêtement technique anti-UV — Claire', category: 'Équipement',
+    description: 'Pour se protéger du soleil néo-zélandais sans surchauffer pendant les longues montées !',
+    price: 180, image: '/liste/veste-anti-uv-patagonia.jpg', emoji: '☀️',
   },
   {
     id: 5, name: 'Doudoune ultra light — Claire', category: 'Équipement',
@@ -105,6 +120,11 @@ const GIFT_ITEMS = [
     price: 4250, image: '/liste/billet-avion.jpg', emoji: '✈️',
   },
   // ── AUTRES CADEAUX ──
+  {
+    id: 24, name: 'Tatouages Maori', category: 'Autres cadeaux',
+    description: "Un souvenir indélébile de notre aventure au cœur de la Terre du Milieu !",
+    price: 200, image: '/liste/tatouage-maori.jpg', emoji: '🪶',
+  },
   {
     id: 18, name: 'Visite de Hobbiton, le village des hobbits', category: 'Autres cadeaux',
     description: "Parce qu'on traverse quand même la Terre du Milieu !",
