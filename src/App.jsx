@@ -13,6 +13,7 @@ const RSVPPage = lazy(() => import('./pages/RSVPPage'));
 const WeNeedYouPage = lazy(() => import('./pages/WeNeedYouPage'));
 const WeddingListPage = lazy(() => import('./pages/WeddingListPage'));
 const ChildrenPage = lazy(() => import('./pages/ChildrenPage'));
+const SurprisePage = lazy(() => import('./pages/SurprisePage'));
 
 // Loading component for Suspense fallback
 const LoadingSpinner = () => (
@@ -38,6 +39,7 @@ const App = () => {
                 <Route path="/volontaire" element={<WeNeedYouPage />} />
                 <Route path="/liste-de-mariage" element={<WeddingListPage />} />
                 <Route path="/enfants" element={<ChildrenPage />} />
+                <Route path="/surprise" element={<SurprisePage />} />
               </Routes>
             </Suspense>
           </main>
