@@ -73,7 +73,7 @@ const GIFT_ITEMS = [
     price: 90, image: '/liste/veste-pluie-claire.png', emoji: '🧥',
   },
   {
-    id: 22, name: 'Vêtement technique anti-UV — Claire', category: 'Équipement',
+    id: 22, name: 'Vêtement technique anti-UV', category: 'Équipement',
     description: 'Pour se protéger du soleil néo-zélandais sans surchauffer pendant les longues montées !',
     price: 180, image: '/liste/veste-anti-uv-patagonia.jpg', emoji: '☀️',
   },
