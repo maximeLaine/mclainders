@@ -24,6 +24,7 @@ const Header = () => {
         <Link to="/hebergements" className="hover:underline">Hébergements</Link>
         <Link to="/transport" className="hover:underline">Transports</Link>
         <Link to="/volontaire" className="hover:underline">Volontaires</Link>
+        <Link to="/surprise" className="hover:underline">Surprise</Link>
         <Link to="/liste-de-mariage" className="hover:underline">Liste de mariage</Link>
         <Link to="/enfants" className="hover:underline">Enfants</Link>
         <Link to="/confirmez-votre-venue" className="bg-white text-black px-4 py-2 uppercase text-sm font-semibold hover:bg-gray-100">
@@ -100,6 +101,13 @@ const Header = () => {
               onClick={closeMenu}
             >
               Volontaires
+            </Link>
+            <Link
+              to="/surprise"
+              className="py-2 hover:underline"
+              onClick={closeMenu}
+            >
+              Surprise
             </Link>
             <Link
               to="/liste-de-mariage"

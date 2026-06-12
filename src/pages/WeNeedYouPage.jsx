@@ -1,5 +1,4 @@
 import { useSupabaseData } from '../hooks/useSupabaseData';
-import ProposalForm from '../components/ProposalForm';
 import BrunchCookingForm from '../components/BrunchCookingForm';
 import VolunteerSlotForm from '../components/VolunteerSlotForm';
 
@@ -271,23 +270,6 @@ const WeNeedYouPage = () => {
         </div>
       </section>
 
-      {/* Proposal Section */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl text-center mb-8 text-gray-800">Vous voulez nous faire des surprises ?</h2>
-          
-          <p className="text-center text-lg mb-12 max-w-3xl mx-auto text-gray-700 leading-relaxed">
-            Vous pouvez contacter Aude, maitresse de cérémonie, via le formulaire suivant. <br />Elle reviendra vers vous après avoir échangé avec Hubert et Romain, également maîtres de cérémonie, pour organiser au mieux votre surprise en fonction du déroulé du week-end. <br />Merci d’avance !
-          </p>
-          
-          <div className="flex justify-center">
-            <div className="w-24 h-px bg-gray-400 my-8"></div>
-          </div>
-          
-          {/* Proposal Form Component */}
-          <ProposalForm />
-        </div>
-      </section>
     </div>
   );
 };
