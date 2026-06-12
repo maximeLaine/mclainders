@@ -187,6 +187,7 @@ async function addToGoogleSheet(rsvpData) {
 async function sendWhatsAppNotification(rsvpData) {
   const { first_name, last_name, presence_saturday, presence_sunday, with_children, children_count, comments } = rsvpData;
 
+  console.log('[WA] token present:', !!process.env.WHAPI_TOKEN, '| phone present:', !!process.env.WHAPI_PHONE_NUMBER);
   if (!process.env.WHAPI_TOKEN || !process.env.WHAPI_PHONE_NUMBER) {
     console.log('Whapi not configured, skipping WhatsApp notification...');
     return;
