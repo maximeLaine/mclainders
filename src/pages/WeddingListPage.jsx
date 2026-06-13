@@ -7,7 +7,7 @@ const GIFT_ITEMS = [
   // ── BIKEPACKING ──
   {
     id: 10, name: 'Deux vélos gravel', category: 'Bikepacking',
-    description: "Ce sont les deux protagonistes principaux de notre aventure. Nous hésitons encore sur le modèle, mais pas sur le prix, faut bien se fixer une limite non ? PS : on a déjà trouvé leurs petits noms ;)",
+    description: "Ce sont les deux protagonistes principaux de notre aventure. PS : on a déjà trouvé leurs petits noms ;)",
     price: 2400, image: '/liste/velo-gravel.png', emoji: '🚲',
   },
   {
@@ -380,7 +380,7 @@ const WeddingListPage = () => {
             Nous mesurons notre chance d'avoir tout ce dont nous avons besoin dans notre quotidien : une famille aimante, des amis présents, un appartement cosy-cocon… mais nous avons un rêve.
           </p>
           <p className="text-lg text-gray-700 text-center leading-relaxed mt-8">
-            Maxime a négocié un congé de 2 mois, Claire a négocié sa fin de contrat CDD et nous partirons sur les routes de Nouvelle-Zélande de <strong>fin novembre 2026 à début février 2027</strong>.
+            Maxime a négocié un congé de 2 mois et demi, Claire a négocié sa fin de contrat CDD et nous partirons sur les routes de Nouvelle-Zélande de <strong>mi novembre 2026 à fin janvier 2027</strong>.
           </p>
         </div>
       </div>
