@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useIbanEmail } from '../hooks/useIbanEmail';
 import { useSupabaseData } from '../hooks/useSupabaseData';
+import { assetUrl } from '../utils/assets';
 
 // ─── CADEAUX ────────────────────────────────────────────────────────────────
 const GIFT_ITEMS = [
@@ -33,7 +34,7 @@ const GIFT_ITEMS = [
   {
     id: 1, name: 'Deux paires de Food Pouch', category: 'Bikepacking',
     description: 'Des petits contenants parfaits pour y glisser nos "gourmandises" lors des longues journées de pédalage.',
-    price: 120, image: '/liste/food pouch.jpg', emoji: '🍬',
+    price: 120, image: '/liste/food-pouch.jpg', emoji: '🍬',
   },
   // ── CAMPING ──
   {
@@ -129,6 +130,16 @@ const GIFT_ITEMS = [
     id: 18, name: 'Visite de Hobbiton, le village des hobbits', category: 'Autres cadeaux',
     description: "Parce qu'on traverse quand même la Terre du Milieu !",
     price: 150, image: '/liste/hobbiton.png', emoji: '🧙',
+  },
+  {
+    id: 25, name: 'Chausson pied de hobbit', category: 'Autres cadeaux',
+    description: "Pour que Max se sente vraiment à la maison en Terre du Milieu.",
+    price: 20, image: '/liste/chaussons-hobbit.jpg', emoji: '🦶',
+  },
+  {
+    id: 26, name: 'Tour chez l\'ostéo après un plaquage avec les Maoris', category: 'Autres cadeaux',
+    description: "Max est persuadé qu'il survivra à un match de rugby avec des Maoris. Claire est moins convaincue. On prend les deux côtés du pari.",
+    price: 30, image: '/gallery/rugby-maori.jpg', emoji: '🏉',
   },
 ];
 
@@ -355,7 +366,7 @@ const WeddingListPage = () => {
     <div className="flex flex-col min-h-screen">
 
       {/* Hero */}
-      <div className="relative h-[75vh] bg-cover bg-center" style={{ backgroundImage: "url('/gallery/baniere_velo.jpg')", backgroundPosition: 'center 37%' }}>
+      <div className="relative h-[75vh] bg-cover bg-center" style={{ backgroundImage: `url('${assetUrl('/gallery/baniere_velo.jpg')}')`, backgroundPosition: 'center 37%' }}>
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4">
           <button
@@ -448,7 +459,7 @@ const WeddingListPage = () => {
                 <div key={g.id} className={`bg-white rounded-xl overflow-hidden flex flex-col shadow-sm border transition-all hover:-translate-y-1 hover:shadow-md ${isFunded ? 'border-amber-300' : 'border-gray-100'}`}>
                   <div className="bg-gray-50 h-52 flex items-center justify-center text-6xl relative overflow-hidden">
                     {g.image
-                      ? <img src={g.image} alt={g.name} className="w-full h-full object-contain p-4" />
+                      ? <img src={assetUrl(g.image)} alt={g.name} className="w-full h-full object-contain p-4" />
                       : g.emoji
                     }
                     {isFunded && (
