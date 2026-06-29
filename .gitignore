@@ -43,4 +43,8 @@ Thumbs.db
 # Fichiers de test locaux
 test-*.js
 
+# Images externes — servies depuis Supabase Storage
+/public/gallery/
+/public/liste/
+
 

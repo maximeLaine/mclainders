@@ -23,18 +23,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: List available images
-        run: |
-          echo "Images in public/gallery:"
-          ls -la public/gallery | head -n 10
-          echo "Data files in src/data:"
-          ls -la src/data || echo "src/data directory not found"
-
       - name: Build
         run: npm run build
         env:
           VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           VITE_SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          VITE_ASSETS_BASE_URL: ${{ secrets.VITE_ASSETS_BASE_URL }}
 
       - name: Deploy to Netlify
         uses: netlify/actions/cli@master

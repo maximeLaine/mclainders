@@ -1,6 +1,7 @@
 import { useSupabaseData } from '../hooks/useSupabaseData';
 import BrunchCookingForm from '../components/BrunchCookingForm';
 import VolunteerSlotForm from '../components/VolunteerSlotForm';
+import { assetUrl } from '../utils/assets';
 
 /**
  * WeNeedYouPage Component
@@ -30,7 +31,7 @@ const WeNeedYouPage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <div className="relative h-[75vh] bg-cover" style={{ backgroundImage: "url('/gallery/baniere_participez.jpg')", backgroundPosition: "center 35%" }}>
+      <div className="relative h-[75vh] bg-cover" style={{ backgroundImage: `url('${assetUrl('/gallery/baniere_participez.jpg')}')`, backgroundPosition: "center 35%" }}>
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4">
           <h1 className="text-5xl md:text-7xl font-light mb-6">Votre aide est précieuse</h1>

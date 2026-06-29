@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSupabaseData } from '../hooks/useSupabaseData';
 import Modal from '../components/common/Modal';
 import { useFormSubmit } from '../hooks/useFormSubmit';
+import { assetUrl } from '../utils/assets';
 
 // Async function to submit carpool offer
 async function submitCarpoolOffer(formData) {
@@ -67,7 +68,7 @@ const TransportPage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <div className="relative h-[75vh] bg-cover bg-center" style={{ backgroundImage: "url('/gallery/baniere_transport.jpg')", backgroundPosition: "center 65%" }}>
+      <div className="relative h-[75vh] bg-cover bg-center" style={{ backgroundImage: `url('${assetUrl('/gallery/baniere_transport.jpg')}')`, backgroundPosition: "center 65%" }}>
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4">
           <h1 className="text-5xl md:text-7xl font-light mb-6">Comment venir</h1>
