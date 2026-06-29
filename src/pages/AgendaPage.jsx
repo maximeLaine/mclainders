@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { assetUrl } from '../utils/assets';
 
 /**
  * AgendaPage Component
@@ -8,7 +9,7 @@ const AgendaPage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <div className="relative h-[75vh] bg-cover" style={{ backgroundImage: "url('/gallery/baniere_agenda.jpg')", backgroundPosition: "center 35%" }}>
+      <div className="relative h-[75vh] bg-cover" style={{ backgroundImage: `url('${assetUrl('/gallery/baniere_agenda.jpg')}')`, backgroundPosition: "center 35%" }}>
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4">
           <h1 className="text-5xl md:text-7xl font-light mb-6">Le déroulé du week-end</h1>
@@ -32,7 +33,7 @@ const AgendaPage = () => {
                 {/* Photo - Left side on desktop */}
                 <div className="hidden md:flex w-1/2 pr-12 justify-end">
                   <div className="bg-white rounded-lg shadow-lg overflow-hidden w-64 h-48">
-                    <img src="/gallery/deroule/accueil.jpg" alt="Accueil Café Gourmand" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span class="text-gray-400 text-sm flex items-center justify-center h-full">Photo à venir</span>'; }} />
+                    <img src={assetUrl('/gallery/deroule/accueil.jpg')} alt="Accueil Café Gourmand" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span class="text-gray-400 text-sm flex items-center justify-center h-full">Photo à venir</span>'; }} />
                   </div>
                 </div>
                 {/* Timeline dot */}
@@ -81,7 +82,7 @@ const AgendaPage = () => {
                 {/* Photo - Right side on desktop */}
                 <div className="hidden md:flex w-1/2 pl-12">
                   <div className="bg-white rounded-lg shadow-lg overflow-hidden w-64 h-48">
-                    <img src="/gallery/deroule/ceremonie.jpg" alt="Cérémonie Laïque" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span class="text-gray-400 text-sm flex items-center justify-center h-full">Photo à venir</span>'; }} />
+                    <img src={assetUrl('/gallery/deroule/ceremonie.jpg')} alt="Cérémonie Laïque" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span class="text-gray-400 text-sm flex items-center justify-center h-full">Photo à venir</span>'; }} />
                   </div>
                 </div>
                 {/* Mobile: Text card */}
@@ -106,7 +107,7 @@ const AgendaPage = () => {
                 {/* Photo - Left side on desktop */}
                 <div className="hidden md:flex w-1/2 pr-12 justify-end">
                   <div className="bg-white rounded-lg shadow-lg overflow-hidden w-64 h-48">
-                    <img src="/gallery/deroule/gouter.jpg" alt="Goûter Festif" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span class="text-gray-400 text-sm flex items-center justify-center h-full">Photo à venir</span>'; }} />
+                    <img src={assetUrl('/gallery/deroule/gouter.jpg')} alt="Goûter Festif" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span class="text-gray-400 text-sm flex items-center justify-center h-full">Photo à venir</span>'; }} />
                   </div>
                 </div>
                 {/* Timeline dot */}
@@ -150,7 +151,7 @@ const AgendaPage = () => {
                 {/* Photo - Right side on desktop */}
                 <div className="hidden md:flex w-1/2 pl-12">
                   <div className="bg-white rounded-lg shadow-lg overflow-hidden w-64 h-48">
-                    <img src="/gallery/deroule/apero.jpg" alt="Apéro Dînatoire" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span class="text-gray-400 text-sm flex items-center justify-center h-full">Photo à venir</span>'; }} />
+                    <img src={assetUrl('/gallery/deroule/apero.jpg')} alt="Apéro Dînatoire" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span class="text-gray-400 text-sm flex items-center justify-center h-full">Photo à venir</span>'; }} />
                   </div>
                 </div>
                 {/* Mobile: Text card */}
@@ -175,7 +176,7 @@ const AgendaPage = () => {
                 {/* Photo - Left side on desktop */}
                 <div className="hidden md:flex w-1/2 pr-12 justify-end">
                   <div className="bg-white rounded-lg shadow-lg overflow-hidden w-64 h-48 border-2 border-orange-400">
-                    <img src="/gallery/deroule/soiree.jpg" alt="Début de la Soirée" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span class="text-gray-400 text-sm flex items-center justify-center h-full">Photo à venir</span>'; }} />
+                    <img src={assetUrl('/gallery/deroule/soiree.jpg')} alt="Début de la Soirée" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span class="text-gray-400 text-sm flex items-center justify-center h-full">Photo à venir</span>'; }} />
                   </div>
                 </div>
                 {/* Timeline dot */}
@@ -213,7 +214,7 @@ const AgendaPage = () => {
                   {/* Photo - Left side on desktop */}
                   <div className="hidden md:flex w-1/2 pr-12 justify-end">
                     <div className="bg-white rounded-lg shadow-lg overflow-hidden w-64 h-48 border-2 border-purple-400">
-                      <img src="/gallery/deroule/brunch.jpg" backgroundPosition="center 60%" alt="Repas du Lendemain" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span class="text-gray-400 text-sm flex items-center justify-center h-full">Photo à venir</span>'; }} />
+                      <img src={assetUrl('/gallery/deroule/brunch.jpg')} backgroundPosition="center 60%" alt="Repas du Lendemain" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span class="text-gray-400 text-sm flex items-center justify-center h-full">Photo à venir</span>'; }} />
                     </div>
                   </div>
                   {/* Timeline dot */}

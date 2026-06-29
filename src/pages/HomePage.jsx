@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { assetUrl } from '../utils/assets';
 
 const HomePage = () => {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <div className="relative h-[75vh] bg-cover flex items-center justify-center" style={{ backgroundImage: "url('/gallery/baniere_accueil_1.jpeg')", backgroundPosition: "center 52%" }}>
+      <div className="relative h-[75vh] bg-cover flex items-center justify-center" style={{ backgroundImage: `url('${assetUrl('/gallery/baniere_accueil_1.jpeg')}')`, backgroundPosition: "center 52%" }}>
         <div className="absolute inset-0 bg-black bg-opacity-20"></div>
         <div className="relative z-10 text-white text-center px-4 pt-52 md:pr-20">
           <p className="text-lg md:text-xl mb-4">🧡​ Venez fêter l'amour avec nous ! 🧡​</p>
@@ -54,7 +55,7 @@ const HomePage = () => {
       </section>
 
       {/* RSVP Call to Action */}
-      <section className="relative py-24 bg-cover bg-center" style={{ backgroundImage: "url('/gallery/baniere_test_2.png')", backgroundPosition: "center 20%" }}>
+      <section className="relative py-24 bg-cover bg-center" style={{ backgroundImage: `url('${assetUrl('/gallery/baniere_test_2.png')}')`, backgroundPosition: "center 20%" }}>
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
         <div className="relative max-w-4xl mx-auto text-center px-6">
           <h2 className="text-4xl md:text-5xl font-light mb-6 text-white">Nous espérons vous compter parmi nous ! 🎉</h2>
