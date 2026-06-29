@@ -20,7 +20,7 @@ const AccommodationPage = () => {
       {/* Image */}
       <div className="h-48 overflow-hidden relative">
         <OptimizedImage
-          src={accommodation.image || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'}
+          src={accommodation.image ? assetUrl(accommodation.image) : 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'}
           alt={accommodation.name}
           className={`w-full h-full object-cover ${accommodation.is_reserved ? 'grayscale' : ''}`}
         />
