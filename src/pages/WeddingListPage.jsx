@@ -139,7 +139,7 @@ const GIFT_ITEMS = [
   {
     id: 26, name: 'Tour chez l\'ostéo après un plaquage avec les Maoris', category: 'Autres cadeaux',
     description: "Max est persuadé qu'il survivra à un match de rugby avec des Maoris. Claire est moins convaincue. On prend les deux côtés du pari.",
-    price: 30, image: '/gallery/rugby-maori.jpg', emoji: '🏉',
+    price: 30, image: '/liste/rugby-maori.jpg', emoji: '🏉',
   },
 ];
 
