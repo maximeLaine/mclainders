@@ -141,6 +141,11 @@ const GIFT_ITEMS = [
     description: "Max est persuadé qu'il survivra à un match de rugby avec des Maoris. Claire est moins convaincue. On prend les deux côtés du pari.",
     price: 30, image: '/liste/rugby-maori.jpg', emoji: '🏉',
   },
+  {
+    id: 27, name: 'Tour en kayak en eaux vives', category: 'Autres cadeaux',
+    description: "Descendre les rapides néo-zélandais en kayak, sensations fortes garanties... jusqu'à ce qu'on chavire. \"Noooon mon brushing !\"",
+    price: 90, image: '/liste/tour-kayak.jpg', emoji: '🛶',
+  },
 ];
 
 const CATEGORIES = ['Tous', ...new Set(GIFT_ITEMS.map(g => g.category))];
