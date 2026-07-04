@@ -139,12 +139,12 @@ const GIFT_ITEMS = [
   {
     id: 26, name: 'Tour chez l\'ostéo après un plaquage avec les Maoris', category: 'Autres cadeaux',
     description: "Max est persuadé qu'il survivra à un match de rugby avec des Maoris. Claire est moins convaincue. On prend les deux côtés du pari.",
-    price: 30, image: '/liste/rugby-maori.jpg', emoji: '🏉',
+    price: 60, image: '/liste/rugby-maori.jpg', emoji: '🏉',
   },
   {
     id: 27, name: 'Tour en kayak en eaux vives', category: 'Autres cadeaux',
     description: "Descendre les rapides néo-zélandais en kayak, sensations fortes garanties... jusqu'à ce qu'on chavire. \"Noooon mon brushing !\"",
-    price: 90, image: '/liste/tour-kayak.jpg', emoji: '🛶',
+    price: 180, image: '/liste/tour-kayak.jpg', emoji: '🛶',
   },
 ];
 
