@@ -144,7 +144,7 @@ const GIFT_ITEMS = [
   {
     id: 27, name: 'Tour en kayak en eaux vives', category: 'Autres cadeaux',
     description: "Descendre les rapides néo-zélandais en kayak, sensations fortes garanties... jusqu'à ce qu'on chavire. \"Noooon mon brushing !\"",
-    price: 90, image: '/liste/tour-kayak.jpg', emoji: '🛶',
+    price: 180, image: '/liste/tour-kayak.jpg', emoji: '🛶',
   },
 ];
 
