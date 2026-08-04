@@ -283,6 +283,11 @@ const WeddingListPage = () => {
 
 
   const filteredGifts = filter === 'Tous' ? GIFT_ITEMS : GIFT_ITEMS.filter(g => g.category === filter);
+  const sortedGifts   = [...filteredGifts].sort((a, b) => {
+    const aFunded = getCollected(contributions, a.id) >= a.price;
+    const bFunded = getCollected(contributions, b.id) >= b.price;
+    return aFunded === bFunded ? 0 : aFunded ? 1 : -1;
+  });
   const totalTarget   = GIFT_ITEMS.reduce((s, g) => s + g.price, 0);
   const totalCollect  = GIFT_ITEMS.reduce((s, g) => s + getCollected(contributions, g.id), 0);
 
@@ -455,7 +460,7 @@ const WeddingListPage = () => {
 
           {/* Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredGifts.map(g => {
+            {sortedGifts.map(g => {
               const collected = getCollected(contributions, g.id);
               const pct       = getPct(contributions, g.id, g.price);
               const nbContrib = (contributions[g.id] || []).length;
