@@ -50,7 +50,51 @@ ON CONFLICT (spot_index) DO NOTHING;
 CREATE INDEX IF NOT EXISTS idx_accueil_available ON accueil_slots(name) WHERE name IS NULL;
 
 -- ================================================
--- 3. RESPO CAFE TABLE
+-- 3. BARMAN TABLE
+-- ================================================
+-- 2 spots available, afternoon and evening
+
+CREATE TABLE IF NOT EXISTS barman_slots (
+  id SERIAL PRIMARY KEY,
+  spot_index INTEGER NOT NULL,
+  name TEXT,
+  email TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  UNIQUE(spot_index)
+);
+
+-- Insert 2 empty spots
+INSERT INTO barman_slots (spot_index) VALUES (0), (1)
+ON CONFLICT (spot_index) DO NOTHING;
+
+-- Index for checking availability
+CREATE INDEX IF NOT EXISTS idx_barman_available ON barman_slots(name) WHERE name IS NULL;
+
+-- ================================================
+-- 4. VESTIAIRE TABLE
+-- ================================================
+-- 2 spots available, at guest arrival
+
+CREATE TABLE IF NOT EXISTS vestiaire_slots (
+  id SERIAL PRIMARY KEY,
+  spot_index INTEGER NOT NULL,
+  name TEXT,
+  email TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  UNIQUE(spot_index)
+);
+
+-- Insert 2 empty spots
+INSERT INTO vestiaire_slots (spot_index) VALUES (0), (1)
+ON CONFLICT (spot_index) DO NOTHING;
+
+-- Index for checking availability
+CREATE INDEX IF NOT EXISTS idx_vestiaire_available ON vestiaire_slots(name) WHERE name IS NULL;
+
+-- ================================================
+-- 5. RESPO CAFE TABLE
 -- ================================================
 -- 2 spots available, at 10h
 
@@ -72,7 +116,7 @@ ON CONFLICT (spot_index) DO NOTHING;
 CREATE INDEX IF NOT EXISTS idx_cafe_available ON cafe_slots(name) WHERE name IS NULL;
 
 -- ================================================
--- 4. RANGEMENT (CLEANUP) TABLE
+-- 6. RANGEMENT (CLEANUP) TABLE
 -- ================================================
 -- Unlimited spots (we'll start with 10 and can add more)
 
@@ -101,18 +145,24 @@ CREATE INDEX IF NOT EXISTS idx_rangement_available ON rangement_slots(name) WHER
 
 ALTER TABLE voiturier_slots ENABLE ROW LEVEL SECURITY;
 ALTER TABLE accueil_slots ENABLE ROW LEVEL SECURITY;
+ALTER TABLE barman_slots ENABLE ROW LEVEL SECURITY;
+ALTER TABLE vestiaire_slots ENABLE ROW LEVEL SECURITY;
 ALTER TABLE cafe_slots ENABLE ROW LEVEL SECURITY;
 ALTER TABLE rangement_slots ENABLE ROW LEVEL SECURITY;
 
 -- Read policy for all tables (public can read)
 CREATE POLICY "Allow public read access" ON voiturier_slots FOR SELECT USING (true);
 CREATE POLICY "Allow public read access" ON accueil_slots FOR SELECT USING (true);
+CREATE POLICY "Allow public read access" ON barman_slots FOR SELECT USING (true);
+CREATE POLICY "Allow public read access" ON vestiaire_slots FOR SELECT USING (true);
 CREATE POLICY "Allow public read access" ON cafe_slots FOR SELECT USING (true);
 CREATE POLICY "Allow public read access" ON rangement_slots FOR SELECT USING (true);
 
 -- Write policy (allow all for now, should be restricted in production)
 CREATE POLICY "Allow public write access" ON voiturier_slots FOR ALL USING (true);
 CREATE POLICY "Allow public write access" ON accueil_slots FOR ALL USING (true);
+CREATE POLICY "Allow public write access" ON barman_slots FOR ALL USING (true);
+CREATE POLICY "Allow public write access" ON vestiaire_slots FOR ALL USING (true);
 CREATE POLICY "Allow public write access" ON cafe_slots FOR ALL USING (true);
 CREATE POLICY "Allow public write access" ON rangement_slots FOR ALL USING (true);
 
@@ -123,9 +173,11 @@ SELECT
   table_name,
   (SELECT COUNT(*) FROM voiturier_slots) as voiturier_count,
   (SELECT COUNT(*) FROM accueil_slots) as accueil_count,
+  (SELECT COUNT(*) FROM barman_slots) as barman_count,
+  (SELECT COUNT(*) FROM vestiaire_slots) as vestiaire_count,
   (SELECT COUNT(*) FROM cafe_slots) as cafe_count,
   (SELECT COUNT(*) FROM rangement_slots) as rangement_count
 FROM information_schema.tables
 WHERE table_schema = 'public'
-  AND table_name IN ('voiturier_slots', 'accueil_slots', 'cafe_slots', 'rangement_slots')
+  AND table_name IN ('voiturier_slots', 'accueil_slots', 'barman_slots', 'vestiaire_slots', 'cafe_slots', 'rangement_slots')
 LIMIT 1;

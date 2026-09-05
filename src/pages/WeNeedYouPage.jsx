@@ -24,6 +24,8 @@ const WeNeedYouPage = () => {
   // Fetch data for all volunteer tables
   const { data: voiturierSlots, loading: loadingVoiturier, error: errorVoiturier, refetch: refetchVoiturier } = useSupabaseData('voiturier_slots', { orderBy: 'spot_index' });
   const { data: accueilSlots, loading: loadingAccueil, error: errorAccueil, refetch: refetchAccueil } = useSupabaseData('accueil_slots', { orderBy: 'spot_index' });
+  const { data: barmanSlots, loading: loadingBarman, error: errorBarman, refetch: refetchBarman } = useSupabaseData('barman_slots', { orderBy: 'spot_index' });
+  const { data: vestiaireSlots, loading: loadingVestiaire, error: errorVestiaire, refetch: refetchVestiaire } = useSupabaseData('vestiaire_slots', { orderBy: 'spot_index' });
   const { data: cafeSlots, loading: loadingCafe, error: errorCafe, refetch: refetchCafe } = useSupabaseData('cafe_slots', { orderBy: 'spot_index' });
   const { data: rangementSlots, loading: loadingRangement, error: errorRangement, refetch: refetchRangement } = useSupabaseData('rangement_slots', { orderBy: 'spot_index' });
   const { data: cookingSlotsData, loading: loadingCooking, error: errorCooking } = useSupabaseData('brunch_cooking_slots', { orderBy: 'time_slot', transform: groupCookingSlots });
@@ -130,6 +132,98 @@ const WeNeedYouPage = () => {
               title="Je suis volontaire"
               modalTitle="Réserver une place d'accueil"
               successMessage="Merci ! Vous êtes inscrit à l'accueil."
+            />
+          )}
+        </div>
+      </section>
+
+
+      {/* Barman Section */}
+      <section className="py-20 px-6 bg-gray-100">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl text-center mb-8 text-gray-800">🍺 Barman / Barmaid</h2>
+
+          <p className="text-center text-lg mb-8 max-w-3xl mx-auto text-gray-700 leading-relaxed">
+            Vous avez un rôle clé : vous êtes responsables de la gestion des fûts et des cubis lors de l'après-midi et de la soirée.
+            <br /><br />
+            Si tu as toujours rêvé de tenir un bar, un café, un bistrot, un troquet ou même la buvette d'un festival… c'est le moment de montrer ton savoir !
+          </p>
+
+          <div className="flex justify-center gap-8 text-center mb-12">
+            <div className="bg-white rounded-lg shadow-md p-4">
+              <p className="text-orange-600 font-semibold">👥 2 personnes</p>
+            </div>
+            <div className="bg-white rounded-lg shadow-md p-4">
+              <p className="text-orange-600 font-semibold">🕐 Après-midi et soirée</p>
+            </div>
+          </div>
+
+          {/* Barman Form */}
+          {errorBarman && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-8 max-w-3xl mx-auto text-center">
+              <p>{errorBarman}</p>
+            </div>
+          )}
+          {loadingBarman ? (
+            <div className="text-center py-12">
+              <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-orange-500 border-r-transparent"></div>
+              <p className="mt-4 text-gray-600">Chargement des places...</p>
+            </div>
+          ) : (
+            <VolunteerSlotForm
+              slots={barmanSlots || []}
+              onSpotReserved={refetchBarman}
+              tableName="barman_slots"
+              emoji="🍺"
+              title="Je suis volontaire"
+              modalTitle="Réserver une place de barman / barmaid"
+              successMessage="Merci ! Vous êtes inscrit·e comme barman / barmaid."
+            />
+          )}
+        </div>
+      </section>
+
+      {/* Vestiaire Section */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl text-center mb-8 text-gray-800">🧥 Vestiaire</h2>
+
+          <p className="text-center text-lg mb-8 max-w-3xl mx-auto text-gray-700 leading-relaxed">
+            Tu veux aider, mais pour un minimum de temps ? Cette mission est pour toi. On est en novembre, et avec tous les invités qui arrivent
+            avec manteaux et écharpes, ça fait vite un embouteillage. Tu es un peu le voiturier de l'intérieur !
+            <br /><br />
+            En bonus, tu peux en toute discrétion regarder la marque du manteau sur lequel tu as flashé.
+          </p>
+
+          <div className="flex justify-center gap-8 text-center mb-12">
+            <div className="bg-gray-100 rounded-lg shadow-md p-4">
+              <p className="text-orange-600 font-semibold">👥 2 personnes</p>
+            </div>
+            <div className="bg-gray-100 rounded-lg shadow-md p-4">
+              <p className="text-orange-600 font-semibold">🕐 À l'arrivée des invités</p>
+            </div>
+          </div>
+
+          {/* Vestiaire Form */}
+          {errorVestiaire && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-8 max-w-3xl mx-auto text-center">
+              <p>{errorVestiaire}</p>
+            </div>
+          )}
+          {loadingVestiaire ? (
+            <div className="text-center py-12">
+              <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-orange-500 border-r-transparent"></div>
+              <p className="mt-4 text-gray-600">Chargement des places...</p>
+            </div>
+          ) : (
+            <VolunteerSlotForm
+              slots={vestiaireSlots || []}
+              onSpotReserved={refetchVestiaire}
+              tableName="vestiaire_slots"
+              emoji="🧥"
+              title="Je suis volontaire"
+              modalTitle="Réserver une place au vestiaire"
+              successMessage="Merci ! Vous êtes inscrit·e au vestiaire."
             />
           )}
         </div>
