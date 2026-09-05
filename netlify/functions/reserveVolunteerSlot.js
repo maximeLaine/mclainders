@@ -7,7 +7,7 @@ const STATUS_METHOD_NOT_ALLOWED = 405;
 const STATUS_SERVER_ERROR = 500;
 
 // Valid table names for security
-const VALID_TABLES = ['voiturier_slots', 'accueil_slots', 'cafe_slots', 'rangement_slots'];
+const VALID_TABLES = ['voiturier_slots', 'accueil_slots', 'barman_slots', 'vestiaire_slots', 'cafe_slots', 'rangement_slots'];
 
 const MSG_METHOD_NOT_ALLOWED = 'Method not allowed';
 const MSG_MISSING_FIELDS = 'Informations manquantes. Veuillez fournir un nom, un email et un créneau.';
