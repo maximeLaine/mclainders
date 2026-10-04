@@ -33,7 +33,7 @@ const GIFT_ITEMS = [
   },
   {
     id: 30, name: 'Deux housses de transport vélo', category: 'Bikepacking',
-    description: "Pour que nos fidèles destriers voyagent en avion (presque) aussi confortablement que nous !",
+    description: "Pour que nos fidèles destriers voyagent en train (presque) aussi confortablement que nous !",
     price: 100, image: '/liste/housse-velo.png', emoji: '🧳',
   },
   {
