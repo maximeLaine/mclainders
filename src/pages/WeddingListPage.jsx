@@ -32,6 +32,11 @@ const GIFT_ITEMS = [
     price: 100, image: '/liste/kit-reparation-velo.jpg', emoji: '🔧',
   },
   {
+    id: 30, name: 'Deux housses de transport vélo', category: 'Bikepacking',
+    description: "Pour que nos fidèles destriers voyagent en train (presque) aussi confortablement que nous !",
+    price: 100, image: '/liste/housse-velo.png', emoji: '🧳',
+  },
+  {
     id: 1, name: 'Deux paires de Food Pouch', category: 'Bikepacking',
     description: 'Des petits contenants parfaits pour y glisser nos "gourmandises" lors des longues journées de pédalage.',
     price: 120, image: '/liste/food-pouch.jpg', emoji: '🍬',
@@ -145,6 +150,16 @@ const GIFT_ITEMS = [
     id: 27, name: 'Tour en kayak en eaux vives', category: 'Autres cadeaux',
     description: "Descendre les rapides néo-zélandais en kayak, sensations fortes garanties... jusqu'à ce qu'on chavire. \"Noooon mon brushing !\"",
     price: 180, image: '/liste/tour-kayak.jpg', emoji: '🛶',
+  },
+  {
+    id: 28, name: 'Deux casquettes personnalisées McLainders', category: 'Autres cadeaux',
+    description: "Pour afficher fièrement nos couleurs sur les routes néo-zélandaises (et cacher les coups de soleil).",
+    price: 90, image: '/liste/casquettes-mclainders.png', emoji: '🧢',
+  },
+  {
+    id: 29, name: 'Un appareil photo de seconde main', category: 'Autres cadeaux',
+    description: "Pour immortaliser l'aventure sans avoir le nez collé à nos téléphones.",
+    price: 300, image: '/liste/appareil-photo.png', emoji: '📷',
   },
 ];
 
