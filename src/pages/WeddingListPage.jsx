@@ -84,6 +84,11 @@ const GIFT_ITEMS = [
     price: 180, image: '/liste/veste-anti-uv-patagonia.jpg', emoji: '☀️',
   },
   {
+    id: 31, name: 'Deux maillots Tour Aotearoa', category: 'Équipement',
+    description: "Un noir pour Claire, un vert pour Max, tous deux couverts de motifs maoris. De quoi rouler du Cap Reinga à Bluff avec style !",
+    price: 172, image: '/liste/maillot-tour-aotearoa.png', emoji: '🚴',
+  },
+  {
     id: 5, name: 'Doudoune ultra light — Claire', category: 'Équipement',
     description: 'Pour avoir bien chaud en prenant le moins de place possible.',
     price: 70, image: '/liste/doudoune_claire.jpg', emoji: '🧥',
